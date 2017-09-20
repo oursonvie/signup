@@ -1,0 +1,28 @@
+<template name="updateStudentForm">
+  {{#autoForm collection="Test" doc=this id="updateStudent" type="update"}}
+    <fieldset>
+      <div class="row">
+        {{> afQuickField name='name' disabled="true"}}
+        {{> afQuickField name='sex' disabled="true"}}
+      </div>
+
+      {{> afQuickField name='race' disabled="true"}}
+      {{> afQuickField name='birthday' disabled="true"}}
+      {{> afQuickField name='degree' disabled="true"}}
+      {{> afQuickField name='level' disabled="true"}}
+      {{> afQuickField name='studentid' disabled="true"}}
+      {{> afQuickField name='lcenter' disabled="true"}}
+
+      {{> afQuickField name='family_name'}}
+      {{> afQuickField name='first_name'}}
+      {{> afQuickField name='phone'}}
+      {{> afQuickField name='company'}}
+      {{> afQuickField name='language'}}
+    </fieldset>
+    <button type="submit" class="btn btn-primary btn-submit">Save</button>
+  {{/autoForm}}
+</template>
+
+<template name="quickStudentForm">
+  {{> quickForm collection="Test" doc=this id="updateStudent" type="update"}}
+</template>

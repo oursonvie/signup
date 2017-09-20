@@ -22,6 +22,7 @@ Test.allow({
 Test.attachSchema(new SimpleSchema({
   certno: {
     type: String,
+    label: "身份证",
     optional: true,
     autoform: {
       type: 'hidden'
@@ -29,13 +30,12 @@ Test.attachSchema(new SimpleSchema({
   },
   name: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "姓名",
+    optional: true
   },
   sex: {
     type: String,
+    label: "性别",
     optional: true,
     autoform: {
       type: 'hidden'
@@ -43,45 +43,33 @@ Test.attachSchema(new SimpleSchema({
   },
   race: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "名族",
+    optional: true
   },
   birthday: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "出生日期",
+    optional: true
   },
   degree: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "就读专业",
+    optional: true
   },
   level: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "培养层次",
+    optional: true
   },
   studentid: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "学号",
+    optional: true
   },
   lcenter: {
     type: String,
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    label: "学习中心",
+    optional: true
   },
   family_name: {
     type: String,
