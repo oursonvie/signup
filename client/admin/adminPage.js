@@ -20,8 +20,6 @@ Template.adminPage.events({
     Meteor.call('download', function(err, fileContent) {
       if (fileContent) {
 
-        console.log(fileContent)
-
         var blob = new Blob([fileContent], {
           type: "text/plain;charset=utf-8"
         });

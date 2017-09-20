@@ -89,6 +89,12 @@ Test.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
+      } else {
+        if (/^[a-z]+$/i.test(this.value)) {
+          return lodash.capitalize(this.value)
+        } else {
+          alert('姓名只能输入拼音')
+        }
       }
     }
   },
@@ -98,6 +104,12 @@ Test.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
+      } else {
+        if (/^[a-z]+$/i.test(this.value)) {
+          return lodash.capitalize(this.value)
+        } else {
+          alert('姓名只能输入拼音')
+        }
       }
     }
   },
