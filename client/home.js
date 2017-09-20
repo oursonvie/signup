@@ -1,38 +1,43 @@
+// import SimpleSchema from 'simpl-schema';
+// SimpleSchema.debug = true
+
 Template.home.onCreated(function() {
-  Session.set('searchStudent', false)
+  Session.set('searchStudent',false)
+  var self = this
+  self.autorun(function() {
+    self.subscribe('StudentOne', Session.get('searchStudent'));
+  });
 });
 
 Template.home.helpers({
   ifSearch: function() {
-    if (Session.get('searchStudent') == true) {
-      return true
-    } else {
-      return false
-    }
+    return Session.get('searchStudent')
   },
-  ifStudent: function() {
-    if (Session.get('searchStudent')._id) {
-      return true
-    } else {
-      return false
-    }
+  Students: function() {
+    return Test.findOne({})
   }
 })
 
 Template.home.events({
   "submit .checkID" (event, template) {
 
-    Session.set('searchStudent', true)
-
     event.preventDefault();
     let userId = document.getElementById('UserID').value.trim()
 
-    PromiseMeteorCall('findStudent', userId).then(res => {
-      Session.set('searchStudent', res)
-    }).catch(err => {
-      Session.set('searchStudent', false)
-      alert('学生不满足报名条件')
-    })
+    Session.set('searchStudent', userId)
 
+  }
+});
+
+AutoForm.addHooks(['updateStudent'], {
+  onSuccess: function(formType, result){
+    if (formType == 'update' && result == 1) {
+      alert('报名成功，点击确认')
+      Session.set('searchStudent',false)
+      document.getElementById('UserID').value = ''
+    }
+  },
+  onError: function (name, error, template) {
+      console.log(name + " error:", error);
   }
 });

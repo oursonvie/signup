@@ -9,32 +9,31 @@
           <div class="form-group">
             <input type="text" class="form-control" id="UserID" placeholder="身份证号">
           </div>
-          <button type="submit" class="btn btn-default">Submit</button>
+          <button type="submit" class="btn btn-default">查询</button>
         </form>
 
       </div>
     </div>
 
-    {{#if ifSearch}}
+
+    {{#if Template.subscriptionsReady}}
+      {{#if ifSearch}}
+        {{#if Students}}
+          <div class="panel panel-default">
+            <div class="panel-heading">报名信息</div>
+            <div class="panel-body">
+              {{#with Students}}
+                {{> quickForm collection="Test" doc=this id="updateStudent" type="update"}}
+              {{/with}}
+            </div>
+          </div>
+        {{else}}
+          <p>报名信息有误，请检查后重试</p>
+        {{/if}}
+      {{/if}}
+    {{else}}
       {{> loader}}
     {{/if}}
-
-    {{#if ifStudent}}
-      {{#autoForm collection="Test" id=this type="update"}}
-        <fieldset>
-          <legend>填写报名资料</legend>
-          {{> afQuickField name='family_name'}}
-          {{> afQuickField name='first_name'}}
-          {{> afQuickField name='phone'}}
-          {{> afQuickField name='company'}}
-          {{> afQuickField name='language'}}
-        </fieldset>
-        <button type="submit" class="btn btn-primary">Insert</button>
-      {{/autoForm}}
-
-    {{/if}}
-
-
 
 
   </main>
