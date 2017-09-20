@@ -1,5 +1,5 @@
-// import SimpleSchema from 'simpl-schema';
-// SimpleSchema.debug = true
+import SimpleSchema from 'simpl-schema';
+SimpleSchema.debug = true
 
 Template.home.onCreated(function() {
   Session.set('searchStudent',false)
@@ -22,7 +22,7 @@ Template.home.events({
   "submit .checkID" (event, template) {
 
     event.preventDefault();
-    let userId = document.getElementById('UserID').value.trim()
+    let userId = document.getElementById('UserID').value.trim().toUpperCase()
 
     Session.set('searchStudent', userId)
 
@@ -32,6 +32,9 @@ Template.home.events({
 AutoForm.addHooks(['updateStudent'], {
   onSuccess: function(formType, result){
     if (formType == 'update' && result == 1) {
+
+      // console.log(this.currentDoc)
+
       alert('报名成功，点击确认')
       Session.set('searchStudent',false)
       document.getElementById('UserID').value = ''

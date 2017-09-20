@@ -8,7 +8,7 @@ Test.deny({
     return !Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
   remove: function(){
-    return false;
+    return !Roles.userIsInRole(Meteor.userId(), ['admin']);
   }
 });
 
@@ -162,17 +162,25 @@ Test.attachSchema(new SimpleSchema({
        type: 'hidden'
      }
   },
-  updated: {
+  updateAt: {
     type: Date,
     autoValue: function() {
-      if (this.isInsert) {
         return new Date
-      } else if (this.isUpdate) {
-        return new Date
-      }
     },
     autoform: {
        type: 'hidden'
      }
+  },
+  edited: {
+    type: Boolean,
+    optional: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return false
+      }
+    },
+    autoform: {
+      type: 'hidden'
+    }
   }
 }, { tracker: Tracker }));
