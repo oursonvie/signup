@@ -1,0 +1,8 @@
+<template name="AdminLayout">
+  {{> nav}}
+  {{#if currentUser}}
+    <div class="container">
+      {{> Template.dynamic template=main}}
+    </div>
+  {{/if}}
+</template>

@@ -1,0 +1,41 @@
+<template name="home">
+  <main>
+
+    <div class="panel panel-default">
+      <div class="panel-heading">考试报名</div>
+      <div class="panel-body">
+
+        <form class="checkID">
+          <div class="form-group">
+            <input type="text" class="form-control" id="UserID" placeholder="身份证号">
+          </div>
+          <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+
+      </div>
+    </div>
+
+    {{#if ifSearch}}
+      {{> loader}}
+    {{/if}}
+
+    {{#if ifStudent}}
+      {{#autoForm collection="Test" id=this type="update"}}
+        <fieldset>
+          <legend>填写报名资料</legend>
+          {{> afQuickField name='family_name'}}
+          {{> afQuickField name='first_name'}}
+          {{> afQuickField name='phone'}}
+          {{> afQuickField name='company'}}
+          {{> afQuickField name='language'}}
+        </fieldset>
+        <button type="submit" class="btn btn-primary">Insert</button>
+      {{/autoForm}}
+
+    {{/if}}
+
+
+
+
+  </main>
+</template>
