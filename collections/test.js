@@ -36,10 +36,7 @@ Test.attachSchema(new SimpleSchema({
   sex: {
     type: String,
     label: "性别",
-    optional: true,
-    autoform: {
-      type: 'hidden'
-    }
+    optional: true
   },
   race: {
     type: String,
@@ -77,12 +74,6 @@ Test.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
-      } else {
-        if (/^[a-z]+$/i.test(this.value)) {
-          return lodash.capitalize(this.value)
-        } else {
-          alert('姓名只能输入拼音')
-        }
       }
     }
   },
@@ -92,12 +83,6 @@ Test.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
-      } else {
-        if (/^[a-z]+$/i.test(this.value)) {
-          return lodash.capitalize(this.value)
-        } else {
-          alert('姓名只能输入拼音')
-        }
       }
     }
   },
@@ -177,6 +162,8 @@ Test.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return false
+      } else {
+        return true
       }
     },
     autoform: {

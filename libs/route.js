@@ -5,13 +5,6 @@ FlowRouter.route('/admin', {
     }
 });
 
-FlowRouter.route('/admin/importStudent', {
-   name: 'importStudent',
-    action() {
-        BlazeLayout.render('AdminLayout', {main: 'importStudent'});
-    }
-});
-
 FlowRouter.route('/', {
    name: 'home',
     action() {

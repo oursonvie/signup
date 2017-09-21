@@ -4,5 +4,5 @@ Meteor.publish('StudentOne', function(id) {
 })
 
 Meteor.publish('regiesteredStudents', function() {
-  return Test.find({edited:{'$exists':false}})
+  return Test.find({edited:true})
 })

@@ -4,10 +4,23 @@
     <div class="panel-heading clearfix">
       <h4 class="panel-title pull-left" style="padding-top: 7.5px;">报名学生</h4>
       <div class="btn-group pull-right">
+
+        <label class="btn btn-danger btn-sm btn-file">
+    导入<input type="file" id="hiddenUpload" style="display: none;">
+        </label>
+
         <button class="btn btn-primary btn-sm btn-download">下载学生列表</button>
+
       </div>
     </div>
     <div class="panel-body">{{signedNo}}</div>
+  </div>
+
+  <div class="panel panel-default panel-download">
+    <div class="panel-heading clearfix">
+      <h4 class="panel-title pull-left" style="padding-top: 7.5px;">提交次数</h4>
+    </div>
+    <div class="panel-body">{{showCount}}</div>
   </div>
 
 </template>

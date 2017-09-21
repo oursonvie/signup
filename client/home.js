@@ -30,6 +30,26 @@ Template.home.events({
 });
 
 AutoForm.addHooks(['updateStudent'], {
+  before: {
+    update: function(doc) {
+      let checkName = doc.$set.family_name + doc.$set.first_name
+
+      if (/^[a-z]+$/i.test(checkName)) {
+
+        // backup insert to db
+        let backupDoc = this.currentDoc
+        //remove key
+        delete backupDoc["_id"]
+        Meteor.call('insertToBackup', this.currentDoc)
+
+        return doc
+      } else {
+        alert('姓名只允许拼音')
+        return false
+        throw new Meteor.Error('Input Error','Only letter accepted')
+      }
+    }
+  },
   onSuccess: function(formType, result){
     if (formType == 'update' && result == 1) {
 
