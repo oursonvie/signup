@@ -40,7 +40,13 @@ AutoForm.addHooks(['updateStudent'], {
         let backupDoc = this.currentDoc
         //remove key
         delete backupDoc["_id"]
-        Meteor.call('insertToBackup', this.currentDoc)
+
+        //check if string are empty
+        let checkString = backupDoc.family_name + backupDoc.first_name + backupDoc.phone + backupDoc.company
+
+        if (checkString.trim() > 0) {
+          Meteor.call('insertToBackup', this.currentDoc)
+        }
 
         return doc
       } else {
