@@ -44,7 +44,7 @@ AutoForm.addHooks(['updateStudent'], {
         //check if string are empty
         let checkString = backupDoc.family_name + backupDoc.first_name + backupDoc.phone + backupDoc.company
 
-        if (checkString.trim() > 0) {
+        if (checkString.trim().length > 0) {
           Meteor.call('insertToBackup', this.currentDoc)
         }
 

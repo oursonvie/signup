@@ -11,7 +11,7 @@ Meteor.methods({
 
   },
   download:function(){
-    return CSV.unparse(Test.find({edited:{'$exists':false}}, {fields:{createdBy:0}}).fetch())
+    return CSV.unparse(Test.find({edited:true}, {fields:{createdBy:0}}).fetch())
   },
   insertToBackup:function(doc){
     Backup.insert(doc)
