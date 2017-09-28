@@ -15,6 +15,9 @@ Template.home.helpers({
   },
   Students: function() {
     return Test.findOne({})
+  },
+  edited: function() {
+    return this.edited
   }
 })
 
@@ -29,10 +32,20 @@ Template.home.events({
   }
 });
 
+Template.updatedStudentForm.events({
+  "click .btn-close" (event, template) {
+
+    Session.set('searchStudent',false)
+    document.getElementById('UserID').value = ''
+  }
+});
+
 AutoForm.addHooks(['updateStudent'], {
   before: {
     update: function(doc) {
       let checkName = doc.$set.family_name + doc.$set.first_name
+
+      console.log(checkName)
 
       if (/^[a-z]+$/i.test(checkName)) {
 
@@ -40,6 +53,10 @@ AutoForm.addHooks(['updateStudent'], {
         let backupDoc = this.currentDoc
         //remove key
         delete backupDoc["_id"]
+
+        // make capticalized on names
+        doc.$set.family_name = lodash.capitalize(doc.$set.family_name);
+        doc.$set.first_name = lodash.capitalize(doc.$set.first_name);
 
         //check if string are empty
         let checkString = backupDoc.family_name + backupDoc.first_name + backupDoc.phone + backupDoc.company
