@@ -45,8 +45,10 @@ AutoForm.addHooks(['updateStudent'], {
         let checkString = backupDoc.family_name + backupDoc.first_name + backupDoc.phone + backupDoc.company
 
         if (checkString.trim().length > 0) {
-          Meteor.call('insertToBackup', this.currentDoc)
+          Meteor.call('insertToBackup', backupDoc)
         }
+
+        PromiseMeteorCall('pushChat', 'update', this.currentDoc)
 
         return doc
       } else {
