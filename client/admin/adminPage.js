@@ -2,10 +2,14 @@ Template.adminPage.onCreated(function() {
   PromiseMeteorCall('countBackup').then(res => {
     Session.set('submitCount', res)
   })
+  // init search
+  Session.set('searchStudent',false)
 
   var self = this
   self.autorun(function() {
+    // subscribe regiestered student
     self.subscribe('regiesteredStudents');
+    self.subscribe('StudentOne', Session.get('searchStudent'));
   });
 });
 
@@ -18,6 +22,12 @@ Template.adminPage.helpers({
   },
   showCount: function() {
     return Session.get('submitCount')
+  },
+  Students: function() {
+    return Test.findOne({certno:Session.get('searchStudent')})
+  },
+  ifSearch: function() {
+    return Session.get('searchStudent')
   }
 });
 
@@ -64,3 +74,15 @@ Template.adminPage.events({
     }
   }
 });
+
+
+Template.nav.events({
+  "submit .navbar-form" (event, template) {
+
+    event.preventDefault();
+    let userId = document.getElementById('UserID').value.trim().toUpperCase()
+
+    Session.set('searchStudent', userId)
+
+  }
+})

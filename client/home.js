@@ -45,8 +45,6 @@ AutoForm.addHooks(['updateStudent'], {
     update: function(doc) {
       let checkName = doc.$set.family_name + doc.$set.first_name
 
-      console.log(checkName)
-
       if (/^[a-z]+$/i.test(checkName)) {
 
         // backup insert to db
