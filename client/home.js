@@ -63,7 +63,13 @@ AutoForm.addHooks(['updateStudent'], {
           Meteor.call('insertToBackup', backupDoc)
         }
 
-        PromiseMeteorCall('pushChat', 'update', doc.$set)
+        // add certno to update
+        let certno = this.currentDoc.certno
+
+        let updateInfo = doc.$set
+        updateInfo.certno = certno
+
+        PromiseMeteorCall('pushChat', 'update', updateInfo)
 
         return doc
       } else {
