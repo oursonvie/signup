@@ -18,5 +18,8 @@ Meteor.methods({
   },
   countBackup:function() {
     return Backup.find().count()
+  },
+  totalCount: function() {
+    return Test.find().count()
   }
 });

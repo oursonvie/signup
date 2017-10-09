@@ -28,6 +28,30 @@ Template.adminPage.helpers({
   },
   ifSearch: function() {
     return Session.get('searchStudent')
+  },
+  totalStudent: function() {
+    PromiseMeteorCall('totalCount').then(res => {Session.set('totalStudent', res)}).catch(err => console.log(err))
+
+    let count = Session.get('totalStudent')
+
+    return count
+  },
+  styleWidth: function() {
+    let signed = Test.find({}).count()
+    let total = Session.get('totalStudent')
+    let result = 2000/total*100
+    // keep only integers
+    result = result.toString().split('.')[0]
+    let string = 'width: ' + result + '%'
+    return string
+  },
+  stringWidth: function() {
+    let signed = Test.find({}).count()
+    let total = Session.get('totalStudent')
+    let result = 2000/total*100
+    // keep only integers
+    result = result.toString().split('.')[0]
+    return result
   }
 });
 
