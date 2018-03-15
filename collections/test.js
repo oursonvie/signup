@@ -74,6 +74,8 @@ Student.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
+      } else if (this.isUpdate) {
+        return lodash.capitalize(this.value)
       }
     }
   },
@@ -83,6 +85,8 @@ Student.attachSchema(new SimpleSchema({
     autoValue: function() {
       if (this.isInsert) {
         return ' '
+      } else if (this.isUpdate) {
+        return lodash.capitalize(this.value)
       }
     }
   },

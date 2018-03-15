@@ -15,9 +15,6 @@ Template.home.helpers({
   },
   Students: function() {
     return Student.findOne({})
-  },
-  edited: function() {
-    return this.edited
   }
 })
 
@@ -29,14 +26,6 @@ Template.home.events({
 
     Session.set('searchStudent', userId)
 
-  }
-});
-
-Template.updatedStudentForm.events({
-  "click .btn-close" (event, template) {
-
-    Session.set('searchStudent',false)
-    document.getElementById('UserID').value = ''
   }
 });
 
