@@ -1,6 +1,7 @@
 <template name="adminPage">
 
   <div class='row'>
+
     <div class='col-xs-6'>
       <div class="panel panel-default panel-download">
         <div class="panel-heading clearfix">
@@ -19,27 +20,17 @@
       </div>
     </div>
 
-
-    <div class='col-xs-6'>
-      <div class="panel panel-default panel-download">
-        <div class="panel-heading clearfix">
-          <h4 class="panel-title pull-left" style="padding-top: 7.5px;">提交次数</h4>
-        </div>
-        <div class="panel-body">{{showCount}}</div>
-      </div>
-    </div>
-
   </div>
 
   <div class='row'>
     <div class='col-xs-12'>
       {{#if Template.subscriptionsReady}}
         {{#if ifSearch}}
-          {{#if Students}}
+          {{#if Student}}
             <div class="panel panel-default panel-basicinfo">
               <div class="panel-heading">本人基本信息</div>
               <div class="panel-body">
-                {{#with Students}}
+                {{#with Student}}
                   {{> quickStudentForm}}
                 {{/with}}
               </div>

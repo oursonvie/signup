@@ -1,22 +1,16 @@
 Meteor.methods({
-  insertTest:function(Obj){
-     Test.insert(Obj)
+  insertStudent:function(Obj){
+     Student.insert(Obj)
   },
   importStudent:function(papaData){
     console.log(papaData.length)
 
     _.forEach(papaData, function(student) {
-      Test.insert(student)
+      Student.insert(student)
     })
 
   },
   download:function(){
-    return CSV.unparse(Test.find({edited:true}, {fields:{createdBy:0}}).fetch())
-  },
-  insertToBackup:function(doc){
-    Backup.insert(doc)
-  },
-  countBackup:function() {
-    return Backup.find().count()
+    return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0}}).fetch())
   }
 });

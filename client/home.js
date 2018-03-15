@@ -14,7 +14,7 @@ Template.home.helpers({
     return Session.get('searchStudent')
   },
   Students: function() {
-    return Test.findOne({})
+    return Student.findOne({})
   },
   edited: function() {
     return this.edited
@@ -46,22 +46,6 @@ AutoForm.addHooks(['updateStudent'], {
       let checkName = doc.$set.family_name + doc.$set.first_name
 
       if (/^[a-z]+$/i.test(checkName)) {
-
-        // backup insert to db
-        let backupDoc = this.currentDoc
-        //remove key
-        delete backupDoc["_id"]
-
-        // make capticalized on names
-        doc.$set.family_name = lodash.capitalize(doc.$set.family_name);
-        doc.$set.first_name = lodash.capitalize(doc.$set.first_name);
-
-        //check if string are empty
-        let checkString = backupDoc.family_name + backupDoc.first_name + backupDoc.phone + backupDoc.company
-
-        if (checkString.trim().length > 0) {
-          Meteor.call('insertToBackup', backupDoc)
-        }
 
         // add certno to update
         let certno = this.currentDoc.certno

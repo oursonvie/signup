@@ -1,7 +1,4 @@
 Template.adminPage.onCreated(function() {
-  PromiseMeteorCall('countBackup').then(res => {
-    Session.set('submitCount', res)
-  })
   // init search
   Session.set('searchStudent',false)
 
@@ -14,20 +11,17 @@ Template.adminPage.onCreated(function() {
 });
 
 Template.adminPage.helpers({
-  students: function(){
-    return Test.find({})
-  },
   signedNo: function() {
-    return Test.find({}).count()
+    return Student.find({edited:true}).count();
   },
   showCount: function() {
-    return Session.get('submitCount')
+    return Session.get('submitCount');
   },
-  Students: function() {
-    return Test.findOne({certno:Session.get('searchStudent')})
+  Student: function() {
+    return Student.findOne({certno:Session.get('searchStudent')});
   },
   ifSearch: function() {
-    return Session.get('searchStudent')
+    return Session.get('searchStudent');
   }
 });
 
@@ -77,12 +71,13 @@ Template.adminPage.events({
 
 
 Template.nav.events({
-  "submit .navbar-form" (event, template) {
-
+  "click .btn-query" (event, template) {
     event.preventDefault();
     let userId = document.getElementById('UserID').value.trim().toUpperCase()
-
     Session.set('searchStudent', userId)
-
+  },
+  "click .btn-reset" (event, template) {
+    event.preventDefault();
+    Session.set('searchStudent', false)
   }
 })

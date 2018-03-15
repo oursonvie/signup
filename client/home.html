@@ -25,8 +25,8 @@
             <div class="panel-heading">本人基本信息</div>
             <div class="panel-body">
               {{#with Students}}
-                {{#if edited}}
-                  {{> updatedStudentForm}}
+                {{#if Students.edited}}
+                  <p>该学生已经报过名，请联系老师</p>
                 {{else}}
                   {{> updateStudentForm}}
                 {{/if}}

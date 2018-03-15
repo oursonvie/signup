@@ -1,9 +1,9 @@
 import SimpleSchema from 'simpl-schema';
 SimpleSchema.extendOptions(['autoform']);
 
-Test = new Mongo.Collection("test");
+Student = new Mongo.Collection("student");
 
-Test.deny({
+Student.deny({
   insert: function(){
     return !Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
@@ -12,14 +12,14 @@ Test.deny({
   }
 });
 
-Test.allow({
+Student.allow({
   update: function(){
     return true
   }
 })
 
 
-Test.attachSchema(new SimpleSchema({
+Student.attachSchema(new SimpleSchema({
   certno: {
     type: String,
     label: "身份证",
