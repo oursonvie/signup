@@ -10,7 +10,7 @@ Template.home.onCreated(function() {
 });
 
 Template.home.helpers({
-  ifSearch: function() {
+  ifSearch: () => {
     return Session.get('searchStudent')
   },
   Students: function() {
