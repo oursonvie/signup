@@ -14,6 +14,15 @@
 
       <!-- Collect the nav links, forms, and other content for toggling -->
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+        <ul class="nav navbar-nav">
+          <!-- Admin menu hidden -->
+          {{#if currentUser}}
+            <li role="presentation" class={{isActiveRoute 'studentPage'}}><a href="/admin">学生管理</a></li>
+            <li role="presentation" class={{isActiveRoute 'examroomPage'}}><a href="/examroom">考点管理</a></li>
+          {{/if}}
+        </ul>
+
         <ul class="nav navbar-nav navbar-right">
           {{> loginButtons}}
         </ul>

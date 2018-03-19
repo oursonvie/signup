@@ -1,31 +1,19 @@
-Template.studentPage.onCreated(function() {
-  // init search
-  Session.set('searchStudent',false)
+Template.examroomPage.onCreated(function() {
 
   var self = this
   self.autorun(function() {
-    // subscribe regiestered student
-    self.subscribe('regiesteredStudents');
-    self.subscribe('StudentOne', Session.get('searchStudent'));
+    // subscribe regiestered student count
+    self.subscribe('studentCount');
   });
 });
 
-Template.studentPage.helpers({
-  signedNo: function() {
-    return Student.find({edited:true}).count();
-  },
-  showCount: function() {
-    return Session.get('submitCount');
-  },
-  Student: function() {
-    return Student.findOne({certno:Session.get('searchStudent')});
-  },
-  ifSearch: function() {
-    return Session.get('searchStudent');
+Template.examroomPage.helpers({
+  studentCount: function() {
+    return Counts.get('studentCount')
   }
 });
 
-Template.studentPage.events({
+Template.examroomPage.events({
   'click .btn-download': function() {
     var nameFile = '学生名单.csv'
     Meteor.call('download', function(err, fileContent) {

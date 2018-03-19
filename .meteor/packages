@@ -53,6 +53,7 @@ session@1.1.7
 stevezhu:lodash
 clinical:csv
 pfafman:filesaver
+tmeasday:publish-counts
 
 ## Promise
 promise@0.10.1

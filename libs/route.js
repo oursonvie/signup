@@ -1,7 +1,14 @@
 FlowRouter.route('/admin', {
-   name: 'adminPage',
+   name: 'studentPage',
     action() {
-        BlazeLayout.render('AdminLayout', {main: 'adminPage'});
+        BlazeLayout.render('AdminLayout', {main: 'studentPage'});
+    }
+});
+
+FlowRouter.route('/examroom', {
+   name: 'examroomPage',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'examroomPage'});
     }
 });
 
