@@ -27,6 +27,11 @@ Examroom.attachSchema(new SimpleSchema({
   examroomLocation: {
     type: String,
     label: "考场类型",
+    autoform: {
+      afFormGroup: {
+        label: false
+      }
+    }
   },
   createdBy: {
     type: String,

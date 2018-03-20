@@ -8,22 +8,37 @@
           <div class="btn-group pull-right">
 
             <label class="btn btn-danger btn-sm btn-file">
-        导入<input type="file" id="hiddenUpload" style="display: none;">
+        导入<input type="file" id="examroomUpload" style="display: none;">
             </label>
 
             <button class="btn btn-primary btn-sm btn-download">下载学生列表</button>
 
           </div>
         </div>
+
         <div class="panel-body">
 
+          <table class="table table-hover">
+            <tbody>
 
+              <tr>
+                <th>考场号</th>
+                <th>考场地址</th>
+              </tr>
 
+              {{#each examrooms}}
+                {{> singleExamroom}}
+              {{/each}}
 
+            </tbody>
+
+          </table>
 
         </div>
+
       </div>
     </div>
 
   </div>
+
 </template>

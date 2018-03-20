@@ -1,15 +1,21 @@
 Template.examroomPage.onCreated(function() {
-
-  var self = this
+    var self = this
   self.autorun(function() {
     // subscribe regiestered student count
     self.subscribe('studentCount');
+    self.subscribe('examrooms');
   });
 });
 
 Template.examroomPage.helpers({
   studentCount: function() {
     return Counts.get('studentCount')
+  },
+  examroomNeeded: function() {
+    return Math.ceil(Counts.get('studentCount')/30)
+  },
+  examrooms: function() {
+    return Examroom.find()
   }
 });
 
@@ -27,7 +33,7 @@ Template.examroomPage.events({
     });
   },
   // import function
-  'change #hiddenUpload': function(event, template) {
+  'change #examroomUpload': function(event, template) {
     var filesList = event.currentTarget.files;
     if (filesList.length) {
       var file = filesList[0];
@@ -41,7 +47,7 @@ Template.examroomPage.events({
           console.log('papaObject', papaObject);
 
           if (papaObject && papaObject.errors.length == 0) {
-            Meteor.call('importStudent', papaObject.data)
+            Meteor.call('importExamroom', papaObject.data)
           } else {
             throw papaObject.errors
           }
