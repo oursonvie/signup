@@ -1,22 +1,28 @@
 <template name="singleExamroom">
   <tr class="examroom_row">
+
     <td>{{examroomId}}</td>
 
     {{#if editMode}}
 
       <td>
+          {{#autoForm collection="Examroom" doc=this id=updateExamroomFormId type="update" template="bootstrap3-inline" autosave=true}}
+              {{> afQuickField name='examroomLocation'}}
+          {{/autoForm}}
 
-        {{#autoForm collection="Examroom" doc=this id=updateExamroomFormId type="update" template="bootstrap3-inline"}}
-          <fieldset>
-            {{> afQuickField name='examroomLocation'}}
-          </fieldset>
-          <button type="submit" class="btn btn-primary">保存</button>
-        {{/autoForm}}
+      </td>
+
+      <td>
+        <button class="btn btn-xs btn-primary btn-save">保存</button>
       </td>
 
     {{else}}
       <td>
-        {{examroomLocation}} <i class="fa fa-edit pull-right"></i>
+        {{examroomLocation}}
+      </td>
+
+      <td>
+        <i class="fa fa-edit"></i>
       </td>
 
     {{/if}}

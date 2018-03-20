@@ -14,5 +14,8 @@ Template.singleExamroom.helpers({
 Template.singleExamroom.events({
   'click .fa-edit': function(event, template) {
     template.editMode.set(!template.editMode.get())
+  },
+  'click .btn-save': function(event, template) {
+    template.editMode.set(!template.editMode.get())
   }
 });
