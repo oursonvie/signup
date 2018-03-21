@@ -5,14 +5,14 @@ Template.studentPage.onCreated(function() {
   var self = this
   self.autorun(function() {
     // subscribe regiestered student
-    self.subscribe('regiesteredStudents');
+    self.subscribe('studentCount');
     self.subscribe('StudentOne', Session.get('searchStudent'));
   });
 });
 
 Template.studentPage.helpers({
   signedNo: function() {
-    return Student.find({edited:true}).count();
+    return Counts.get('studentCount');
   },
   showCount: function() {
     return Session.get('submitCount');

@@ -20,17 +20,13 @@ Template.examroomPage.helpers({
 });
 
 Template.examroomPage.events({
-  'click .btn-download': function() {
-    var nameFile = '学生名单.csv'
-    Meteor.call('download', function(err, fileContent) {
-      if (fileContent) {
-
-        var blob = new Blob([fileContent], {
-          type: "text/plain;charset=utf-8"
-        });
-        saveAs(blob, nameFile);
-      }
-    });
+  'click .btn-random': function() {
+    console.log(123)
+    PromiseMeteorCall('randomlizeExamroom')
+    .then(res => {
+      Session.set('randomExamroon', res)
+    })
+    .catch(err => console.log(err))
   },
   // import function
   'change #examroomUpload': function(event, template) {
