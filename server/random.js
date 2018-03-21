@@ -1,6 +1,5 @@
 Meteor.methods({
   randomlizeExamroom: function() {
-
     rawList = Student.find({},{fields:{_id:1}}).fetch()
     sortedList = []
     // random array
@@ -17,6 +16,8 @@ Meteor.methods({
       arrays.push(sortedList.splice(0, size));
 
     console.log(arrays)
+
+    // put group id into each examroom
 
   }
 });
