@@ -21,10 +21,9 @@ Template.examroomPage.helpers({
 
 Template.examroomPage.events({
   'click .btn-random': function() {
-    console.log(123)
     PromiseMeteorCall('randomlizeExamroom')
     .then(res => {
-      Session.set('randomExamroon', res)
+      Session.set('randomExamroom', res)
     })
     .catch(err => console.log(err))
   },

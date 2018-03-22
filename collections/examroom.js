@@ -33,6 +33,41 @@ Examroom.attachSchema(new SimpleSchema({
       }
     }
   },
+  capacity: {
+    type: Number,
+    label: "容纳人数",
+    autoValue: function() {
+      if (this.isInsert) {
+        if (!this.value) {
+          return 30
+        }
+      }
+    }
+  },
+  seats: {
+      type: Array,
+      optional: true,
+      autoform: {
+        type:"hidden"
+      }
+  },
+  'seats.$': {
+      type: Object
+  },
+  'seats.$.seatNumber':{
+    type: String,
+    label: "座位号",
+    autoform: {
+        type:"hidden"
+    }
+  },
+  'seats.$.studentId':{
+    type: String,
+    label: "学生编号",
+    autoform: {
+        type:"hidden"
+    }
+  },
   createdBy: {
     type: String,
     autoValue:function(){

@@ -8,6 +8,13 @@ Template.singleExamroom.helpers({
   },
   updateExamroomFormId: function() {
     return this._id
+  },
+  occupied: function() {
+    if (this.seats) {
+      return `${this.seats.length}/${this.capacity}`
+    } else {
+      return `0/${this.capacity}`
+    }
   }
 });
 
