@@ -18,23 +18,27 @@
 
         <div class="panel-body">
 
-          <table class="table table-hover fixed">
-            <tbody>
+          {{#if Template.subscriptionsReady}}
+            <table class="table table-hover fixed">
+              <tbody>
 
-              <tr>
-                <th width="20%">考场号</th>
-                <th width="60%">考场地址</th>
-                <th width="10%">座位数</th>
-                <th width="10%">编辑</th>
-              </tr>
+                <tr>
+                  <th width="20%">考场号</th>
+                  <th width="60%">考场地址</th>
+                  <th width="10%">座位数</th>
+                  <th width="10%">编辑</th>
+                </tr>
 
-              {{#each examrooms}}
-                {{> singleExamroom}}
-              {{/each}}
+                {{#each examrooms}}
+                  {{> singleExamroom}}
+                {{/each}}
 
-            </tbody>
+              </tbody>
 
-          </table>
+            </table>
+          {{else}}
+            {{> loader}}
+          {{/if}}
 
         </div>
 
