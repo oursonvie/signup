@@ -46,7 +46,7 @@ Meteor.methods({
 
           let studentId = sortedList.splice(0,1)[0]
 
-      		console.log(roomNumber, seatNumber, studentId)
+      		// console.log(roomNumber, seatNumber, studentId)
 
           seatInfo = {seatNumber: seatNumber, studentId: studentId}
 
