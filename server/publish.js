@@ -20,5 +20,23 @@ Meteor.publish('examrooms', function() {
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }
+})
 
+Meteor.publish('examroomsOne', function(id) {
+  if (this.userId) {
+
+    let rawList = Examroom.findOne({_id:id}).seats
+
+    let studentArray = []
+    _.forEach(rawList, function(student) {
+      studentArray.push(student.studentId)
+    })
+
+    return [
+      Examroom.find({_id:id}),
+      Student.find({_id:{$in:studentArray}})
+    ]
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
 })

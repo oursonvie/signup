@@ -1,3 +1,10 @@
+FlowRouter.route('/', {
+   name: 'home',
+    action() {
+        BlazeLayout.render('UserLayout', {main: 'home'});
+    }
+});
+
 FlowRouter.route('/admin', {
    name: 'studentPage',
     action() {
@@ -12,9 +19,9 @@ FlowRouter.route('/examroom', {
     }
 });
 
-FlowRouter.route('/', {
-   name: 'home',
+FlowRouter.route('/examroom/:id', {
+   name: 'examroomList',
     action() {
-        BlazeLayout.render('UserLayout', {main: 'home'});
+        BlazeLayout.render('AdminLayout', {main: 'examroomList'});
     }
 });
