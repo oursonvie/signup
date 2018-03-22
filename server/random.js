@@ -50,6 +50,15 @@ Meteor.methods({
 
           seatInfo = {seatNumber: seatNumber, studentId: studentId}
 
+          // need following info for student
+          studentId =
+          name =
+          degree =
+          level =
+          certno =
+          examID =
+
+
           // add seat infor into examroom
           Examroom.update({examroomId:roomNumber},{$addToSet:{seats:seatInfo}});
 
