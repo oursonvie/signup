@@ -5,3 +5,12 @@ Template.examroomList.onCreated(function() {
         self.subscribe('examroomsOne', id);
     });
 });
+
+Template.examroomList.helpers({
+  Students: function() {
+    return student.find()
+  },
+  Seats: function() {
+    return Examroom.findOne().seats
+  }
+})

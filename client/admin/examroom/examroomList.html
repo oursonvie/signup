@@ -1,3 +1,54 @@
 <template name="examroomList">
+  <div class='row'>
 
+    <div class='col-xs-12'>
+      <div class="panel panel-default">
+        <div class="panel-heading clearfix">
+          <h4 class="panel-title pull-left" style="padding-top: 7.5px;">考场顺序</h4>
+          <div class="btn-group pull-right">
+
+            <label class="btn btn-danger btn-sm btn-file">
+        导入<input type="file" id="examroomUpload" style="display: none;">
+            </label>
+
+            <button class="btn btn-primary btn-sm btn-random">排列考场</button>
+
+          </div>
+        </div>
+
+        <div class="panel-body">
+
+          {{#if Template.subscriptionsReady}}
+            <table class="table table-hover fixed">
+              <tbody>
+
+                <tr>
+                  <th width="20%">座位号</th>
+                  <th width="60%">编号</th>
+                  <th width="10%">座位数</th>
+                  <th width="10%">编辑</th>
+                </tr>
+
+                {{#each Seats}}
+                  <tr>
+                    <td>{{seatNumber}}</td>
+                    <td>{{studentId}}</td>
+                  </tr>
+                {{/each}}
+
+              </tbody>
+
+            </table>
+          {{else}}
+            {{> loader}}
+          {{/if}}
+
+
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
 </template>
