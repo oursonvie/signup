@@ -27,6 +27,9 @@ Template.home.events({
 
     // search student photo for later user
     PromiseMeteorCall('getPhoto', userId).then(res => {
+      if (res.data.count > 0) {
+        Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
+      }
       Session.set('studentPhoto', res)
     }).catch(err => {
       console.log(err)

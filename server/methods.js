@@ -25,16 +25,17 @@ Meteor.methods({
     return GetPhoto(batchcode, certno)
   },
   addOpenPhoto: function(certno, photoData) {
-    console.log(certno)
-    console.log(photoData)
     let dataList = photoData.data.dataList
     _.forEach(dataList, function(photo) {
       if (certno.toUpperCase() == photo.certificateno.toUpperCase()) {
+        photo.source = 'open'
         Image.insert(photo)
       } else {
         console.log(photo)
       }
     })
+
+    return 'photo added'
 
   }
 });
