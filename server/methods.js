@@ -19,5 +19,9 @@ Meteor.methods({
     _.forEach(papaData, function(examroom) {
       Examroom.insert(examroom)
     })
+  },
+  getPhoto:function(certno) {
+    let batchcode = Student.findOne({certno:certno}).batchcode
+    return GetPhoto(batchcode, certno)
   }
 });

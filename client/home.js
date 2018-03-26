@@ -26,7 +26,7 @@ Template.home.events({
 
     // search student photo for later user
     PromiseMeteorCall('getPhoto', userId).then(res => {
-      Session.set(studentPhoto, res)
+      Session.set('studentPhoto', res)
     }).catch(err => {
       console.log(err)
     })
