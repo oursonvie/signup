@@ -24,6 +24,13 @@ Template.home.events({
     event.preventDefault();
     let userId = document.getElementById('UserID').value.trim().toUpperCase()
 
+    // search student photo for later user
+    PromiseMeteorCall('getPhoto', userId).then(res => {
+      Session.set(studentPhoto, res)
+    }).catch(err => {
+      console.log(err)
+    })
+
     Session.set('searchStudent', userId)
 
   }

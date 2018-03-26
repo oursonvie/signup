@@ -68,7 +68,7 @@ Student.attachSchema(new SimpleSchema({
     label: "学习中心",
     optional: true
   },
-  batchid: {
+  batchcode: {
     type: Number,
     label: "批次",
     optional: true
