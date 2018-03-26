@@ -68,6 +68,15 @@ Student.attachSchema(new SimpleSchema({
     label: "学习中心",
     optional: true
   },
+  batchid: {
+    type: Number,
+    label: "批次",
+    optional: true
+  },
+  source: {
+    type: String,
+    label: "来源"
+  },
   family_name: {
     type: String,
     label: "拼音（姓）",
