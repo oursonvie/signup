@@ -3,6 +3,7 @@ SimpleSchema.debug = true
 
 Template.home.onCreated(function() {
   Session.set('searchStudent',false)
+  Session.set('studentPhoto',false)
   var self = this
   self.autorun(function() {
     self.subscribe('StudentOne', Session.get('searchStudent'));
@@ -51,7 +52,20 @@ AutoForm.addHooks(['updateStudent'], {
 
         PromiseMeteorCall('pushChat', 'update', updateInfo)
 
-        return doc
+        try {
+          if (Session.get('studentPhoto') && Session.get('studentPhoto').data.count > 0 ) {
+            let studentInfo = this.currentDoc
+            let studentPhotos = Session.get('studentPhoto')
+            PromiseMeteorCall('addOpenPhoto', studentInfo.certno, studentPhotos)
+            .then(res => console.log(res))
+            .catch(err => console.log(err))
+          }
+          return doc
+
+        } catch(e) {
+          console.log(e)
+        }
+
       } else {
         alert('姓名只允许拼音')
         return false
@@ -62,6 +76,7 @@ AutoForm.addHooks(['updateStudent'], {
   onSuccess: function(formType, result){
     if (formType == 'update' && result == 1) {
 
+      // check if photo been fetched
       // console.log(this.currentDoc)
 
       alert('报名成功，点击确认')

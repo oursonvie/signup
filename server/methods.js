@@ -23,5 +23,18 @@ Meteor.methods({
   getPhoto:function(certno) {
     let batchcode = Student.findOne({certno:certno}).batchcode
     return GetPhoto(batchcode, certno)
+  },
+  addOpenPhoto: function(certno, photoData) {
+    console.log(certno)
+    console.log(photoData)
+    let dataList = photoData.data.dataList
+    _.forEach(dataList, function(photo) {
+      if (certno.toUpperCase() == photo.certificateno.toUpperCase()) {
+        Image.insert(photo)
+      } else {
+        console.log(photo)
+      }
+    })
+
   }
 });
