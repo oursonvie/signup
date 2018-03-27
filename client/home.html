@@ -28,7 +28,11 @@
                 {{#if Students.edited}}
                   <p>该学生已经报过名，请联系老师</p>
                 {{else}}
-                  {{> updateStudentForm}}
+                  {{#if photoExist}}
+                    {{> updateStudentForm}}
+                  {{else}}
+                    {{> disabledUpdateStudentForm}}
+                  {{/if}}
                 {{/if}}
               {{/with}}
             </div>

@@ -16,6 +16,9 @@ Template.home.helpers({
   },
   Students: function() {
     return Student.findOne({})
+  },
+  photoExist: function() {
+    return Session.get('studentPhoto').fileexist
   }
 })
 
@@ -28,7 +31,8 @@ Template.home.events({
     // search student photo for later user
     PromiseMeteorCall('getPhoto', userId).then(res => {
       if (res.fileexist) {
-        Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
+        //Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
+        console.log('student picture exist')
       }
       Session.set('studentPhoto', res)
     }).catch(err => {
