@@ -6,6 +6,7 @@ Template.studentPage.onCreated(function() {
   self.autorun(function() {
     // subscribe regiestered student
     self.subscribe('studentCount');
+    self.subscribe('photoCount');
     self.subscribe('StudentOne', Session.get('searchStudent'));
   });
 });
@@ -13,6 +14,9 @@ Template.studentPage.onCreated(function() {
 Template.studentPage.helpers({
   signedNo: function() {
     return Counts.get('studentCount');
+  },
+  photodNo: function() {
+    return Counts.get('photoCount');
   },
   showCount: function() {
     return Session.get('submitCount');

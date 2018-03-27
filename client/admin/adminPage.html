@@ -23,6 +23,23 @@
     </div>
 
     <div class='col-xs-6'>
+      <div class="panel panel-default panel-download">
+        <div class="panel-heading clearfix">
+          <h4 class="panel-title pull-left" style="padding-top: 7.5px;">照片数量</h4>
+        </div>
+        <div class="panel-body">
+          <p>{{photodNo}}</p>
+        </div>
+      </div>
+    </div>
+
+
+
+
+  </div>
+
+  <div class='row'>
+    <div class='col-xs-6'>
       {{#if Template.subscriptionsReady}}
         {{#if ifSearch}}
           {{#if Student}}
@@ -42,8 +59,6 @@
         {{> loader}}
       {{/if}}
     </div>
-
-
   </div>
 
 
