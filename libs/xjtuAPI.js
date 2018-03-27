@@ -35,19 +35,31 @@ getXjtuPhoto = (sid) => {
       // console.log(sfpzurl)
 
       let photoZp = getXjtuUrl(zpurl)
-      let photoSfpzurl = getXjtuUrl(sfpzurl)
+      // let photoSfpzurl = getXjtuUrl(sfpzurl)
 
-      let filecount = ((photoZp) ? 1 : 0) + ((photoSfpzurl) ? 1 : 0)
+      // let filecount = ((photoZp) ? 1 : 0) + ((photoSfpzurl) ? 1 : 0)
+
+      result = {
+        filetype: 'zp',
+        doccontent:photoZp,
+        certificateno: student.certno,
+        source: 'xjtu',
+        fileexist: (( photoZp.length > 0 ) ? true : false )
+      }
+
+      /*
 
       result = {
         data: {
           count: filecount,
           dataList: [
-            {filetype:'zp', doccontent:photoZp, certno: student.certno},
-            {filetype:'sfpzurl', doccontent:photoSfpzurl, certno: student.certno}
+            {filetype:'zp', doccontent:photoZp, certificateno: student.certno},
+            {filetype:'sfpzurl', doccontent:photoSfpzurl, certificateno: student.certno}
           ]
         }
       }
+
+      */
 
       return result
     }

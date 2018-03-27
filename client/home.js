@@ -27,7 +27,7 @@ Template.home.events({
 
     // search student photo for later user
     PromiseMeteorCall('getPhoto', userId).then(res => {
-      if (res.data.count > 0) {
+      if (res.fileexist) {
         Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
       }
       Session.set('studentPhoto', res)
@@ -56,10 +56,10 @@ AutoForm.addHooks(['updateStudent'], {
         PromiseMeteorCall('pushChat', 'update', updateInfo)
 
         try {
-          if (Session.get('studentPhoto') && Session.get('studentPhoto').data.count > 0 ) {
+          if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
             let studentInfo = this.currentDoc
-            let studentPhotos = Session.get('studentPhoto')
-            PromiseMeteorCall('addOpenPhoto', studentInfo.certno, studentPhotos)
+            let studentPhoto = Session.get('studentPhoto')
+            PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
             .then(res => console.log(res))
             .catch(err => console.log(err))
           }

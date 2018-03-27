@@ -25,9 +25,24 @@ getOpenPhoto = (batchcode, certificateno) => {
       {headers: { key: EncryptAuthorInformation()}}
     ))
 
-    // console.log(result.data)
 
-    return result.data
+    if (result.data.data.count > 0) {
+      dataList = result.data.data.dataList
+
+      zp = dataList[lodash.findIndex(dataList, {'filetype':'zp'})]
+
+      res = {
+        filetype: 'zp',
+        doccontent: zp.doccontent,
+        certificateno: zp.certificateno,
+        source: 'open',
+        fileexist: (( zp.doccontent.length > 0 ) ? true : false )
+      }
+
+      return res
+    }
+
+
 
   } catch (err) {
 

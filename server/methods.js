@@ -21,28 +21,31 @@ Meteor.methods({
     })
   },
   getPhoto:function(certno) {
-    let student = Student.findOne({certno:certno})
-    if (student.source == 'xjtu') {
-      return getXjtuPhoto(student.signupid)
-    } else if (student.source == 'open') {
-      return getOpenPhoto(student.batchcode, certno)
-    } else {
-      throw new Meteor.Error( '503', 'Data missing source' );
+    try {
+      let student = Student.findOne({certno:certno})
+      if (student.source == 'xjtu') {
+        return getXjtuPhoto(student.signupid)
+      } else if (student.source == 'open') {
+        return getOpenPhoto(student.batchcode, certno)
+      } else {
+        throw new Meteor.Error( '503', 'Data missing source' );
+      }
+    } catch(err) {
+      throw new Meteor.Error('404', 'Cannot find student')
     }
 
   },
-  addOpenPhoto: function(certno, photoData) {
-    let dataList = photoData.data.dataList
-    _.forEach(dataList, function(photo) {
-      if (certno.toUpperCase() == photo.certificateno.toUpperCase()) {
-        photo.source = 'open'
-        Image.insert(photo)
-      } else {
-        console.log(photo)
-      }
-    })
+  addPhoto: function(certno, studentPhoto) {
+    studentPhoto.createdby = this.userId
+    studentPhoto.updated = moment().format('YYYY-MM-DD HH:mm:ss')
 
-    return 'photo added'
+    if (Image.findOne({certificateno:certno})) {
+      result = Image.update({certificateno:certno},{$set:studentPhoto})
+      return result
+    } else {
+      result = Image.insert(studentPhoto)
+      return result
+    }
 
   }
 });
