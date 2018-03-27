@@ -10,17 +10,6 @@ Meteor.methods({
     	}
       sortedList.push(rawList[0]._id)
 
-      /*
-
-      // devide into group of 30
-      let arrays = [], size = 30;
-
-      while (sortedList.length > 0)
-        arrays.push(sortedList.splice(0, size));
-
-      */
-
-
       // test if class room fits students
       // get total examroom capacity
       let totalSeats = Examroom.aggregate([
@@ -47,26 +36,35 @@ Meteor.methods({
 
             let studentId = sortedList.splice(0,1)[0]
 
-        		// console.log(roomNumber, seatNumber, studentId)
+            student = Student.findOne({_id:studentId})
+            examID = moment().format('YY') + '1' + '10698' + roomNumber.toString().padStart(3, '0') + seatNumber.toString().padStart(2, '0')
 
-            seatInfo = {seatNumber: seatNumber, studentId: studentId}
+            seatInfo = {
+              meteorId: studentId,
+              studentid: student.studentid,
+              roomnumber: roomNumber,
+              seatnumber: seatNumber,
+              name: student.name,
+              degree: student.degress,
+              level: student.level,
+              certno: student.certno,
+              examid: examID,
+              source: student.source
+            }
 
-            // console.log(roomNumber, seatNumber, examrooms[roomNumber-1].capacity + 1, sortedList.length)
+            briefSeats = {
+              seatnumber: seatNumber,
+              meteorId: studentId,
+              name: student.name
+            }
 
-            // need following info for student
-
-            /*
-            studentId =
-            name =
-            degree =
-            level =
-            certno =
-            examID =
-            */
+            console.log(briefSeats)
 
 
             // add seat infor into examroom
-            Examroom.update({examroomId:roomNumber},{$addToSet:{seats:seatInfo}});
+            Examroom.update({examroomId:roomNumber},{$addToSet:{seats:briefSeats}});
+
+            Seats.insert(seatInfo)
 
 
         	}
@@ -80,6 +78,18 @@ Meteor.methods({
 
     } else {
       throw new Meteor.Error( '401', 'No examrooms added' );
+    }
+
+
+  },
+  cleanExamroom: function() {
+    console.log('cleaning')
+    try {
+      Examroom.remove({})
+      Seats.remove({})
+      return `examroom: ${Examroom.find().count()}, Seats: ${Seats.find().count()}`
+    } catch(err) {
+      throw new Meteor.Error('error', err)
     }
 
 

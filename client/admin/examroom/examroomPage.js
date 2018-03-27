@@ -27,6 +27,11 @@ Template.examroomPage.events({
     })
     .catch(err => console.log(err))
   },
+  'click .btn-clean': function() {
+    PromiseMeteorCall('cleanExamroom')
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+  },
   // import function
   'change #examroomUpload': function(event, template) {
     var filesList = event.currentTarget.files;
