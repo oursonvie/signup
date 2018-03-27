@@ -1,16 +1,20 @@
 Template.examroomList.onCreated(function() {
     var self = this;
     self.autorun(function() {
-        var id = FlowRouter.getParam('id');
-        self.subscribe('examroomsOne', id);
+        var examroomId = parseInt(FlowRouter.getParam('id'));
+        self.subscribe('examroomsOne', examroomId);
+        self.subscribe('seatsStudentExamroom', examroomId);
     });
 });
 
 Template.examroomList.helpers({
-  Students: function() {
-    return student.find()
-  },
   Seats: function() {
-    return Examroom.findOne().seats
+    return Seats.find()
+  },
+  ExamroomNumber: function() {
+    return FlowRouter.getParam('id').padStart(3, '0')
+  },
+  thisRoom: function() {
+    return Examroom.findOne()
   }
 })

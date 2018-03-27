@@ -22,20 +22,17 @@ Meteor.publish('examrooms', function() {
   }
 })
 
-Meteor.publish('examroomsOne', function(id) {
+Meteor.publish('examroomsOne', function(examroomId) {
   if (this.userId) {
+    return Examroom.find({examroomId:examroomId})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
 
-    let rawList = Examroom.findOne({_id:id}).seats
-
-    let studentArray = []
-    _.forEach(rawList, function(student) {
-      studentArray.push(student.studentId)
-    })
-
-    return [
-      Examroom.find({_id:id}),
-      Student.find({_id:{$in:studentArray}})
-    ]
+Meteor.publish('seatsStudentExamroom', function(examroomId) {
+  if (this.userId) {
+    return Seats.find({roomnumber:examroomId})
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }

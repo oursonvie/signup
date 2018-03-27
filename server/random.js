@@ -45,12 +45,15 @@ Meteor.methods({
               roomnumber: roomNumber,
               seatnumber: seatNumber,
               name: student.name,
-              degree: student.degress,
+              degree: student.degree,
               level: student.level,
               certno: student.certno,
               examid: examID,
+              lcenter: student.lcenter,
               source: student.source
             }
+
+
 
             briefSeats = {
               seatnumber: seatNumber,
@@ -58,11 +61,10 @@ Meteor.methods({
               name: student.name
             }
 
-            console.log(briefSeats)
+            // add seat infor into examroom, restrict from collection setting
+             result = Examroom.update({examroomId:roomNumber},{$addToSet:{seats:briefSeats}});
 
-
-            // add seat infor into examroom
-            Examroom.update({examroomId:roomNumber},{$addToSet:{seats:briefSeats}});
+             console.log(result)
 
             Seats.insert(seatInfo)
 

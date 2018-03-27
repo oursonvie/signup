@@ -54,16 +54,23 @@ Examroom.attachSchema(new SimpleSchema({
   'seats.$': {
       type: Object
   },
-  'seats.$.seatNumber':{
+  'seats.$.seatnumber':{
     type: String,
     label: "座位号",
     autoform: {
         type:"hidden"
     }
   },
-  'seats.$.studentId':{
+  'seats.$.meteorId':{
     type: String,
     label: "学生编号",
+    autoform: {
+        type:"hidden"
+    }
+  },
+  'seats.$.name':{
+    type: String,
+    label: "学生姓名",
     autoform: {
         type:"hidden"
     }
