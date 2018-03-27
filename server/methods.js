@@ -21,8 +21,15 @@ Meteor.methods({
     })
   },
   getPhoto:function(certno) {
-    let batchcode = Student.findOne({certno:certno}).batchcode
-    return getOpenPhoto(batchcode, certno)
+    let student = Student.findOne({certno:certno})
+    if (student.source == 'xjtu') {
+      return getXjtuPhoto(student.signupid)
+    } else if (student.source == 'open') {
+      return getOpenPhoto(student.batchcode, certno)
+    } else {
+      throw new Meteor.Error( '503', 'Data missing source' );
+    }
+
   },
   addOpenPhoto: function(certno, photoData) {
     let dataList = photoData.data.dataList

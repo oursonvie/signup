@@ -37,8 +37,11 @@ getXjtuPhoto = (sid) => {
       let photoZp = getXjtuUrl(zpurl)
       let photoSfpzurl = getXjtuUrl(sfpzurl)
 
+      let filecount = ((photoZp) ? 1 : 0) + ((photoSfpzurl) ? 1 : 0)
+
       result = {
         data: {
+          count: filecount,
           dataList: [
             {filetype:'zp', doccontent:photoZp, certno: student.certno},
             {filetype:'sfpzurl', doccontent:photoSfpzurl, certno: student.certno}
