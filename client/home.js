@@ -82,9 +82,10 @@ AutoForm.addHooks(['updateStudent'], {
       // check if photo been fetched
       // console.log(this.currentDoc)
 
-      alert('报名成功，点击确认')
       Session.set('searchStudent',false)
       document.getElementById('UserID').value = ''
+
+      alert('报名成功，点击确认')
     }
   },
   onError: function (name, error, template) {

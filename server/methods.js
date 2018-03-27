@@ -22,7 +22,7 @@ Meteor.methods({
   },
   getPhoto:function(certno) {
     let batchcode = Student.findOne({certno:certno}).batchcode
-    return GetPhoto(batchcode, certno)
+    return getOpenPhoto(batchcode, certno)
   },
   addOpenPhoto: function(certno, photoData) {
     let dataList = photoData.data.dataList

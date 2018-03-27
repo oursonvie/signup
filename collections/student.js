@@ -73,6 +73,11 @@ Student.attachSchema(new SimpleSchema({
     label: "批次",
     optional: true
   },
+  signupid: {
+    type: String,
+    label: "报名编号",
+    optional: true
+  },
   source: {
     type: String,
     label: "来源"
