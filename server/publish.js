@@ -37,3 +37,11 @@ Meteor.publish('seatsStudentExamroom', function(examroomId) {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('seatOne', function(candidateId) {
+  if (this.userId) {
+    return Seats.find({certno:candidateId})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

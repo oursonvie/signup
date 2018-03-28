@@ -25,11 +25,12 @@
                 <tr>
                   <th>座位号</th>
                   <th>学号</th>
-                  <th>编号</th>
-                  <th>座位数</th>
-                  <th>编辑</th>
+                  <th>姓名</th>
+                  <th>专业</th>
+                  <th>层次</th>
                   <th>学习中心</th>
-                  <th>source</th>
+                  <th>数据来源</th>
+                  <th>查看</th>
                 </tr>
 
                 {{#each Seats}}
@@ -40,7 +41,8 @@
                     <td>{{degree}}</td>
                     <td>{{level}}</td>
                     <td>{{lcenter}}</td>
-                    <th>{{source}}</th>
+                    <td>{{source}}</td>
+                    <td><a href="/candidate/{{certno}}"><i class="fa fa-eye"></i></a></td>
                   </tr>
                 {{/each}}
 

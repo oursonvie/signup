@@ -1,0 +1,16 @@
+<template name="candidatePage">
+  <div class='exam_cert'>
+    <h2>西安交通大学</h2>
+    <h3>承认本科学士学位外国语考试</h3>
+    <h1>准考证</h1>
+
+    {{#with candidateInfo}}
+      学号：{{studentid}}
+      姓名：{{name}}
+      专业：{{degree}}
+      层次：{{level}}
+      身份证号码：{{certno}}
+      准考证号码：{{examid}}
+    {{/with}}
+  </div>
+</template>

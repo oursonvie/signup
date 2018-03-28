@@ -25,3 +25,10 @@ FlowRouter.route('/examroom/:id', {
         BlazeLayout.render('AdminLayout', {main: 'examroomList'});
     }
 });
+
+FlowRouter.route('/candidate/:id', {
+   name: 'candidatePage',
+    action() {
+        BlazeLayout.render('PrintLayout', {main: 'candidatePage'});
+    }
+});
