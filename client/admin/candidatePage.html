@@ -5,62 +5,83 @@
     <h1>准考证</h1>
 
     {{#with candidateInfo}}
-      <table class="table borderless">
-        <tbody>
-          <tr>
-            <td class="text-label">学号</td>
-            <td>{{studentid}}</td>
-          </tr>
 
-          <tr>
-            <td class="text-label">姓名</td>
-            <td>{{name}}</td>
-          </tr>
+      <div class="row student_info">
 
-          <tr>
-            <td class="text-label">专业</td>
-            <td>{{degree}}</td>
-          </tr>
+        <div class="col-md-9">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td class="text-label">学号</td>
+                <td>{{studentid}}</td>
+              </tr>
 
-          <tr>
-            <td class="text-label">层次</td>
-            <td>{{level}}</td>
-          </tr>
+              <tr>
+                <td class="text-label">姓名</td>
+                <td>{{name}}</td>
+              </tr>
 
-          <tr>
-            <td class="text-label">身份证号码</td>
-            <td>{{certno}}</td>
-          </tr>
+              <tr>
+                <td class="text-label">专业</td>
+                <td>{{degree}}</td>
+              </tr>
 
-          <tr>
-            <td class="text-label">准考证号码</td>
-            <td>{{examid}}</td>
-          </tr>
-        </tbody>
-      </table>
+              <tr>
+                <td class="text-label">层次</td>
+                <td>{{level}}</td>
+              </tr>
+
+              <tr>
+                <td class="text-label">身份证号码</td>
+                <td>{{certno}}</td>
+              </tr>
+
+              <tr>
+                <td class="text-label">准考证号码</td>
+                <td>{{examid}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-md-3">
+          {{#with studentPhoto}}
+            <img src={{baseHeader doccontent}} class="img-responsive" alt="Responsive image">
+
+          {{/with}}
+        </div>
 
 
-      <table class="table examroom-table">
-        <tbody>
-            <tr>
-              <th>考试时间</th>
-              <th>考试科目</th>
-              <th>考场号</th>
-              <th>座位号</th>
-              <th>考场地址</th>
-              <th>考试类型</th>
-            </tr>
 
-            <tr>
-              <td></td>
-              <td></td>
-              <td>{{numberPadding roomnumber 3}}</td>
-              <td>{{numberPadding seatnumber 2}}</td>
-              <td></td>
-              <td>闭卷</td>
-            </tr>
-        </tbody>
-      </table>
+      </div>
+
+
+      <div class="row exam_info">
+        <table class="table table-bordered examroom-table">
+          <tbody>
+              <tr>
+                <th>考试时间</th>
+                <th>考试科目</th>
+                <th>考场号</th>
+                <th>座位号</th>
+                <th>考场地址</th>
+                <th>考试类型</th>
+              </tr>
+
+              <tr>
+                <td></td>
+                <td></td>
+                <td>{{numberPadding roomnumber 3}}</td>
+                <td>{{numberPadding seatnumber 2}}</td>
+                <td></td>
+                <td>闭卷</td>
+              </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+
 
     {{/with}}
 
