@@ -34,5 +34,8 @@ Template.candidatePage.helpers({
       endtime = moment(starttime).add(duration, 'hours').format('HH:mm')
       return `${starttime} - ${endtime}`
     }
+  },
+  xjtulogo: function() {
+    return xjtulogo()
   }
 })
