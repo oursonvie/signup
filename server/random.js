@@ -50,7 +50,8 @@ Meteor.methods({
               certno: student.certno,
               examid: examID,
               lcenter: student.lcenter,
-              source: student.source
+              source: student.source,
+              language: student.language
             }
 
 

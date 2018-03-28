@@ -10,6 +10,9 @@ Template.candidatePage.helpers({
   candidateInfo: function() {
     return Seats.findOne({})
   },
+  examroomInfo: function() {
+    return Examroom.findOne({})
+  },
   numberPadding: function(input, padding) {
     return input.toString().padStart(padding, '0')
   },

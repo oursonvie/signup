@@ -58,6 +58,7 @@ pfafman:filesaver
 tmeasday:publish-counts
 ## collection hook
 matb33:collection-hooks
+tsega:bootstrap3-datetimepicker
 
 
 ## Promise

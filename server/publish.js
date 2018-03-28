@@ -39,12 +39,11 @@ Meteor.publish('seatsStudentExamroom', function(examroomId) {
 })
 
 Meteor.publish('examCert', function(candidateId) {
-  if (this.userId) {
-    return [
-      Seats.find({certno:candidateId}),
-      Image.find({certificateno:candidateId})
-    ]
-  } else {
-    throw new Meteor.Error( '500', 'No Premission' );
-  }
+  Seat = Seats.findOne({certno:candidateId})
+
+  return [
+    Seats.find({certno:candidateId}),
+    Image.find({certificateno:candidateId}),
+    Examroom.find({examroomId:Seat.roomnumber})
+  ]
 })

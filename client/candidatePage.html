@@ -45,10 +45,7 @@
         </div>
 
         <div class="col-xs-3">
-          {{#with studentPhoto}}
-            <img src={{baseHeader doccontent}} class="img-responsive" alt="Responsive image">
-
-          {{/with}}
+          <img src={{baseHeader studentPhoto.doccontent}} class="img-responsive" alt="Responsive image">
         </div>
 
 
@@ -70,10 +67,10 @@
 
               <tr>
                 <td></td>
-                <td></td>
+                <td>{{language}}</td>
                 <td>{{numberPadding roomnumber 3}}</td>
                 <td>{{numberPadding seatnumber 2}}</td>
-                <td></td>
+                <td>{{examroomInfo.examroomLocation}}</td>
                 <td>闭卷</td>
               </tr>
           </tbody>

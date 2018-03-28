@@ -44,6 +44,14 @@ Examroom.attachSchema(new SimpleSchema({
       }
     }
   },
+  starttime: {
+    type: Date,
+    label: "开始时间"
+  },
+  duration: {
+    type: Number,
+    label: "考试时长"
+  },
   seats: {
       type: Array,
       optional: true,
