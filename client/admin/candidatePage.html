@@ -5,12 +5,64 @@
     <h1>准考证</h1>
 
     {{#with candidateInfo}}
-      学号：{{studentid}}
-      姓名：{{name}}
-      专业：{{degree}}
-      层次：{{level}}
-      身份证号码：{{certno}}
-      准考证号码：{{examid}}
+      <table class="table borderless">
+        <tbody>
+          <tr>
+            <td class="text-label">学号</td>
+            <td>{{studentid}}</td>
+          </tr>
+
+          <tr>
+            <td class="text-label">姓名</td>
+            <td>{{name}}</td>
+          </tr>
+
+          <tr>
+            <td class="text-label">专业</td>
+            <td>{{degree}}</td>
+          </tr>
+
+          <tr>
+            <td class="text-label">层次</td>
+            <td>{{level}}</td>
+          </tr>
+
+          <tr>
+            <td class="text-label">身份证号码</td>
+            <td>{{certno}}</td>
+          </tr>
+
+          <tr>
+            <td class="text-label">准考证号码</td>
+            <td>{{examid}}</td>
+          </tr>
+        </tbody>
+      </table>
+
+
+      <table class="table examroom-table">
+        <tbody>
+            <tr>
+              <th>考试时间</th>
+              <th>考试科目</th>
+              <th>考场号</th>
+              <th>座位号</th>
+              <th>考场地址</th>
+              <th>考试类型</th>
+            </tr>
+
+            <tr>
+              <td></td>
+              <td></td>
+              <td>{{numberPadding roomnumber 3}}</td>
+              <td>{{numberPadding seatnumber 2}}</td>
+              <td></td>
+              <td>闭卷</td>
+            </tr>
+        </tbody>
+      </table>
+
     {{/with}}
+
   </div>
 </template>

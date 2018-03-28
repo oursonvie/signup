@@ -9,5 +9,8 @@ Template.candidatePage.onCreated(function() {
 Template.candidatePage.helpers({
   candidateInfo: function() {
     return Seats.findOne({})
+  },
+  numberPadding: function(input, padding) {
+    return input.toString().padStart(padding, '0')
   }
 })
