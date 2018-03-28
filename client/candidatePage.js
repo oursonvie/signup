@@ -25,5 +25,14 @@ Template.candidatePage.helpers({
     } else {
       return content
     }
+  },
+  examtime: function() {
+    dateInfo = Examroom.findOne({},{fields:{starttime:1, duration:1}})
+    if (dateInfo && dateInfo.starttime && dateInfo.duration) {
+      starttime = moment(dateInfo.starttime).format('YYYY-MM-DD HH:mm')
+      duration = dateInfo.duration
+      endtime = moment(starttime).add(duration, 'hours').format('HH:mm')
+      return `${starttime} - ${endtime}`
+    }
   }
 })
