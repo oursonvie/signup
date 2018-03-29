@@ -61,6 +61,7 @@ meteor@1.8.4
 meteor-base@1.3.0
 meteorhacks:aggregate@1.3.0
 meteorhacks:collection-utils@1.2.0
+meteorhacks:picker@1.0.3
 meteortoys:allthings@4.0.0
 meteortoys:authenticate@4.0.0
 meteortoys:autopub@4.0.0

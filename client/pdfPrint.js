@@ -42,7 +42,8 @@ Template.pdfPrint.events({
                 }
           }
 
-      pdfMake.createPdf(res).download('test.pdf')
+      // pdfMake.createPdf(res).download('test.pdf')
+      pdfMake.createPdf(res).open();
 
     })
     .catch(err => console.log(err))
