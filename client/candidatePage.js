@@ -20,19 +20,12 @@ Template.candidatePage.helpers({
     return Image.findOne({})
   },
   baseHeader: function(content) {
-    if (content.split(',').length != 2) {
-      return "data:image/jpeg;base64," + content
-    } else {
-      return content
-    }
+    return base64ImageFixer(content)
   },
   examtime: function() {
     dateInfo = Examroom.findOne({},{fields:{starttime:1, duration:1}})
     if (dateInfo && dateInfo.starttime && dateInfo.duration) {
-      starttime = moment(dateInfo.starttime).format('YYYY-MM-DD HH:mm')
-      duration = dateInfo.duration
-      endtime = moment(starttime).add(duration, 'hours').format('HH:mm')
-      return `${starttime} - ${endtime}`
+      return examDateTimeConverter(dateInfo.starttime, dateInfo.duration)
     }
   },
   xjtulogo: function() {

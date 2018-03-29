@@ -10,6 +10,7 @@
     "bcrypt": "^1.0.3",
     "es6-denodeify": "^0.1.5",
     "meteor-node-stubs": "~0.2.4",
+    "pdfmake": "^0.1.36",
     "simpl-schema": "^0.3.2"
   }
 }

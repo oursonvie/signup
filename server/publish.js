@@ -39,11 +39,15 @@ Meteor.publish('seatsStudentExamroom', function(examroomId) {
 })
 
 Meteor.publish('examCert', function(candidateId) {
-  Seat = Seats.findOne({certno:candidateId})
+  try {
+    Seat = Seats.findOne({certno:candidateId})
+    return [
+      Seats.find({certno:candidateId}),
+      Image.find({certificateno:candidateId}),
+      Examroom.find({examroomId:Seat.roomnumber})
+    ]
+  } catch(err) {
+    throw new Meteor.Error( '400', err )
+  }
 
-  return [
-    Seats.find({certno:candidateId}),
-    Image.find({certificateno:candidateId}),
-    Examroom.find({examroomId:Seat.roomnumber})
-  ]
 })
