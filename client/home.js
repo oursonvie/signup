@@ -19,6 +19,9 @@ Template.home.helpers({
   },
   photoExist: function() {
     return Session.get('studentPhoto').fileexist
+  },
+  RegisterExipre: function() {
+    return moment().isAfter(closing_date)
   }
 })
 
