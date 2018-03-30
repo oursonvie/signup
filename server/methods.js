@@ -17,10 +17,7 @@ Meteor.methods({
 
     _.forEach(papaData, function(examroom) {
       examroom.starttime = datetime.starttime
-      examroom.duration = datetime.duration
-
-      console.log(examroom)
-      
+      examroom.duration = datetime.duration      
       Examroom.insert(examroom)
     })
   },

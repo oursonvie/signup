@@ -10,21 +10,23 @@
         <div class="panel-heading clearfix">
           <h4 class="panel-title pull-left" style="padding-top: 7.5px;">考点管理</h4>
 
-          <div class="btn-group pull-right">
+          {{#if isInRole 'superadmin'}}
+            <div class="btn-group pull-right">
 
-            <label class="btn">{{examtime}}</label>
+              <label class="btn">{{examtime}}</label>
 
-            <label class="btn btn-danger btn-sm btn-file">
-        导入考场<input type="file" id="examroomUpload" style="display: none;">
-            </label>
+              <label class="btn btn-danger btn-sm btn-file">
+          导入考场<input type="file" id="examroomUpload" style="display: none;">
+              </label>
 
-            <button class="btn btn-primary btn-sm btn-setdate">设置考试时间</button>
+              <button class="btn btn-primary btn-sm btn-setdate">设置考试时间</button>
 
-            <button class="btn btn-primary btn-sm btn-random">排列考场</button>
+              <button class="btn btn-primary btn-sm btn-random">排列考场</button>
 
-            <button class="btn btn-primary btn-sm btn-clean">清除考场</button>
+              <button class="btn btn-primary btn-sm btn-clean">清除考场</button>
 
-          </div>
+            </div>
+          {{/if}}
         </div>
 
         <div class="panel-body">

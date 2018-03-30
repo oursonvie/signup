@@ -5,7 +5,7 @@ Meteor.startup(function () {
           email: 'oursonvie@qq.com',
           password: 'hacker'
       });
-      Roles.addUsersToRoles(id, ['admin'])
+      Roles.addUsersToRoles(id, ['admin', 'superadmin'])
   }
 
 });
