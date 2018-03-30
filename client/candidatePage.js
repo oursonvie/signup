@@ -27,8 +27,5 @@ Template.candidatePage.helpers({
     if (dateInfo && dateInfo.starttime && dateInfo.duration) {
       return examDateTimeConverter(dateInfo.starttime, dateInfo.duration)
     }
-  },
-  xjtulogo: function() {
-    return xjtulogo()
   }
 })
