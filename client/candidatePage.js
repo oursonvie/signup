@@ -27,5 +27,8 @@ Template.candidatePage.helpers({
     if (dateInfo && dateInfo.starttime && dateInfo.duration) {
       return examDateTimeConverter(dateInfo.starttime, dateInfo.duration)
     }
+  },
+  logoUrl: function() {
+    return Meteor.settings.public.logoUrl
   }
 })

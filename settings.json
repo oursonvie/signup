@@ -1,6 +1,7 @@
 {
   "public":{
-    "expireDate": "2018-04-29"
+    "expireDate": "2018-04-29",
+    "logoUrl": "/img/xjtu.png"
   },
   "private":{
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf"
