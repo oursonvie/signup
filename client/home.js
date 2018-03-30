@@ -21,7 +21,11 @@ Template.home.helpers({
     return Session.get('studentPhoto').fileexist
   },
   RegisterExipre: function() {
-    return moment().isAfter(closing_date)
+    if (Meteor.settings.public.expireDate) {
+      return moment().isAfter(moment(Meteor.settings.public.expireDate))
+    } else {
+      return true
+    }
   }
 })
 

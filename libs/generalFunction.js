@@ -11,5 +11,3 @@ base64ImageFixer = (content) => {
     return content
   }
 }
-
-closing_date = moment("2018-04-30")
