@@ -28,10 +28,10 @@ function createPdfBinary(pdfDoc, callback) {
 
   var fontDescriptors = {
          Roboto: {
-              normal: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
-              bold: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
-              italics: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
-              bolditalics: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf'
+              normal: Meteor.settings.private.font_YaHei,
+              bold: Meteor.settings.private.font_YaHei,
+              italics: Meteor.settings.private.font_YaHei,
+              bolditalics: Meteor.settings.private.font_YaHei
             }
       }
 
