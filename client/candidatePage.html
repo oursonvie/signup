@@ -1,122 +1,129 @@
 <template name="candidatePage">
-  <div class='exam_cert'>
-    <img src='/img/xjtu.png' class="img-responsive logo" alt="Responsive image">
-    <h3>成人本科学士学位外国语考试</h3>
-    <h1>准考证</h1>
 
-    {{#with candidateInfo}}
+  {{#if Template.subscriptionsReady}}
+    <div class='exam_cert'>
+      <img src='/img/xjtu.png' class="img-responsive logo" alt="Responsive image">
+      <h3>成人本科学士学位外国语考试</h3>
+      <h1>准考证</h1>
 
-      <div class="row student_info">
+      {{#with candidateInfo}}
 
-        <div class="col-xs-9">
-          <table class="table borderless">
+        <div class="row student_info">
+
+          <div class="col-xs-9">
+            <table class="table borderless">
+              <tbody>
+                <tr>
+                  <td class="text-label">学号</td>
+                  <td>{{studentid}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-label">姓名</td>
+                  <td>{{name}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-label">专业</td>
+                  <td>{{degree}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-label">层次</td>
+                  <td>{{level}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-label">身份证号码</td>
+                  <td>{{certno}}</td>
+                </tr>
+
+                <tr>
+                  <td class="text-label">准考证号码</td>
+                  <td>{{examid}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="col-xs-3">
+            <img src={{baseHeader studentPhoto.doccontent}} class="img-responsive" alt="Responsive image">
+          </div>
+
+
+
+        </div>
+
+
+        <div class="row exam_info">
+          <table class="table table-bordered examroom-table">
             <tbody>
-              <tr>
-                <td class="text-label">学号</td>
-                <td>{{studentid}}</td>
-              </tr>
+                <tr>
+                  <th>考试时间</th>
+                  <th>考试科目</th>
+                  <th>考场号</th>
+                  <th>座位号</th>
+                  <th>考场地址</th>
+                  <th>考试类型</th>
+                </tr>
 
-              <tr>
-                <td class="text-label">姓名</td>
-                <td>{{name}}</td>
-              </tr>
-
-              <tr>
-                <td class="text-label">专业</td>
-                <td>{{degree}}</td>
-              </tr>
-
-              <tr>
-                <td class="text-label">层次</td>
-                <td>{{level}}</td>
-              </tr>
-
-              <tr>
-                <td class="text-label">身份证号码</td>
-                <td>{{certno}}</td>
-              </tr>
-
-              <tr>
-                <td class="text-label">准考证号码</td>
-                <td>{{examid}}</td>
-              </tr>
+                <tr>
+                  <td>{{examtime}}</td>
+                  <td>{{language}}</td>
+                  <td>{{numberPadding roomnumber 3}}</td>
+                  <td>{{numberPadding seatnumber 2}}</td>
+                  <td>{{examroomInfo.examroomLocation}}</td>
+                  <td>闭卷</td>
+                </tr>
             </tbody>
           </table>
         </div>
 
-        <div class="col-xs-3">
-          <img src={{baseHeader studentPhoto.doccontent}} class="img-responsive" alt="Responsive image">
+      {{/with}}
+
+      <div class="row location_info">
+        <div class="col-xs-9">
+          <table class="table borderless">
+            <tbody>
+              <tr>
+                <td class="text-label">考点</td>
+                <td>西安交通大学（东校区）</td>
+              </tr>
+
+              <tr>
+                <td class="text-label">地址</td>
+                <td>西安市咸宁西路28号西安交通大学兴庆校区</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
 
+      <div class="row exam_instruction">
 
+        <p class='important-header'>考生须知</p>
+        <p>1、考生自行下载准考证，查看考场信息。</p>
+        <p>2、考生应在前一天到考试地点了解考场有关的注意事项及考场具体位置。</p>
+        <p>3、考生凭本人准考证和有效身份证件（军官证、护照、居民身份证）参加考试，缺一不可。</p>
+        <p>4、开考前20分钟凭两证进入考场，对号入座。考试中须将两证放在课桌右上角接受检查。</p>
+        <p>5、进入考场，只准带黑色签字笔、2B铅笔（用于填涂答题卡）、橡皮等必备工具，不得携带与考试有关的书籍、资料及其它任何物品。不得携带手机等通讯工具进入考场，违者按违纪处理。</p>
+        <p>6、考生迟到15分钟后不得进入考场，考试结束前学生不得提前交卷离开考场。考试结束后，待监考教师将准考证、答题卡和试卷收齐后才能依次退场。</p>
+        <p>7、试题有字迹不清，卷面缺损等，可举手提问。有关试题内容等问题不得向监考教师提问。</p>
+        <p>8、考试中不得以任何方式作弊或帮助他人作弊，违者按规定予以处罚。</p>
+        <p>9、遵守考场纪律，保持考场安静，不得吸烟，不得喧哗。</p>
+        <p>10、考试期间，校园内不得停放校外车辆，请考生自行解决交通，按时考试。</p>
+
+        <p class='important-footer'>西安交通大学网络教育学院</p>
 
       </div>
 
 
-      <div class="row exam_info">
-        <table class="table table-bordered examroom-table">
-          <tbody>
-              <tr>
-                <th>考试时间</th>
-                <th>考试科目</th>
-                <th>考场号</th>
-                <th>座位号</th>
-                <th>考场地址</th>
-                <th>考试类型</th>
-              </tr>
 
-              <tr>
-                <td>{{examtime}}</td>
-                <td>{{language}}</td>
-                <td>{{numberPadding roomnumber 3}}</td>
-                <td>{{numberPadding seatnumber 2}}</td>
-                <td>{{examroomInfo.examroomLocation}}</td>
-                <td>闭卷</td>
-              </tr>
-          </tbody>
-        </table>
-      </div>
-
-    {{/with}}
-
-    <div class="row location_info">
-      <div class="col-xs-9">
-        <table class="table borderless">
-          <tbody>
-            <tr>
-              <td class="text-label">考点</td>
-              <td>西安交通大学（东校区）</td>
-            </tr>
-
-            <tr>
-              <td class="text-label">地址</td>
-              <td>西安市咸宁西路28号西安交通大学兴庆校区</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-
-    <div class="row exam_instruction">
-
-      <p class='important-header'>考生须知</p>
-      <p>1、考生自行下载准考证，查看考场信息。</p>
-      <p>2、考生应在前一天到考试地点了解考场有关的注意事项及考场具体位置。</p>
-      <p>3、考生凭本人准考证和有效身份证件（军官证、护照、居民身份证）参加考试，缺一不可。</p>
-      <p>4、开考前20分钟凭两证进入考场，对号入座。考试中须将两证放在课桌右上角接受检查。</p>
-      <p>5、进入考场，只准带黑色签字笔、2B铅笔（用于填涂答题卡）、橡皮等必备工具，不得携带与考试有关的书籍、资料及其它任何物品。不得携带手机等通讯工具进入考场，违者按违纪处理。</p>
-      <p>6、考生迟到15分钟后不得进入考场，考试结束前学生不得提前交卷离开考场。考试结束后，待监考教师将准考证、答题卡和试卷收齐后才能依次退场。</p>
-      <p>7、试题有字迹不清，卷面缺损等，可举手提问。有关试题内容等问题不得向监考教师提问。</p>
-      <p>8、考试中不得以任何方式作弊或帮助他人作弊，违者按规定予以处罚。</p>
-      <p>9、遵守考场纪律，保持考场安静，不得吸烟，不得喧哗。</p>
-      <p>10、考试期间，校园内不得停放校外车辆，请考生自行解决交通，按时考试。</p>
-
-      <p class='important-footer'>西安交通大学网络教育学院</p>
 
     </div>
+  {{else}}
+    {{> loader}}
+  {{/if}}
 
 
-
-
-  </div>
 </template>
