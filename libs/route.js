@@ -32,10 +32,3 @@ FlowRouter.route('/candidate/:id', {
         BlazeLayout.render('PrintLayout', {main: 'candidatePage'});
     }
 });
-
-FlowRouter.route('/pdfprint/:id', {
-   name: 'pdfPrint',
-    action() {
-        BlazeLayout.render('PrintLayout', {main: 'pdfPrint'});
-    }
-});

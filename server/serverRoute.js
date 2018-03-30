@@ -1,11 +1,6 @@
 var PdfPrinter = require('pdfmake')
 
 
-
-// var pdfMakePrinter =  require('../node_modules/pdfmake/src/printer');
-var path = require('path');
-
-
 Picker.route('/api/pdf/:_id', function(params, req, res) {
   var id = params._id;
 
