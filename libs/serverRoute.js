@@ -1,7 +1,9 @@
-var pdfMakePrinter =  require('../node_modules/pdfmake/src/printer');
+var PdfPrinter = require('pdfmake')
+
+
+
+// var pdfMakePrinter =  require('../node_modules/pdfmake/src/printer');
 var path = require('path');
-
-
 
 
 Picker.route('/api/pdf/:_id', function(params, req, res) {
@@ -31,14 +33,14 @@ function createPdfBinary(pdfDoc, callback) {
 
   var fontDescriptors = {
          Roboto: {
-              normal: path.join(__dirname, '..', '/Users/Tonny/Desktop/Assignment/Signup/meteor/node_modules/pdfmake/examples/fonts', 'Microsoft YaHei.ttf'),
-              bold: path.join(__dirname, '..', '/Users/Tonny/Desktop/Assignment/Signup/meteor/node_modules/pdfmake/examples/fonts', 'Microsoft YaHei.ttf'),
-              italics: path.join(__dirname, '..', '/Users/Tonny/Desktop/Assignment/Signup/meteor/node_modules/pdfmake/examples/fonts', 'Microsoft YaHei.ttf'),
-              bolditalics: path.join(__dirname, '..', '/Users/Tonny/Desktop/Assignment/Signup/meteor/node_modules/pdfmake/examples/fonts', 'Microsoft YaHei.ttf')
+              normal: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
+              bold: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
+              italics: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf',
+              bolditalics: '/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf'
             }
       }
 
-  var printer = new pdfMakePrinter(fontDescriptors);
+  var printer = new PdfPrinter(fontDescriptors);
 
   var doc = printer.createPdfKitDocument(pdfDoc);
 
