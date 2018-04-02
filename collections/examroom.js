@@ -44,6 +44,15 @@ Examroom.attachSchema(new SimpleSchema({
       }
     }
   },
+  occupied: {
+    type: Boolean,
+    label: "已使用",
+    autoValue: function() {
+      if (this.isInsert) {
+        return false
+      }
+    }
+  },
   starttime: {
     type: Date,
     label: "开始时间"

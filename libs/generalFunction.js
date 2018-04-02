@@ -11,3 +11,13 @@ base64ImageFixer = (content) => {
     return content
   }
 }
+
+LanguageList = () => {
+  return [
+    {label: "英语", value:"英语"},
+    {label: "俄语", value:"俄语"},
+    {label: "法语", value:"法语"},
+    {label: "德语", value:"德语"},
+    {label: "日语", value:"日语"}
+  ]
+}

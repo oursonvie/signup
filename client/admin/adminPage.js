@@ -1,11 +1,3 @@
-let LanguageList = [
-  {label: "英语", value:"英语"},
-  {label: "俄语", value:"俄语"},
-  {label: "法语", value:"法语"},
-  {label: "德语", value:"德语"},
-  {label: "日语", value:"日语"}
-]
-
 Template.studentPage.onCreated(function() {
   // init search
   Session.set('searchStudent',false)
@@ -39,7 +31,7 @@ Template.studentPage.helpers({
     return Session.get('searchStudent');
   },
   languages: function() {
-    return LanguageList
+    return LanguageList()
   },
   languageSignedNo: function(lang) {
     return Counts.get(lang, lang);
