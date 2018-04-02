@@ -117,7 +117,7 @@ Student.attachSchema(new SimpleSchema({
           {label: "俄语", value:"俄语"},
           {label: "法语", value:"法语"},
           {label: "德语", value:"德语"},
-          {label: "日语", value:"日语"},
+          {label: "日语", value:"日语"}
         ]
       }
     }

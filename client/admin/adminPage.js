@@ -1,3 +1,11 @@
+let LanguageList = [
+  {label: "英语", value:"英语"},
+  {label: "俄语", value:"俄语"},
+  {label: "法语", value:"法语"},
+  {label: "德语", value:"德语"},
+  {label: "日语", value:"日语"}
+]
+
 Template.studentPage.onCreated(function() {
   // init search
   Session.set('searchStudent',false)
@@ -8,6 +16,9 @@ Template.studentPage.onCreated(function() {
     self.subscribe('studentCount');
     self.subscribe('photoCount');
     self.subscribe('StudentOne', Session.get('searchStudent'));
+    //count for 5 languages
+
+    self.subscribe('studentCountLanguage');
   });
 });
 
@@ -26,6 +37,12 @@ Template.studentPage.helpers({
   },
   ifSearch: function() {
     return Session.get('searchStudent');
+  },
+  languages: function() {
+    return LanguageList
+  },
+  languageSignedNo: function(lang) {
+    return Counts.get(lang, lang);
   }
 });
 
@@ -70,5 +87,21 @@ Template.studentPage.events({
         fileReader.readAsText(file);
       }
     }
+  },
+  'click .fa-download-languages': function(event, template) {
+    let targetLanguage = this.value
+    var nameFile = `${targetLanguage}考试名单.csv`
+    PromiseMeteorCall('downloadStudentViaLanguage', targetLanguage)
+    .then(fileContent => {
+      if(fileContent) {
+        var blob = new Blob([fileContent], {
+          type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, nameFile);
+      } else {
+        console.log('Nothing to download')
+      }
+    })
+    .catch(err => console.log(err))
   }
 });
