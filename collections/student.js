@@ -104,29 +104,13 @@ Student.attachSchema(new SimpleSchema({
       }
     }
   },
-  phone: {
-    type: String,
-    label: "个人联系电话",
-    autoValue: function() {
-      if (this.isInsert) {
-        return ' '
-      }
-    }
-  },
-  company: {
-    type: String,
-    label: "现工作单位",
-    autoValue: function() {
-      if (this.isInsert) {
-        return ' '
-      }
-    }
-  },
   language: {
     type: String,
     label: "考试语种",
+    optional: true,
     autoform: {
       type: "select",
+      firstOption: '(选择考试语言)',
       options: () => {
         return[
           {label: "英语", value:"英语"},
@@ -135,11 +119,6 @@ Student.attachSchema(new SimpleSchema({
           {label: "德语", value:"德语"},
           {label: "日语", value:"日语"},
         ]
-      }
-    },
-    autoValue: function() {
-      if (this.isInsert) {
-        return "英语"
       }
     }
   },
