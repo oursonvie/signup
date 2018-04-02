@@ -10,14 +10,14 @@ Meteor.methods({
 
   },
   download:function(){
-    return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0}}).fetch())
+    return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0, edited:0}}).fetch())
   },
   importExamroom:function(papaData, datetime){
     // console.log(papaData.length)
 
     _.forEach(papaData, function(examroom) {
       examroom.starttime = datetime.starttime
-      examroom.duration = datetime.duration      
+      examroom.duration = datetime.duration
       Examroom.insert(examroom)
     })
   },
