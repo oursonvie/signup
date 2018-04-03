@@ -35,6 +35,9 @@ Template.studentPage.helpers({
   },
   languageSignedNo: function(lang) {
     return Counts.get(lang, lang);
+  },
+  examRoomCount: function(lang) {
+    return Math.ceil(Counts.get(lang, lang)/30);
   }
 });
 

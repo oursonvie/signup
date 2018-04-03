@@ -7,6 +7,7 @@ Template.home.onCreated(function() {
   var self = this
   self.autorun(function() {
     self.subscribe('StudentOne', Session.get('searchStudent'));
+    self.subscribe('studentCount');
   });
 });
 
@@ -21,8 +22,10 @@ Template.home.helpers({
     return Session.get('studentPhoto').fileexist
   },
   RegisterExipre: function() {
-    if (Meteor.settings.public.expireDate) {
-      return moment().isAfter(moment(Meteor.settings.public.expireDate))
+    let currentRegister = Counts.get('studentCount');
+
+    if (Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
+      return moment().isAfter(moment(Meteor.settings.public.expireDate)) || Counts.get('studentCount') >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
@@ -54,42 +57,50 @@ Template.home.events({
 AutoForm.addHooks(['updateStudent'], {
   before: {
     update: function(doc) {
-      if(doc.$set.language) {
-        let checkName = doc.$set.family_name + doc.$set.first_name
+      if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
 
-        if (/^[a-z]+$/i.test(checkName)) {
+        if(doc.$set.language) {
+          let checkName = doc.$set.family_name + doc.$set.first_name
 
-          // add certno to update
-          let certno = this.currentDoc.certno
+          if (/^[a-z]+$/i.test(checkName)) {
 
-          let updateInfo = doc.$set
-          updateInfo.certno = certno
+            // add certno to update
+            let certno = this.currentDoc.certno
 
-          PromiseMeteorCall('pushChat', 'update', updateInfo)
+            let updateInfo = doc.$set
+            updateInfo.certno = certno
 
-          try {
-            if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
-              let studentInfo = this.currentDoc
-              let studentPhoto = Session.get('studentPhoto')
-              PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
-              .then(res => console.log(res))
-              .catch(err => console.log(err))
+            PromiseMeteorCall('pushChat', 'update', updateInfo)
+
+            try {
+              if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
+                let studentInfo = this.currentDoc
+                let studentPhoto = Session.get('studentPhoto')
+                PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
+                .then(res => console.log(res))
+                .catch(err => console.log(err))
+              }
+              return doc
+
+            } catch(e) {
+              console.log(e)
             }
-            return doc
 
-          } catch(e) {
-            console.log(e)
+          } else {
+            alert('姓名只允许拼音')
+            return false
+            throw new Meteor.Error('Input Error','Only letter accepted')
           }
-
         } else {
-          alert('姓名只允许拼音')
+          alert('请选择考试语言')
           return false
-          throw new Meteor.Error('Input Error','Only letter accepted')
+          throw new Meteor.Error('Input Error','Language missing')
         }
+
       } else {
-        alert('请选择考试语言')
+        alert('报名人数已满')
         return false
-        throw new Meteor.Error('Input Error','Language missing')
+        throw new Meteor.Error('Insert Error','Reach register upper limit')
       }
     }
   },

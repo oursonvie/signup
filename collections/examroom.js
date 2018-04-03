@@ -61,6 +61,11 @@ Examroom.attachSchema(new SimpleSchema({
     type: Number,
     label: "考试时长"
   },
+  language: {
+    type: String,
+    label: "考试语种",
+    optional: true
+  },
   seats: {
       type: Array,
       optional: true,
