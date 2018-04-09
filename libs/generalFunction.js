@@ -5,11 +5,16 @@ examDateTimeConverter = (starttime, duration) => {
 }
 
 base64ImageFixer = (content) => {
-  if (content.split(',').length != 2) {
-    return "data:image/jpeg;base64," + content
-  } else {
-    return content
+  try {
+    if (content.split(',').length != 2) {
+      return "data:image/jpeg;base64," + content
+    } else {
+      return content
+    }
+  } catch (err) {
+    console.log(err)
   }
+
 }
 
 LanguageList = () => {
