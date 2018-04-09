@@ -1,26 +1,46 @@
+var AES = require("crypto-js/aes");
+
 var PdfPrinter = require('pdfmake')
 
+Picker.route('/api/pdf', function(params, req, res) {
 
-Picker.route('/api/pdf/:_id', function(params, req, res) {
-  var id = params._id;
+  try {
 
-  PromiseMeteorCall('printExamID', id)
-  .then(response => {
+    console.log(params.query)
 
-    createPdfBinary(response, function(binary) {
-      // res.contentType('application/pdf');
-      res.setHeader('content-type', 'application/pdf');
-      // res.send(binary);
+    let decrypted = AES.decrypt(params.query.doc, Meteor.settings.private.passphrase);
+
+    var id = decrypted.toString(CryptoJS.enc.Utf8);
+
+    console.log(`id = ${id}`)
+
+    if (id) {
+      PromiseMeteorCall('printExamID', id)
+      .then(response => {
+
+        createPdfBinary(response, function(binary) {
+          // res.contentType('application/pdf');
+          res.setHeader('content-type', 'application/pdf');
+          // res.send(binary);
 
 
-      res.end(binary);
-    }, function(error) {
-      res.send('ERROR:' + error);
-    });
+          res.end(binary);
+        }, function(error) {
+          res.send('ERROR:' + error);
+        });
 
 
-  })
-  .catch(err => console.log(err))
+      })
+      .catch(err => console.log(err))
+    } else {
+      res.end('invalid key');
+    }
+
+  } catch(err) {
+    console.log(err)
+    res.send('ERROR:' + err);
+  }
+
 });
 
 

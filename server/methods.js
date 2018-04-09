@@ -1,3 +1,5 @@
+var AES = require("crypto-js/aes");
+
 Meteor.methods({
   insertStudent:function(Obj){
      Student.insert(Obj)
@@ -51,5 +53,14 @@ Meteor.methods({
       return result
     }
 
+  },
+  convertCert: function(certno) {
+    let decrypted = AES.encrypt(certno, Meteor.settings.private.passphrase);
+    console.log(certno, Meteor.settings.private.passphrase)
+    console.log(`encrypted string: ${decrypted.toString()}`)
+    let encodedString = encodeURIComponent(decrypted.toString())
+    let result = `doc=${encodedString}`;
+    console.log(result)
+    return result
   }
 });

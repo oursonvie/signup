@@ -8,6 +8,7 @@
     "@babel/runtime": "^7.0.0-beta.41",
     "babel-runtime": "^6.20.0",
     "bcrypt": "^1.0.3",
+    "crypto-js": "^3.1.9-1",
     "es6-denodeify": "^0.1.5",
     "meteor-node-stubs": "~0.2.4",
     "pdfmake": "^0.1.36",
