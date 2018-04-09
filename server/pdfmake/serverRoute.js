@@ -6,13 +6,13 @@ Picker.route('/api/pdf', function(params, req, res) {
 
   try {
 
-    console.log(params.query)
+    // console.log(params.query)
 
     let decrypted = AES.decrypt(params.query.doc, Meteor.settings.private.passphrase);
 
     var id = decrypted.toString(CryptoJS.enc.Utf8);
 
-    console.log(`id = ${id}`)
+    console.log(`[PDF Request] docId = ${id}`)
 
     if (id) {
       PromiseMeteorCall('printExamID', id)
