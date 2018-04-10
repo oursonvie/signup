@@ -21,15 +21,6 @@ Template.examroomPage.helpers({
   },
   ifSetTime: function() {
     return Session.get('setDate').edit
-  },
-  examtime: function() {
-    dateInfo = Session.get('setDate')
-    if (dateInfo && dateInfo.starttime && dateInfo.duration) {
-      starttime = moment(dateInfo.starttime).format('YYYY-MM-DD HH:mm')
-      duration = dateInfo.duration
-      endtime = moment(starttime).add(duration, 'hours').format('HH:mm')
-      return `考试日期：${starttime} - ${endtime}`
-    }
   }
 });
 

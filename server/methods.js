@@ -15,12 +15,10 @@ Meteor.methods({
   downloadStudentViaLanguage:function(lang){
     return CSV.unparse(Student.find({edited:true, language: lang}, {fields:{createdBy:0, edited:0}}).fetch())
   },
-  importExamroom:function(papaData, datetime){
+  importExamroom:function(papaData){
     // console.log(papaData.length)
 
     _.forEach(papaData, function(examroom) {
-      examroom.starttime = datetime.starttime
-      examroom.duration = datetime.duration
       Examroom.insert(examroom)
     })
   },
