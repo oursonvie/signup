@@ -28,7 +28,7 @@ Template.examroomPage.events({
     .catch(err => console.log(err))
   },
   'click .btn-download': function() {
-    console.log('download')
+    console.log('download examroom template')
 
 
     PromiseMeteorCall('downloadExamRoom')
@@ -41,6 +41,20 @@ Template.examroomPage.events({
       }
     })
 
+  },
+  'click .btn-seat-download': function() {
+    console.log('download seating infor')
+
+
+    PromiseMeteorCall('downloadSeats')
+    .then(res => {
+      if (res) {
+        let blob = new Blob([res], {
+          type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, '座位列表.csv')
+      }
+    })
   },
   'click .btn-clean': function() {
     PromiseMeteorCall('cleanExamroom')
