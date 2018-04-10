@@ -1,6 +1,4 @@
 Template.examroomPage.onCreated(function() {
-  Session.set('setDate', {edit:false} )
-
   var self = this
   self.autorun(function() {
     // subscribe regiestered student count
@@ -18,9 +16,6 @@ Template.examroomPage.helpers({
   },
   examrooms: function() {
     return Examroom.find()
-  },
-  ifSetTime: function() {
-    return Session.get('setDate').edit
   }
 });
 
@@ -32,13 +27,25 @@ Template.examroomPage.events({
     })
     .catch(err => console.log(err))
   },
+  'click .btn-download': function() {
+    console.log('download')
+
+
+    PromiseMeteorCall('downloadExamRoom')
+    .then(res => {
+      if (res) {
+        let blob = new Blob([res], {
+          type: "text/plain;charset=utf-8"
+        });
+        saveAs(blob, '教室编号.csv')
+      }
+    })
+
+  },
   'click .btn-clean': function() {
     PromiseMeteorCall('cleanExamroom')
     .then(res => console.log(res))
     .catch(err => console.log(err))
-  },
-  'click .btn-setdate': function() {
-    Session.set('setDate', {edit:!Session.get('setDate').edit})
   },
   // import function
   'change #examroomUpload': function(event, template) {

@@ -15,6 +15,9 @@ Meteor.methods({
   downloadStudentViaLanguage:function(lang){
     return CSV.unparse(Student.find({edited:true, language: lang}, {fields:{createdBy:0, edited:0}}).fetch())
   },
+  downloadExamRoom:function(){
+    return CSV.unparse(Examroom.find({},{fields:{_id:0, examroomId:1, examroomLocation:1}}).fetch())
+  },
   importExamroom:function(papaData){
     // console.log(papaData.length)
 

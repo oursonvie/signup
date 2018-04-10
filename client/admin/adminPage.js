@@ -44,15 +44,16 @@ Template.studentPage.helpers({
 Template.studentPage.events({
   'click .btn-download': function() {
     var nameFile = '学生名单.csv'
-    Meteor.call('download', function(err, fileContent) {
-      if (fileContent) {
 
-        var blob = new Blob([fileContent], {
+    PromiseMeteorCall('download')
+    .then(res => {
+      if (res) {
+        let blob = new Blob([res], {
           type: "text/plain;charset=utf-8"
         });
-        saveAs(blob, nameFile);
+        saveAs(blob, nameFile)
       }
-    });
+    })
   },
   // import function
   'change #hiddenUpload': function(event, template) {
