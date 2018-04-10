@@ -52,35 +52,32 @@ Template.examroomPage.events({
     // check datetime been set for the current examnation
     dateInfo = Session.get('setDate')
 
-    if (dateInfo.starttime != undefined && dateInfo.duration != undefined) {
-      var filesList = event.currentTarget.files;
-      if (filesList.length) {
-        var file = filesList[0];
-        if (file.type === 'text/csv') {
-          var fileReader = new FileReader();
-          fileReader.onload = function(e) {
-            var papaObject = CSV.parse(fileReader.result, {
-              header: true,
-              encoding: "UTF-8"
-            });
-            console.log('papaObject', papaObject);
+    let filesList = event.currentTarget.files;
+    if (filesList.length) {
+      let file = filesList[0];
+      if (file.type === 'text/csv') {
+        let fileReader = new FileReader();
+        fileReader.onload = function(e) {
+          var papaObject = CSV.parse(fileReader.result, {
+            header: true,
+            encoding: "UTF-8"
+          });
+          console.log('papaObject', papaObject);
 
-            if (papaObject && papaObject.errors.length == 0) {
-              Meteor.call('importExamroom', papaObject.data, dateInfo)
-            } else {
-              throw papaObject.errors
-            }
+          if (papaObject && papaObject.errors.length == 0) {
+            Meteor.call('importExamroom', papaObject.data)
+          } else {
+            throw papaObject.errors
+          }
 
-            Session.set('uploadedData', papaObject);
-          };
-          fileReader.onerror = function(e) {
-            throw 'Error reading CSV file';
-          };
-          fileReader.readAsText(file);
-        }
+          Session.set('uploadedData', papaObject);
+        };
+        fileReader.onerror = function(e) {
+          throw 'Error reading CSV file';
+        };
+        fileReader.readAsText(file);
       }
-    } else {
-      alert("导入教室前请先设置考试时间")
     }
+
   }
 });

@@ -19,11 +19,16 @@ Meteor.methods({
     return CSV.unparse(Examroom.find({},{fields:{_id:0, examroomId:1, examroomLocation:1}}).fetch())
   },
   importExamroom:function(papaData){
-    // console.log(papaData.length)
-
+    //console.log(papaData)
     _.forEach(papaData, function(examroom) {
-      Examroom.insert(examroom)
-    })
+      try {
+        let examroomID = parseInt(examroom.examroomId)
+        Examroom.update({examroomId: examroomID}, {$set:{examroomLocation: examroom.examroomLocation}})
+      } catch(err) {
+        throw new Meteor.Error('500', err)
+      }
+
+     })
   },
   getPhoto:function(certno) {
     try {
