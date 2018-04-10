@@ -5,23 +5,11 @@ makeExamId = (renderObject) => {
     content: [
 
       {
-        text: '西安交通大学',
-        style: 'logo',
-        alignment: 'center'
+        image: logoPng,
+        width: 400,
+        alignment: 'center',
+        margin: [0, -10, 0, 0],
       },
-
-      {
-        text: '成人本科学士学位外国语考试',
-        style: 'subheader',
-        alignment: 'center'
-      },
-
-      {
-        text: '准考证',
-        style: 'header',
-        alignment: 'center'
-      },
-
       {
   			columns: [
   				{
@@ -48,13 +36,15 @@ makeExamId = (renderObject) => {
   				},
           {
       	    image: renderObject.image,
-      	    fit: [200, 200]
+      	    fit: [150, 150],
+            alignment: 'center'
       		}
-  			]
+  			],
+        margin: [20, -20, 20, 0]
   		},
 
       {
-  			style: 'tableExample',
+  			margin: [20, -20, 20, 0],
   			table: {
           widths: ['auto', '*', '*', '*', '*', '*'],
   				body: [
@@ -80,13 +70,14 @@ makeExamId = (renderObject) => {
             ${renderObject.address} \n
             `
   				}
-  			]
+  			],
+        margin: [20, 0, 20, 0]
   		},
 
       {
         text: '考生须知',
-			  style: 'header',
-        alignment: 'center'
+        alignment: 'center',
+        margin: [20, -20, 20, 0]
       },
 
       {
@@ -102,7 +93,8 @@ makeExamId = (renderObject) => {
           9、遵守考场纪律，保持考场安静，不得吸烟，不得喧哗。\n
           10、考试期间，校园内不得停放校外车辆，请考生自行解决交通，按时考试。\n
         `,
-        fontSize: 8
+        fontSize: 8,
+        margin: [20, 0, 20, 0],
       },
 
       {
