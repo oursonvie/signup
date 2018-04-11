@@ -70,7 +70,7 @@ AutoForm.addHooks(['updateStudent'], {
             let updateInfo = doc.$set
             updateInfo.certno = certno
 
-            PromiseMeteorCall('pushChat', 'update', updateInfo)
+            PromiseMeteorCall('pushChat', 'Update', updateInfo)
 
             try {
               if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {

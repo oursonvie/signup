@@ -2,6 +2,7 @@ makeExamId = (renderObject) => {
   // console.log(renderObject)
 
   let docPDF = {
+    pageSize: 'A4',
     content: [
 
       {

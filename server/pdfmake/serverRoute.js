@@ -10,9 +10,16 @@ Picker.route('/api/pdf', function(params, req, res) {
 
     let decrypted = AES.decrypt(params.query.doc, Meteor.settings.private.passphrase);
 
-    var id = decrypted.toString(CryptoJS.enc.Utf8);
+    let id = decrypted.toString(CryptoJS.enc.Utf8);
 
-    console.log(`[PDF Request] docId = ${id}`)
+    let remoteHost = req.connection.remoteAddress
+
+    let message = {docId: id, remoteIP: remoteHost}
+
+    console.log(`[PDF Request] docId = ${id} from ${remoteHost}`)
+
+    PromiseMeteorCall('pushChat', 'PDF Request', message)
+
 
     if (id) {
       PromiseMeteorCall('printExamID', id)

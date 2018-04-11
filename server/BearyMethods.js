@@ -7,7 +7,7 @@ Meteor.methods({
       //
 
       var postData = {
-        "text": input + ' \n' + JSON.stringify(message) + '\n'
+        "text": `[${input}] ${JSON.stringify(message)}`
       }
 
       var options = {
