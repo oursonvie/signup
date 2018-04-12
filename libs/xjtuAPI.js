@@ -3,7 +3,10 @@ getXjtuUrl = (url) => {
     const response = Promise.await(PromiseHTTPCall(
       'GET',
       url,
-      {npmRequestOptions: { encoding: null }}
+      {
+        npmRequestOptions: { encoding: null },
+        timeout: 3000
+      }
     ))
 
     // get base64 image

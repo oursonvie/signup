@@ -36,7 +36,10 @@ Template.home.events({
   "submit .checkID" (event, template) {
 
     event.preventDefault();
-    let userId = document.getElementById('UserID').value.trim().toUpperCase()
+
+    let inputValue = document.getElementById('UserID').value.trim()
+
+    let userId = inputValue.toUpperCase()
 
     // search student photo for later user
     PromiseMeteorCall('getPhoto', userId).then(res => {

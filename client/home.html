@@ -12,7 +12,7 @@
         {{else}}
           <form class="checkID">
             <div class="form-group">
-              <input type="text" class="form-control" id="UserID" placeholder="身份证号">
+              <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" id="UserID" placeholder="身份证号">
             </div>
             <button type="submit" class="btn btn-primary pull-right" style="width:150px">查询</button>
           </form>

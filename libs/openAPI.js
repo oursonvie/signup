@@ -22,7 +22,10 @@ getOpenPhoto = (batchcode, certificateno) => {
     const result = Promise.await(PromiseHTTPCall(
       'GET',
       url,
-      {headers: { key: EncryptAuthorInformation()}}
+      {
+        headers: { key: EncryptAuthorInformation()},
+        timeout: 3000
+      }
     ))
 
 
