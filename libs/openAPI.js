@@ -28,6 +28,8 @@ getOpenPhoto = (batchcode, certificateno) => {
       }
     ))
 
+    // debug open api
+    console.log(result.content)
 
     if (result.data.data.count > 0) {
       dataList = result.data.data.dataList
