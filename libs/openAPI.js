@@ -16,6 +16,8 @@ const EncryptAuthorInformation = () => {
 
 getOpenPhoto = (batchcode, certificateno) => {
 
+  console.log(batchcode)
+
   let url = `http://openapi.open.com.cn/api/GetStudentFile/GetStudentFileInfo?appKey=${appKey}&batchCode=${batchcode}&certificateNo=${certificateno}`
 
   try {
@@ -29,7 +31,7 @@ getOpenPhoto = (batchcode, certificateno) => {
     ))
 
     // debug open api
-    console.log(result.content)
+    // console.log(result.content)
 
     if (result.data.data.count > 0) {
       dataList = result.data.data.dataList

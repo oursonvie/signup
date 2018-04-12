@@ -39,7 +39,13 @@ Meteor.methods({
       if (student.source == 'xjtu') {
         return getXjtuPhoto(student.signupid)
       } else if (student.source == 'open') {
-        return getOpenPhoto(student.batchcode, certno)
+        // change batchcode
+        if (student.batchcode.toString().length == 8) {
+          return getOpenPhoto(parseInt(student.batchcode.toString().slice(2,6)), certno)
+        } else {
+          return getOpenPhoto(student.batchcode, certno)
+        }
+
       } else {
         throw new Meteor.Error( '503', 'Data missing source' );
       }
