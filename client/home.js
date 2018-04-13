@@ -67,14 +67,6 @@ AutoForm.addHooks(['updateStudent'], {
 
           if (/^[a-z]+$/i.test(checkName)) {
 
-            // add certno to update
-            let certno = this.currentDoc.certno
-
-            let updateInfo = doc.$set
-            updateInfo.certno = certno
-
-            PromiseMeteorCall('pushChat', 'Update', updateInfo)
-
             try {
               if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
                 let studentInfo = this.currentDoc
@@ -111,7 +103,10 @@ AutoForm.addHooks(['updateStudent'], {
     if (formType == 'update' && result == 1) {
 
       // check if photo been fetched
-      // console.log(this.currentDoc)
+      if (this && this.updateDoc && this.updateDoc.$set) {
+        PromiseMeteorCall('pushChat', 'Update', this.updateDoc.$set)
+      }
+
 
       Session.set('searchStudent',false)
       document.getElementById('UserID').value = ''
