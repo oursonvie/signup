@@ -10,13 +10,9 @@ Meteor.methods({
     var docPDF = {
       pageSize: 'A4',
 
-      header: {
-        columns: [
-          { text: `批次编号: 123 考点编号: 10698 考场号：${examroom.examroomId}`, alignment: 'center' }
-        ]
-      },
-
       content: [
+        { text: `西安交通大学网络教育学院2018全国学位外语考试考场签到单`, alignment: 'center' },
+        { text: `考场 ${examroom.examroomId}`, alignment: 'left', fontSize: 8 },
         {
           table: {
             // headers are automatically repeated if the table spans over multiple pages
@@ -49,12 +45,14 @@ singleStudent = function(student) {
   return [
     {
         image: studentImage,
-        fit: [100, 80],
+        fit: [44, 44],
         alignment: 'center'
     },
-    {text: '姓名: ' + student.name + ' \n', fontSize: 10},
-    {text: '座位: ' + student.seatnumber + '\n', fontSize: 10},
-    {text: student.certno + '\n', fontSize: 8},
+    {text: '姓名: ' + student.name + ' \n', fontSize: 8},
+    {text: '座位: ' + student.seatnumber + '\n', fontSize: 8},
+    {text: '身份证号: ' + student.certno + '\n', fontSize: 8},
+    {text: '准考证号: ' + student.examid + '\n', fontSize: 8},
+    {text: '签字:', fontSize: 8},
 
   ]
 }
