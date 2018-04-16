@@ -1,5 +1,5 @@
 import SimpleSchema from 'simpl-schema';
-SimpleSchema.debug = true
+// SimpleSchema.debug = true
 
 Template.home.onCreated(function() {
   Session.set('searchStudent',false)
@@ -24,11 +24,16 @@ Template.home.helpers({
   RegisterExipre: function() {
     let currentRegister = Counts.get('studentCount');
 
-    if (Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return moment().isAfter(moment(Meteor.settings.public.expireDate)) || Counts.get('studentCount') >= Meteor.settings.public.registerLimit
+    let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
+
+    if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
+      return !validSignupDate || Counts.get('studentCount') >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
+  },
+  ifEarly: function() {
+    return moment().isBefore(Meteor.settings.public.startDate)
   }
 })
 

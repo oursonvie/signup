@@ -7,15 +7,19 @@
       </div>
       <div class="panel-body">
 
-        {{#if RegisterExipre}}
-          <h2 style="text-align:center">报名结束</h2>
+        {{#if ifEarly}}
+          <h2 style="text-align:center">报名尚未开始</h2>
         {{else}}
-          <form class="checkID">
-            <div class="form-group">
-              <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" id="UserID" placeholder="身份证号">
-            </div>
-            <button type="submit" class="btn btn-primary pull-right" style="width:150px">查询</button>
-          </form>
+          {{#if RegisterExipre}}
+            <h2 style="text-align:center">报名结束</h2>
+          {{else}}
+            <form class="checkID">
+              <div class="form-group">
+                <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" id="UserID" placeholder="身份证号">
+              </div>
+              <button type="submit" class="btn btn-primary pull-right" style="width:150px">查询</button>
+            </form>
+          {{/if}}
         {{/if}}
 
       </div>
