@@ -45,14 +45,12 @@ singleStudent = function(student) {
   return [
     {
         image: studentImage,
-        fit: [44, 44],
+        fit: [65, 65],
         alignment: 'center'
     },
-    {text: '姓名: ' + student.name + ' \n', fontSize: 8},
-    {text: '座位: ' + student.seatnumber + '\n', fontSize: 8},
+    {text: '姓名: ' + student.name + ' 座位: ' + student.seatnumber + '\n', fontSize: 8},
     {text: '身份证号: ' + student.certno + '\n', fontSize: 8},
     {text: '准考证号: ' + student.examid + '\n', fontSize: 8},
-    {text: '签字:', fontSize: 8},
 
   ]
 }
