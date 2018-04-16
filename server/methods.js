@@ -55,6 +55,8 @@ Meteor.methods({
 
   },
   addPhoto: function(certno, studentPhoto) {
+    console.log(`[certno: ${certno}]`)
+
     studentPhoto.createdby = this.userId
     studentPhoto.updated = moment().format('YYYY-MM-DD HH:mm:ss')
 
