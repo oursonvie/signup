@@ -50,7 +50,7 @@ Meteor.methods({
         throw new Meteor.Error( '503', 'Data missing source' );
       }
     } catch(err) {
-      throw new Meteor.Error('404', 'Cannot find student')
+      throw new Meteor.Error(err.error, err.message)
     }
 
   },

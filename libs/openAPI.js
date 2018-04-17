@@ -24,7 +24,7 @@ getOpenPhoto = (batchcode, certificateno) => {
       url,
       {
         headers: { key: EncryptAuthorInformation()},
-        timeout: 3000
+        timeout: 1
       }
     ))
 
@@ -47,11 +47,9 @@ getOpenPhoto = (batchcode, certificateno) => {
       return res
     }
 
-
-
   } catch (err) {
 
-    console.log(err)
+    throw new Meteor.Error('403', err.code)
 
   }
 

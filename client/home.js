@@ -54,6 +54,13 @@ Template.home.events({
         Session.set('studentPhoto', res)
       }
     }).catch(err => {
+      if (err.reason == 'ETIMEDOUT [403]') {
+        let selected = confirm("网络请求超时，请稍后重试");
+        if (selected || !selected) {
+          Session.set('searchStudent',false)
+          Session.set('studentPhoto',false)
+        }
+      }
       console.log(err)
     })
 
