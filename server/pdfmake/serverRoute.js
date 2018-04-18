@@ -24,7 +24,6 @@ Picker.route('/api/pdf', function(params, req, res) {
       PromiseMeteorCall('printExamID', id)
       .then(response => {
 
-        console.log('fuck')
         createPdfBinary(response, function(binary) {
           // res.contentType('application/pdf');
           res.setHeader('content-type', 'application/pdf');

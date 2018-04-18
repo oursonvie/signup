@@ -1,6 +1,5 @@
 Meteor.methods({
   printExamID:function(certno){
-    console.log(certno)
 
      if ( Seats.find({certno: certno}).count() > 0 ) {
        SeatInfo = Seats.findOne({certno: certno})
