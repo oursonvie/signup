@@ -4,6 +4,18 @@ Template.examroomPage.onCreated(function() {
     // subscribe regiestered student count
     self.subscribe('studentCount');
     self.subscribe('examrooms');
+
+    // autorun search bar
+    let certno = Session.get('searchStudent')
+    if (certno) {
+        PromiseMeteorCall('convertCert', certno)
+        .then(res => {
+            let result = `${Meteor.absoluteUrl()}api/pdf?${res}`
+            window.open(result)
+        })
+        .catch(err => console.log(err))
+    }
+
   });
 });
 

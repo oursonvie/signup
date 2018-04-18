@@ -4,11 +4,12 @@ Meteor.methods({
   convertCert: function(certno) {
     // decrypt certno using passphase
     let decrypted = AES.encrypt(certno, Meteor.settings.private.passphrase);
-    console.log(`encrypted string: ${decrypted.toString()}`)
+    // console.log(`encrypted string: ${decrypted.toString()}`)
+    
     // encode url
     let encodedString = encodeURIComponent(decrypted.toString())
     let result = `doc=${encodedString}`;
-    console.log(result)
+    // console.log(result)
     return result
   }
 });
