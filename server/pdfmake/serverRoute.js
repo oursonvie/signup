@@ -14,17 +14,17 @@ Picker.route('/api/pdf', function(params, req, res) {
 
     let remoteHost = req.connection.remoteAddress
 
-    let message = {docId: id, remoteIP: remoteHost}
+    let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
 
-    console.log(`[PDF Request] docId = ${id} from ${remoteHost}`)
+    console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
 
     PromiseMeteorCall('pushChat', 'PDF Request', message)
-
 
     if (id) {
       PromiseMeteorCall('printExamID', id)
       .then(response => {
 
+        console.log('fuck')
         createPdfBinary(response, function(binary) {
           // res.contentType('application/pdf');
           res.setHeader('content-type', 'application/pdf');
@@ -33,19 +33,21 @@ Picker.route('/api/pdf', function(params, req, res) {
 
           res.end(binary);
         }, function(error) {
-          res.send('ERROR:' + error);
+          res.send(error);
         });
 
 
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+        res.end('ERROR:' + err);
+      })
     } else {
       res.end('invalid key');
     }
 
   } catch(err) {
     console.log(err)
-    res.send('ERROR:' + err);
+    res.end('ERROR:' + err);
   }
 
 });

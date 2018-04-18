@@ -1,49 +1,46 @@
 Meteor.methods({
   printExamID:function(certno){
-     try {
-       if ( Seats.find({certno: certno}).count() > 0 ) {
-         SeatInfo = Seats.findOne({certno: certno})
-         // console.log(SeatInfo)
+    console.log(certno)
 
-         // check image, examroom info existance
-         if ( Image.findOne({certificateno:certno}) &&  Image.findOne({certificateno:certno}).doccontent && Examroom.findOne({examroomId: SeatInfo.roomnumber}) && Examroom.findOne({examroomId: SeatInfo.roomnumber}).examroomLocation ) {
+     if ( Seats.find({certno: certno}).count() > 0 ) {
+       SeatInfo = Seats.findOne({certno: certno})
+       // console.log(SeatInfo)
 
-           StudentImage = Image.findOne({certificateno: certno})
+       // check image, examroom info existance
+       if ( Image.findOne({certificateno:certno}) &&  Image.findOne({certificateno:certno}).doccontent && Examroom.findOne({examroomId: SeatInfo.roomnumber}) && Examroom.findOne({examroomId: SeatInfo.roomnumber}).examroomLocation ) {
 
-           ExamroomInfo = Examroom.findOne({examroomId: SeatInfo.roomnumber})
+         StudentImage = Image.findOne({certificateno: certno})
 
-           renderObject = {
-             studentid: SeatInfo.studentid,
-             name: SeatInfo.name,
-             degree: SeatInfo.degree,
-             level: SeatInfo.level,
-             certno: SeatInfo.certno,
-             examid: SeatInfo.examid,
-             examtime: examDateTimeConverter(ExamroomInfo.starttime, ExamroomInfo.duration),
-             subject: SeatInfo.language,
-             examroom: SeatInfo.roomnumber,
-             seatno: SeatInfo.seatnumber,
-             location: ExamroomInfo.examroomLocation,
-             examtype: '闭卷',
-             place: '西安交通大学（东校区）',
-             address: '西安市咸宁西路28号西安交通大学兴庆校区',
-             image: base64ImageFixer(StudentImage.doccontent)
-           }
+         ExamroomInfo = Examroom.findOne({examroomId: SeatInfo.roomnumber})
 
-           return makeExamId(renderObject)
-
-
-         } else {
-           new Meteor.Error('404', 'no matching image or examroom info')
+         renderObject = {
+           studentid: SeatInfo.studentid,
+           name: SeatInfo.name,
+           degree: SeatInfo.degree,
+           level: SeatInfo.level,
+           certno: SeatInfo.certno,
+           examid: SeatInfo.examid,
+           examtime: examDateTimeConverter(ExamroomInfo.starttime, ExamroomInfo.duration),
+           subject: SeatInfo.language,
+           examroom: SeatInfo.roomnumber,
+           seatno: SeatInfo.seatnumber,
+           location: ExamroomInfo.examroomLocation,
+           examtype: '闭卷',
+           place: '西安交通大学（东校区）',
+           address: '西安市咸宁西路28号西安交通大学兴庆校区',
+           image: base64ImageFixer(StudentImage.doccontent)
          }
 
+         return makeExamId(renderObject)
+
+
        } else {
-         return new Meteor.Error('404', 'no matching student')
+         throw new Meteor.Error('404', 'no matching image or examroom info')
        }
 
-
-     } catch(err) {
-       return new Meteor.Error('400', err)
+     } else {
+       throw new Meteor.Error('404', 'no matching student')
      }
+
   }
 });
