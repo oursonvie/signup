@@ -1,16 +1,12 @@
-var AES = require("crypto-js/aes");
-
 var PdfPrinter = require('pdfmake')
 
 Picker.route('/api/pdf', function(params, req, res) {
 
   try {
 
-    // console.log(params.query)
+    console.log(params.query)
 
-    let decrypted = AES.decrypt(params.query.doc, Meteor.settings.private.passphrase);
-
-    let id = decrypted.toString(CryptoJS.enc.Utf8);
+    let id = decryptAES(params.query.doc);
 
     let remoteHost = req.connection.remoteAddress
 
