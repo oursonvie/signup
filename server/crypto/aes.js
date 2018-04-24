@@ -2,8 +2,8 @@
 var crypto = require('crypto');
 
 // local var for AES encryption
-const key = 'b90126c9a326d6a9';
-const iv = 'b90126c9a326d6a9';
+const key = Meteor.settings.private.passkey;
+const iv = Meteor.settings.private.passvi;
 
 encryptAES = function(data) {
   console.log(data)
