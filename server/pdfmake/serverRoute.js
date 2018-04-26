@@ -17,6 +17,12 @@ Picker.route('/api/pdf', function(params, req, res) {
     PromiseMeteorCall('pushChat', 'PDF Request', message)
 
     if (id) {
+
+      message.err = false
+      message.type = 'PDF_request'
+
+      Logs.insert(message)
+
       PromiseMeteorCall('printExamID', id)
       .then(response => {
 
@@ -27,13 +33,22 @@ Picker.route('/api/pdf', function(params, req, res) {
 
 
           res.end(binary);
-        }, function(error) {
+        }, function(err) {
+          message.err = err
+          message.type = 'PDF_request'
+
+          Logs.insert(message)
+
           res.send(error);
         });
 
 
       })
       .catch(err => {
+        message.err = err
+        message.type = 'PDF_request'
+
+        Logs.insert(message)
         res.end('ERROR:' + err);
       })
     } else {
