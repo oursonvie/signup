@@ -72,43 +72,49 @@ Template.home.events({
 AutoForm.addHooks(['updateStudent'], {
   before: {
     update: function(doc) {
-      if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
+      if ( Roles.userIsInRole(this.userId, ['admin']) ) {
+        if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
 
-        if(doc.$set.language) {
-          let checkName = doc.$set.family_name + doc.$set.first_name
+          if(doc.$set.language) {
+            let checkName = doc.$set.family_name + doc.$set.first_name
 
-          if (/^[a-z]+$/i.test(checkName)) {
+            if (/^[a-z]+$/i.test(checkName)) {
 
-            try {
-              if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
-                let studentInfo = this.currentDoc
-                let studentPhoto = Session.get('studentPhoto')
-                PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
-                .then(res => console.log(res))
-                .catch(err => console.log(err))
+              try {
+                if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist ) {
+                  let studentInfo = this.currentDoc
+                  let studentPhoto = Session.get('studentPhoto')
+                  PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
+                  .then(res => console.log(res))
+                  .catch(err => console.log(err))
+                }
+                return doc
+
+              } catch(e) {
+                console.log(e)
               }
-              return doc
 
-            } catch(e) {
-              console.log(e)
+            } else {
+              alert('姓名只允许拼音')
+              return false
+              throw new Meteor.Error('Input Error','Only letter accepted')
             }
-
           } else {
-            alert('姓名只允许拼音')
+            alert('请选择考试语言')
             return false
-            throw new Meteor.Error('Input Error','Only letter accepted')
+            throw new Meteor.Error('Input Error','Language missing')
           }
-        } else {
-          alert('请选择考试语言')
-          return false
-          throw new Meteor.Error('Input Error','Language missing')
-        }
 
+        } else {
+          alert('报名人数已满')
+          return false
+          throw new Meteor.Error('Insert Error','Reach register upper limit')
+        }
       } else {
-        alert('报名人数已满')
-        return false
-        throw new Meteor.Error('Insert Error','Reach register upper limit')
+        return doc
       }
+
+
     }
   },
   onSuccess: function(formType, result){

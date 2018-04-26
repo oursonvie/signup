@@ -3,7 +3,7 @@
     "startDate": "2018-04-16",
     "expireDate": "2018-05-20",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 150
+    "registerLimit": 100
   },
   "private":{
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
