@@ -58,6 +58,7 @@ Meteor.methods({
         }
 
       })
+      console.log('[Check Photo] Done')
     } else {
       throw new Meteor.Error( '500', 'No Premission' );
     }
