@@ -4,7 +4,7 @@ Picker.route('/api/pdf', function(params, req, res) {
 
   try {
 
-    console.log(params.query)
+    // console.log(params.query)
 
     let id = decryptAES(params.query.doc);
 
