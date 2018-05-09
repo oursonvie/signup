@@ -15,8 +15,6 @@ Meteor.methods({
          // reading exam datetime infor directly from setting file
          ExamDateInfo = Meteor.settings.public.examtime
 
-         console.log(ExamDateInfo)
-
          renderObject = {
            studentid: SeatInfo.studentid,
            name: SeatInfo.name,
