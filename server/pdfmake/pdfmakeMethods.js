@@ -12,6 +12,11 @@ Meteor.methods({
 
          ExamroomInfo = Examroom.findOne({examroomId: SeatInfo.roomnumber})
 
+         // reading exam datetime infor directly from setting file
+         ExamDateInfo = Meteor.settings.public.examtime
+
+         console.log(ExamDateInfo)
+
          renderObject = {
            studentid: SeatInfo.studentid,
            name: SeatInfo.name,
@@ -19,7 +24,7 @@ Meteor.methods({
            level: SeatInfo.level,
            certno: SeatInfo.certno,
            examid: SeatInfo.examid,
-           examtime: examDateTimeConverter(ExamroomInfo.starttime, ExamroomInfo.duration),
+           examtime: examDateTimeConverter(ExamDateInfo.starttime, ExamDateInfo.duration),
            subject: SeatInfo.language,
            examroom: SeatInfo.roomnumber,
            seatno: SeatInfo.seatnumber,

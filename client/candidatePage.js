@@ -23,7 +23,7 @@ Template.candidatePage.helpers({
     return base64ImageFixer(content)
   },
   examtime: function() {
-    dateInfo = Examroom.findOne({},{fields:{starttime:1, duration:1}})
+    dateInfo = Meteor.settings.public.examtime
     if (dateInfo && dateInfo.starttime && dateInfo.duration) {
       return examDateTimeConverter(dateInfo.starttime, dateInfo.duration)
     }

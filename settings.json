@@ -3,13 +3,15 @@
     "startDate": "2018-04-16",
     "expireDate": "2018-05-20",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 6000
+    "registerLimit": 6000,
+    "examtime": {
+      "starttime":"2018-06-02 10:00:00",
+      "duration":2
+    }
   },
   "private":{
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
     "passkey":"b90126c9a326d6a9",
-    "passvi":"b90126c9a326d6a9",
-    "exam_starttime":"2018-06-10 10:00:00",
-    "exam_duration":3
+    "passvi":"b90126c9a326d6a9"
   }
 }

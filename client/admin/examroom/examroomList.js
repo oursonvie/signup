@@ -42,5 +42,14 @@ Template.examroomList.events({
     })
     .catch(err => console.log(err))
 
+  },
+  'click .fa-eye': function() {
+    console.log(this.certno)
+    PromiseMeteorCall('convertCert', this.certno)
+    .then(res => {
+      let link = `${Meteor.absoluteUrl()}api/pdf?${res}`
+      window.open(link);
+    })
+    .catch(err => console.log(err))
   }
 })
