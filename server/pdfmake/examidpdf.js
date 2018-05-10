@@ -82,13 +82,6 @@ makeExamId = (renderObject) => {
         margin: [20, -15, 20, 15]
       },
 
-
-      {
-        text: '西安交通大学网络教育学院',
-			  style: 'header',
-        alignment: 'right'
-      },
-
     ]
   }
 
