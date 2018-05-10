@@ -44,7 +44,6 @@ Template.examroomList.events({
 
   },
   'click .fa-eye': function() {
-    console.log(this.certno)
     PromiseMeteorCall('convertCert', this.certno)
     .then(res => {
       let link = `${Meteor.absoluteUrl()}api/pdf?${res}`
