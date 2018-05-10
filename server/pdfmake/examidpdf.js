@@ -9,7 +9,7 @@ makeExamId = (renderObject) => {
         image: logoPng,
         width: 400,
         alignment: 'center',
-        margin: [0, -20, 0, 0],
+        margin: [0, -10, 0, 0],
       },
       {
   			columns: [

@@ -1,7 +1,7 @@
 Meteor.methods({
   generateExamroomList:function(examroomId){
 
-    console.log(examroomId)
+    // console.log(examroomId)
 
     let examroom = Examroom.findOne({examroomId:examroomId})
 
