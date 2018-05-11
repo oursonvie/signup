@@ -123,6 +123,8 @@ AutoForm.addHooks(['updateStudent'], {
       // check if photo been fetched
       if (this && this.updateDoc && this.updateDoc.$set) {
         PromiseMeteorCall('pushChat', 'Update', this.updateDoc.$set)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
       }
 
 
