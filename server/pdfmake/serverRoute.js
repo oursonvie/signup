@@ -14,7 +14,9 @@ Picker.route('/api/pdf', function(params, req, res) {
 
     console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
 
-    Meteor.call('pushChat', 'PDF Request', message)
+    PromiseMeteorCall('pushChat', 'PDF Request', message)
+    .then(res => {}) // do nothing if success
+    .catch(err => console.log(err))
 
     if (id) {
 
