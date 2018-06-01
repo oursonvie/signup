@@ -83,8 +83,13 @@ Template.scandidate.events({
 
                 let result = res.result.score
 
+                // get student exam detail before calling beary
+                let student = Seats.findOne({certno:Session.get('searchStudent')},{fields:{_id:0, meteorId:0}})
+
+                student.baiduAPIScore = result
+
                 // beary chat push
-                PromiseMeteorCall('bearyFaceMatch', Session.get('searchStudent'), result)
+                PromiseMeteorCall('bearyFaceMatch', Session.get('searchStudent'), student)
 
                 // write result back into suspect student
                 PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), result)
@@ -93,8 +98,6 @@ Template.scandidate.events({
                 })
                 .catch(err => console.log(err))
               }
-
-
 
             })
 
