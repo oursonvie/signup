@@ -1,4 +1,7 @@
 Template.examroomPage.onCreated(function() {
+  // reset searchStudent Session
+  Session.set('searchStudent',false)
+
   var self = this
   self.autorun(function() {
     // subscribe regiestered student count
