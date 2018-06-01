@@ -26,3 +26,13 @@ LanguageList = () => {
     {label: "日语", value:"日语"}
   ]
 }
+
+
+sleep = (milliseconds) => {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}

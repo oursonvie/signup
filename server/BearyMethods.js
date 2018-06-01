@@ -27,5 +27,8 @@ Meteor.methods({
         // console.log('statusCode: ', statusCode)
       })
 
+  },
+  bearyFaceMatch: function(id, api) {
+    PromiseMeteorCall('pushChat', '[API Match]', api)
   }
 });

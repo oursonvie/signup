@@ -66,3 +66,6 @@ tsega:bootstrap3-datetimepicker
 promise@0.10.1
 
 meteorhacks:aggregate
+
+cfs:standard-packages
+cfs:gridfs

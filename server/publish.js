@@ -52,10 +52,25 @@ Meteor.publish('examCert', function(candidateId) {
 
 })
 
-
 Meteor.publish('studentPhoto', function(id) {
   if (this.userId) {
     return Image.find({certificateno:id})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
+
+Meteor.publish('suspectStudent', function(id) {
+  if (this.userId) {
+    return SuspectStudents.find({certno:id})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})
+
+Meteor.publish('onSitePic', function(id) {
+  if (this.userId) {
+    return Images.find({_id:id})
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }
