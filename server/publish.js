@@ -51,3 +51,12 @@ Meteor.publish('examCert', function(candidateId) {
   }
 
 })
+
+
+Meteor.publish('studentPhoto', function(id) {
+  if (this.userId) {
+    return Image.find({certificateno:id})
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

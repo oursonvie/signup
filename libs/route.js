@@ -32,3 +32,10 @@ FlowRouter.route('/candidate/:id', {
         BlazeLayout.render('PrintLayout', {main: 'candidatePage'});
     }
 });
+
+FlowRouter.route('/scandidate', {
+   name: 'scandidate',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'scandidate'});
+    }
+});
