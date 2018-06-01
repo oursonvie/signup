@@ -1,6 +1,6 @@
 Template.scandidate.onCreated(function() {
   Session.set('searchStudent',false)
-  Session.set('searchStudent','612524199409150624')
+  // Session.set('searchStudent','612524199409150624')
   var self = this
   self.autorun(function() {
     self.subscribe('examCert', Session.get('searchStudent'));
