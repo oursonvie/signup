@@ -5,6 +5,7 @@ Template.scandidate.onCreated(function() {
   self.autorun(function() {
     self.subscribe('examCert', Session.get('searchStudent'));
     self.subscribe('suspectStudent', Session.get('searchStudent'));
+    self.subscribe('suspectStudentCount');
 
     if (SuspectStudents.findOne()) {
       self.subscribe('onSitePic', SuspectStudents.findOne().photoId)
@@ -42,6 +43,9 @@ Template.scandidate.helpers({
   },
   SuspectStudents: () => {
     return SuspectStudents.findOne()
+  },
+  suspectStudentCount: () => {
+    return Counts.get('suspectStudentCount');
   }
 })
 

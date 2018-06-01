@@ -13,3 +13,7 @@ Meteor.publish('studentCountLanguage', function() {
 Meteor.publish('photoCount', function() {
   Counts.publish(this,'photoCount', Image.find())
 })
+
+Meteor.publish('suspectStudentCount', function() {
+  Counts.publish(this,'suspectStudentCount', SuspectStudents.find())
+})
