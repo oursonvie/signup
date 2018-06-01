@@ -34,7 +34,7 @@ Template.scandidate.helpers({
     return Images.findOne()
   },
   showResult: () => {
-    if (SuspectStudents.findOne() && SuspectStudents.findOne().hasOwnProperty('baiduAPI') && SuspectStudents.findOne().baiduAPI.error_code == 0) {
+    if (SuspectStudents.findOne() && SuspectStudents.findOne().hasOwnProperty('baiduAPIScore')) {
       return true
     } else {
       return false
@@ -79,18 +79,22 @@ Template.scandidate.events({
             PromiseMeteorCall('compareBaidu', Session.get('searchStudent'), fileObj._id)
             .then(res => {
 
-              // beary chat push
-              if (res.error_code == 0) {
+              if (res.error_code == 0 && res.result.score) {
+
                 let result = res.result.score
-                PromiseMeteorCall('bearyFaceMatch', Session.get('searchStudent'), res)
+
+                // beary chat push
+                PromiseMeteorCall('bearyFaceMatch', Session.get('searchStudent'), result)
+
+                // write result back into suspect student
+                PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), result)
+                .then(res => {
+                  console.log(res)
+                })
+                .catch(err => console.log(err))
               }
 
-              // write result back into suspect student
-              PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), res)
-              .then(res => {
-                console.log(res)
-              })
-              .catch(err => console.log(err))
+
 
             })
 

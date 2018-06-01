@@ -29,6 +29,6 @@ Meteor.methods({
 
   },
   bearyFaceMatch: function(id, api) {
-    PromiseMeteorCall('pushChat', '[API Match]', api)
+    PromiseMeteorCall('pushChat', 'API Match', api)
   }
 });

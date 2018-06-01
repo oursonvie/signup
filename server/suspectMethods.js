@@ -8,7 +8,7 @@ Meteor.methods({
      SuspectStudents.insert(saveObj)
   },
   downloadSuspect:function(){
-    return CSV.unparse(SuspectStudents.find({}, {fields:{_id:0, photoId:0, }}).fetch())
+    return CSV.unparse(SuspectStudents.find({}, {fields:{_id:0, photoId:0, createdBy:0 }}).fetch())
   },
   deleteSuspectStudent: function(id) {
     let suspectData = SuspectStudents.findOne({certno:id})
@@ -20,7 +20,7 @@ Meteor.methods({
 
     return 1
   },
-  updateSuspectStudent: function(id, api) {
-    SuspectStudents.update({certno:id}, {$set: {baiduAPI: api}})
+  updateSuspectStudent: function(id, score) {
+    SuspectStudents.update({certno:id}, {$set: {baiduAPIScore: score}})
   }
 });
