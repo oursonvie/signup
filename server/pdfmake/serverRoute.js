@@ -8,7 +8,7 @@ Picker.route('/api/pdf', function(params, req, res) {
 
     let id = decryptAES(params.query.doc);
 
-    let remoteHost = req.connection.remoteAddress
+    let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
     let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
 
