@@ -39,3 +39,10 @@ FlowRouter.route('/scandidate', {
         BlazeLayout.render('AdminLayout', {main: 'scandidate'});
     }
 });
+
+FlowRouter.route('/score', {
+   name: 'score',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'score'});
+    }
+});
