@@ -129,6 +129,7 @@ AutoForm.addHooks(['updateStudent'], {
 
 
       Session.set('searchStudent',false)
+      Session.set('studentPhoto',false)
       document.getElementById('UserID').value = ''
 
       alert('报名成功，点击确认')
