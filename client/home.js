@@ -73,10 +73,12 @@ AutoForm.addHooks(['updateStudent'], {
   before: {
     update: function(doc) {
       if ( Roles.userIsInRole(this.userId, ['admin']) ) {
+        return doc
+      } else {
         if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
 
           // seems not working
-          if(doc.$unset.language != '') {
+          if(doc.$set.language) {
             let checkName = doc.$set.family_name + doc.$set.first_name
 
             if (/^[a-z]+$/i.test(checkName)) {
@@ -111,8 +113,7 @@ AutoForm.addHooks(['updateStudent'], {
           return false
           throw new Meteor.Error('Insert Error','Reach register upper limit')
         }
-      } else {
-        return doc
+
       }
 
 
