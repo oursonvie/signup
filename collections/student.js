@@ -107,7 +107,11 @@ Student.attachSchema(new SimpleSchema({
   language: {
     type: String,
     label: "考试语种",
-    optional: true,
+    autoValue: function() {
+      if (this.isInsert) {
+        return ''
+      }
+    },
     autoform: {
       type: "select",
       firstOption: '(选择考试语言)',
