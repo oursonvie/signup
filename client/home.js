@@ -72,7 +72,7 @@ Template.home.events({
 AutoForm.addHooks(['updateStudent'], {
   before: {
     update: function(doc) {
-      if ( Roles.userIsInRole(this.userId, ['admin']) ) {
+      if ( Roles.userIsInRole(Meteor.userId(), ['admin']) ) {
         return doc
       } else {
         if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
