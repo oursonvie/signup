@@ -1,8 +1,9 @@
 Meteor.publish('StudentOne', function(id) {
-  if (id != false) {
-    console.log(id)
+  if ( Student.findOne({certno:id}).status == '毕业' ) {
+    return Student.find({certno:id})
+  } else {
+    return Student.find({certno:1})
   }
-  return Student.find({certno:id})
 })
 
 Meteor.publish('regiesteredStudents', function() {

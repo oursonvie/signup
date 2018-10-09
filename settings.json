@@ -3,7 +3,7 @@
     "startDate": "2018-09-26",
     "expireDate": "2018-11-08",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 4000,
+    "registerLimit": 5000,
     "examtime": {
       "starttime":"2018-06-02 10:00:00",
       "duration":2
