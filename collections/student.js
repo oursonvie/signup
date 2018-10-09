@@ -82,6 +82,10 @@ Student.attachSchema(new SimpleSchema({
     type: String,
     label: "来源"
   },
+  status: {
+    type: String,
+    label: "学籍状态"
+  },
   family_name: {
     type: String,
     label: "拼音（姓）",
@@ -160,7 +164,7 @@ Student.attachSchema(new SimpleSchema({
       if (this.isInsert) {
         return false
       } else {
-        return true
+        // return true
       }
     },
     autoform: {

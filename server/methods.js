@@ -7,7 +7,25 @@ Meteor.methods({
     _.forEach(papaData, function(student) {
       Student.insert(student)
     })
+  },
+  updateStudentStatus: function(papaData) {
+    console.log(papaData.length)
+    _.forEach(papaData, function(student) {
+      result = Student.update(
+        {
+          signupid:student.signupid,
+          certno: student.certno,
+          studentid: student.studentid,
+        },
+        {
+          $set: {
+            status: student.status
+          }
+        }
+      )
 
+      console.log(result)
+    })
   },
   download:function(){
     return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0, edited:0}}).fetch())
