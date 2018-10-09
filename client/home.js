@@ -46,26 +46,29 @@ Template.home.events({
 
     let userId = inputValue.toUpperCase()
 
-    // search student photo for later user
-    PromiseMeteorCall('getPhoto', userId).then(res => {
-      if (res && res.fileexist) {
-        //Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
-        console.log('student picture exist')
-        Session.set('studentPhoto', res)
-      }
-    }).catch(err => {
-      if (err.reason == 'ETIMEDOUT [403]') {
-        let selected = confirm("网络请求超时，请稍后重试");
-        if (selected || !selected) {
-          Session.set('searchStudent',false)
-          Session.set('studentPhoto',false)
+    // only with valid input
+
+    if (userId) {
+      // search student photo for later user
+      PromiseMeteorCall('getPhoto', userId).then(res => {
+        if (res && res.fileexist) {
+          //Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
+          console.log('student picture exist')
+          Session.set('studentPhoto', res)
         }
-      }
-      console.log(err)
-    })
+      }).catch(err => {
+        if (err.reason == 'ETIMEDOUT [403]') {
+          let selected = confirm("网络请求超时，请稍后重试");
+          if (selected || !selected) {
+            Session.set('searchStudent',false)
+            Session.set('studentPhoto',false)
+          }
+        }
+        console.log(err)
+      })
 
-    Session.set('searchStudent', userId)
-
+      Session.set('searchStudent', userId)
+    }
   }
 });
 

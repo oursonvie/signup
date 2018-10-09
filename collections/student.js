@@ -164,7 +164,7 @@ Student.attachSchema(new SimpleSchema({
       if (this.isInsert) {
         return false
       } else {
-        // return true
+        return true
       }
     },
     autoform: {
