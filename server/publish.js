@@ -1,5 +1,5 @@
 Meteor.publish('StudentOne', function(id) {
-  if ( Student.findOne({certno:id}).status == '毕业' ) {
+  if ( Student.findOne({certno:id}) && Student.findOne({certno:id}).status && Student.findOne({certno:id}).status == '毕业' ) {
     return Student.find({certno:id})
   } else {
     return Student.find({certno:1})
