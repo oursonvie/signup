@@ -77,7 +77,6 @@ AutoForm.addHooks(['updateStudent'], {
       } else {
         if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
 
-          // seems not working
           if(doc.$set.language) {
             let checkName = doc.$set.family_name + doc.$set.first_name
 
