@@ -47,7 +47,7 @@ Meteor.methods({
 
 
         // if image missing, get them
-        if (Image.find({certificateno:certno}).count() == 0) {
+        if (Image.find({certificateno:certno}).count() == 0 || Image.find({certificateno:certno}).fileexist == false) {
           PromiseMeteorCall('getPhoto', certno)
           .then(res => {
             PromiseMeteorCall('addPhoto', certno, res)

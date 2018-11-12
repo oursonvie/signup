@@ -41,6 +41,11 @@ singleStudent = function(student) {
 
   let studentImage = base64ImageFixer(Image.findOne({certificateno: student.certno}).doccontent)
 
+  console.log(studentImage.length)
+
+  console.log(student.certno)
+
+  console.log(studentImage.slice(0,40))
 
   return [
     {
