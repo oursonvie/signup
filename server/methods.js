@@ -44,6 +44,7 @@ Meteor.methods({
     _.forEach(papaData, function(examroom) {
       try {
         let examroomID = parseInt(examroom.examroomId)
+        console.log(examroom)
         Examroom.update({examroomId: examroomID}, {$set:{examroomLocation: examroom.examroomLocation}})
       } catch(err) {
         throw new Meteor.Error('500', err)

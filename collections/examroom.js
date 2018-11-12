@@ -55,12 +55,26 @@ Examroom.attachSchema(new SimpleSchema({
     }
   },
   starttime: {
-    type: Date,
-    label: "开始时间"
+    type: String,
+    label: "开始时间",
+    autoValue: function() {
+      if (this.isInsert) {
+        if (!this.value) {
+          return Meteor.settings.public.examtime.starttime
+        }
+      }
+    }
   },
   duration: {
     type: Number,
-    label: "考试时长"
+    label: "考试时长",
+    autoValue: function() {
+      if (this.isInsert) {
+        if (!this.value) {
+          return Meteor.settings.public.examtime.duration
+        }
+      }
+    }
   },
   language: {
     type: String,
