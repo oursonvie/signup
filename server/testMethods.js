@@ -40,14 +40,18 @@ Meteor.methods({
     if ( Roles.userIsInRole(this.userId, ['superadmin']) ) {
       console.log('start checking pictures')
 
+      // remove empty photo entity
+      removeCount = Image.remove({fileexist:false})
+
+      console.log(`${removeCount} empty students removed from image DB`)
+
       let checkArray = Student.find({edited:true}, {fields:{_id:0, certno:1}}).fetch()
 
       _.forEach(checkArray, function(student) {
         let certno = student.certno
 
-
         // if image missing, get them
-        if (Image.find({certificateno:certno}).count() == 0 || Image.find({certificateno:certno}).fileexist == false) {
+        if (Image.find({certificateno:certno}).count() == 0) {
           PromiseMeteorCall('getPhoto', certno)
           .then(res => {
             PromiseMeteorCall('addPhoto', certno, res)

@@ -33,19 +33,16 @@ Meteor.methods({
 chunkArray = function(array, size) {
   let result = []
   // actually chunking
-  while (array.length > 0) result.push(array.splice(0,size));
+  while (array.length > 0) {
+    result.push(array.splice(0,size));
+  }
+
   return result
 }
 
 singleStudent = function(student) {
 
   let studentImage = base64ImageFixer(Image.findOne({certificateno: student.certno}).doccontent)
-
-  console.log(studentImage.length)
-
-  console.log(student.certno)
-
-  console.log(studentImage.slice(0,40))
 
   return [
     {
@@ -64,13 +61,23 @@ arrayConverter = function(students) {
 
   rowOfStudents = []
 
+  // generate student array object
   lodash.each(students, function(student) {
-
     rowOfStudents.push(singleStudent(student))
   })
 
+  // make sure the students array object are in the number of 5
+  // get missing number
+  missingStudents = 30 - rowOfStudents.length
+
+  for(missingNumber = 0;missingNumber<missingStudents; missingNumber++) {
+    rowOfStudents.push({})
+  }
+
   // chunk the result directly
   let result = chunkArray(rowOfStudents, 5)
+
+  // console.log(result)
 
   return result
 
