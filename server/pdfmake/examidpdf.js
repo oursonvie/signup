@@ -78,8 +78,8 @@ makeExamId = (renderObject) => {
       {
         image: examRules,
         alignment: 'center',
-        width: 600,
-        margin: [20, -15, 20, 15]
+        width: 500,
+        margin: [20, -20, 0, 0]
       },
 
     ]
