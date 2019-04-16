@@ -27,13 +27,21 @@ Template.home.helpers({
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
 
     if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return !validSignupDate || Counts.get('studentCount') >= Meteor.settings.public.registerLimit
+      return !validSignupDate || Counts.get('signedStudentCount') >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
   },
   ifEarly: function() {
     return moment().isBefore(Meteor.settings.public.startDate)
+  },
+  allowSignup: function() {
+    startDate = (this.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
+
+    return validSignupDate = moment().isAfter(startDate) && moment().isBefore(Meteor.settings.public.expireDate)
+  },
+  currentSetudentDate: function() {
+    return Meteor.settings.public.currentStudentDate
   }
 })
 

@@ -1,7 +1,8 @@
 {
   "public":{
-    "startDate": "2018-09-26",
-    "expireDate": "2018-11-08",
+    "startDate": "2019-04-16 09:00:00",
+    "currentStudentDate": "2019-04-20 09:00:00",
+    "expireDate": "2019-05-05 23:59:59",
     "logoUrl": "/img/xjtu.png",
     "registerLimit": 4500,
     "examtime": {
@@ -12,6 +13,7 @@
   "private":{
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
     "passkey":"b90126c9a326d6a9",
-    "passvi":"b90126c9a326d6a9"
+    "passvi":"b90126c9a326d6a9",
+    "appKey":"543DE0821C0F607EE0533412640A033E"
   }
 }

@@ -1,5 +1,3 @@
-const appKey = '543DE0821C0F607EE0533412640A033E'
-
 // md5 for open auth
 const EncryptAuthorInformation = () => {
   let dateNow = moment()
@@ -15,6 +13,7 @@ const EncryptAuthorInformation = () => {
 }
 
 getOpenPhoto = (batchcode, certificateno) => {
+  const appKey = Meteor.settings.private.appKey
 
   let url = `http://openapi.open.com.cn/api/GetStudentFile/GetStudentFileInfo?appKey=${appKey}&batchCode=${batchcode}&certificateNo=${certificateno}`
 

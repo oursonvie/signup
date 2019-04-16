@@ -30,20 +30,31 @@
       {{#if ifSearch}}
         {{#if Students}}
           <div class="panel panel-default panel-basicinfo">
-            <div class="panel-heading">本人基本信息</div>
-            <div class="panel-body">
-              {{#with Students}}
-                {{#if Students.edited}}
-                  <p>该生已报名</p>
-                {{else}}
-                  {{#if photoExist}}
-                    {{> updateStudentForm}}
-                  {{else}}
-                    {{> disabledUpdateStudentForm}}
+
+              <div class="panel-heading">本人基本信息</div>
+              <div class="panel-body">
+                {{#with Students}}
+
+                  {{#if allowSignup}}
+
+                    {{#if Students.edited}}
+                      <p>该生已报名</p>
+                    {{else}}
+                      {{#if photoExist}}
+                        {{> updateStudentForm}}
+                      {{else}}
+                        {{> disabledUpdateStudentForm}}
+                      {{/if}}
+                    {{/if}}
+
+                    {{else}}
+
+                    <h4 class="text-center">在读生报名开始时间为: {{currentSetudentDate}}</h4>
                   {{/if}}
-                {{/if}}
-              {{/with}}
-            </div>
+                {{/with}}
+              </div>
+
+
           </div>
         {{else}}
           <p>报名信息有误，请检查后重试</p>
