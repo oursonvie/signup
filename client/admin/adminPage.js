@@ -16,6 +16,9 @@ Template.studentPage.onCreated(function() {
 
 Template.studentPage.helpers({
   signedNo: function() {
+    return Counts.get('signedStudentCount');
+  },
+  totalStudentCount: function() {
     return Counts.get('studentCount');
   },
   photodNo: function() {

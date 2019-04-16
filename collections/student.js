@@ -80,7 +80,8 @@ Student.attachSchema(new SimpleSchema({
   },
   source: {
     type: String,
-    label: "来源"
+    label: "来源",
+    optional: true
   },
   status: {
     type: String,

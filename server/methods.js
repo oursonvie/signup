@@ -3,10 +3,12 @@ Meteor.methods({
      Student.insert(Obj)
   },
   importStudent:function(papaData){
-    console.log(papaData.length)
+    console.log(`[studentImport]: ${papaData.length}`)
     _.forEach(papaData, function(student) {
-      Student.insert(student)
+      result = Student.insert(student)
+      console.log(result)
     })
+    console.log(`[studentImport] done`)
   },
   updateStudentStatus: function(papaData) {
     console.log(papaData.length)
