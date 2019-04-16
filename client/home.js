@@ -22,8 +22,6 @@ Template.home.helpers({
     return Session.get('studentPhoto').fileexist
   },
   RegisterExipre: function() {
-    let currentRegister = Counts.get('studentCount');
-
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
 
     if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
@@ -86,7 +84,7 @@ AutoForm.addHooks(['updateStudent'], {
       if ( Roles.userIsInRole(Meteor.userId(), ['admin']) ) {
         return doc
       } else {
-        if (Counts.get('studentCount') < Meteor.settings.public.registerLimit) {
+        if (Counts.get('signedStudentCount') < Meteor.settings.public.registerLimit) {
 
           if(doc.$set.language) {
             let checkName = doc.$set.family_name + doc.$set.first_name
