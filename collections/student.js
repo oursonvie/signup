@@ -66,7 +66,11 @@ Student.attachSchema(new SimpleSchema({
   batchcode: {
     type: Number,
     label: "批次",
-    optional: true
+    autoValue: function() {
+      if (this.isInsert) {
+        return parseInt(this.field('studentid').value.slice(1,5))
+      }
+    },
   },
   signupid: {
     type: String,
