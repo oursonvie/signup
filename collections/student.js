@@ -38,11 +38,6 @@ Student.attachSchema(new SimpleSchema({
     label: "性别",
     optional: true
   },
-  race: {
-    type: String,
-    label: "名族",
-    optional: true
-  },
   birthday: {
     type: String,
     label: "出生日期",
