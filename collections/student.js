@@ -67,7 +67,7 @@ Student.attachSchema(new SimpleSchema({
     type: Number,
     label: "批次",
     autoValue: function() {
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return parseInt(this.field('studentid').value.slice(1,5))
       }
     },
@@ -90,7 +90,7 @@ Student.attachSchema(new SimpleSchema({
     type: String,
     label: "拼音（姓）",
     autoValue: function() {
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return ' '
       } else if (this.isUpdate) {
         return lodash.capitalize(this.value)
@@ -101,7 +101,7 @@ Student.attachSchema(new SimpleSchema({
     type: String,
     label: "拼音（名）",
     autoValue: function() {
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return ' '
       } else if (this.isUpdate) {
         return lodash.capitalize(this.value)
@@ -129,7 +129,7 @@ Student.attachSchema(new SimpleSchema({
   createdBy: {
     type: String,
     autoValue:function(){
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return this.userId
       }
      },
@@ -140,7 +140,7 @@ Student.attachSchema(new SimpleSchema({
   createdAt: {
     type: Date,
     autoValue: function() {
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return new Date
       }
     },
@@ -161,7 +161,7 @@ Student.attachSchema(new SimpleSchema({
     type: Boolean,
     optional: true,
     autoValue: function() {
-      if (this.isInsert) {
+      if (this.isUpsert) {
         return false
       } else {
         return true

@@ -5,7 +5,15 @@ Meteor.methods({
   importStudent:function(papaData){
     console.log(`[studentImport]: ${papaData.length}`)
     _.forEach(papaData, function(student) {
-      result = Student.insert(student)
+      result = Student.upsert(
+        {
+          signupid: student.signupid ,
+          certno: student.certno ,
+          studentid: student.studentid
+        },
+        {$set:student}
+      )
+
       console.log(result)
     })
     console.log(`[studentImport] done`)
