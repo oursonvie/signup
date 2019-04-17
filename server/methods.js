@@ -13,7 +13,6 @@ Meteor.methods({
         },
         {$set:student}
       )
-
       console.log(result)
     })
     console.log(`[studentImport] done`)

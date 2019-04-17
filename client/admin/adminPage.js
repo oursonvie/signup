@@ -73,7 +73,13 @@ Template.studentPage.events({
           console.log('papaObject', papaObject);
 
           if (papaObject && papaObject.errors.length == 0) {
-            Meteor.call('importStudent', papaObject.data)
+            PromiseMeteorCall('importStudent', papaObject.data)
+            .then ( res => {
+              console.log(res)
+            })
+            .catch( err => {
+              console.log(err)
+            })
           } else {
             throw papaObject.errors
           }
