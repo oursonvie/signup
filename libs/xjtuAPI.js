@@ -37,7 +37,7 @@ getXjtuPhoto = (sid) => {
       // console.log(zpurl)
       // console.log(sfpzurl)
 
-      let photoZp = getXjtuUrl(zpurl)
+      let photoZp = (getXjtuUrl(zpurl)) ? getXjtuUrl(zpurl) : getXjtuUrl(sfpzurl)
       // let photoSfpzurl = getXjtuUrl(sfpzurl)
 
       // let filecount = ((photoZp) ? 1 : 0) + ((photoSfpzurl) ? 1 : 0)
