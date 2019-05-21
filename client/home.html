@@ -40,11 +40,7 @@
                     {{#if Students.edited}}
                       <p>该生已报名</p>
                     {{else}}
-                      {{#if photoExist}}
-                        {{> updateStudentForm}}
-                      {{else}}
-                        {{> disabledUpdateStudentForm}}
-                      {{/if}}
+                      {{> updateStudentForm}}
                     {{/if}}
 
                     {{else}}

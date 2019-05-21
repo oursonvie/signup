@@ -34,6 +34,7 @@ meteorhacks:picker
 twbs:bootstrap
 zimme:active-route
 stolinski:stylus-multi
+fortawesome:fontawesome
 
 ## plugins
 email@1.2.3
@@ -70,3 +71,5 @@ meteorhacks:aggregate
 cfs:standard-packages
 cfs:gridfs
 underscore@1.0.10
+
+montiapm:agent

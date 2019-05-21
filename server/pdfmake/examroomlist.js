@@ -41,8 +41,13 @@ chunkArray = function(array, size) {
 }
 
 singleStudent = function(student) {
+  studentImage = ''
 
-  let studentImage = base64ImageFixer(Image.findOne({certificateno: student.certno}).doccontent)
+  if ( Image.findOne({certificateno: student.certno}) != null && Image.findOne({certificateno: student.certno}).doccontent) {
+    studentImage = base64ImageFixer(Image.findOne({certificateno: student.certno}).doccontent)
+  } else {
+    studentImage = blank()
+  }
 
   return [
     {

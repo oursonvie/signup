@@ -4,7 +4,7 @@
     "currentStudentDate": "2019-04-17 21:00:00",
     "expireDate": "2019-04-17 22:00:00",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 4500,
+    "registerLimit": 4000,
     "examtime": {
       "starttime":"2018-11-24 9:30:00",
       "duration":2

@@ -52,29 +52,8 @@ Template.home.events({
 
     let userId = inputValue.toUpperCase()
 
-    // only with valid input
+    Session.set('searchStudent', userId)
 
-    if (userId) {
-      // search student photo for later user
-      PromiseMeteorCall('getPhoto', userId).then(res => {
-        if (res && res.fileexist) {
-          //Bert.alert( '学生照片存在！', 'info', 'growl-top-right' );
-          console.log('student picture exist')
-          Session.set('studentPhoto', res)
-        }
-      }).catch(err => {
-        if (err.reason == 'ETIMEDOUT [403]') {
-          let selected = confirm("网络请求超时，请稍后重试");
-          if (selected || !selected) {
-            Session.set('searchStudent', false)
-            Session.set('studentPhoto', false)
-          }
-        }
-        console.log(err)
-      })
-
-      Session.set('searchStudent', userId)
-    }
   }
 });
 
@@ -93,19 +72,7 @@ AutoForm.addHooks(['updateStudent'], {
 
               if (/^[a-z]+$/i.test(checkName)) {
 
-                try {
-                  if (Session.get('studentPhoto') && Session.get('studentPhoto').fileexist) {
-                    let studentInfo = this.currentDoc
-                    let studentPhoto = Session.get('studentPhoto')
-                    PromiseMeteorCall('addPhoto', studentInfo.certno, studentPhoto)
-                      .then(res => console.log(res))
-                      .catch(err => console.log(err))
-                  }
-                  return doc
-
-                } catch (e) {
-                  console.log(e)
-                }
+                return doc
 
               } else {
                 alert('姓名只允许拼音')
