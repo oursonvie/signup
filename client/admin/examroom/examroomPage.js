@@ -1,6 +1,6 @@
 Template.examroomPage.onCreated(function() {
   // reset searchStudent Session
-  Session.set('searchStudent',false)
+  Session.set('searchStudent', false)
 
   var self = this
   self.autorun(function() {
@@ -11,10 +11,10 @@ Template.examroomPage.onCreated(function() {
     // autorun search bar
     let certno = Session.get('searchStudent')
     if (certno) {
-        PromiseMeteorCall('convertCert', certno)
+      PromiseMeteorCall('convertCert', certno)
         .then(res => {
-            let result = `${Meteor.absoluteUrl()}api/pdf?${res}`
-            window.open(result)
+          let result = `${Meteor.absoluteUrl()}api/pdf?${res}`
+          window.open(result)
         })
         .catch(err => console.log(err))
     }
@@ -27,7 +27,7 @@ Template.examroomPage.helpers({
     return Counts.get('studentCount')
   },
   examroomNeeded: function() {
-    return Math.ceil(Counts.get('studentCount')/30)
+    return Math.ceil(Counts.get('studentCount') / 30)
   },
   examrooms: function() {
     return Examroom.find()
@@ -37,24 +37,24 @@ Template.examroomPage.helpers({
 Template.examroomPage.events({
   'click .btn-random': function() {
     PromiseMeteorCall('randomlizeExamroom')
-    .then(res => {
-      Session.set('randomExamroom', res)
-    })
-    .catch(err => console.log(err))
+      .then(res => {
+        Session.set('randomExamroom', res)
+      })
+      .catch(err => console.log(err))
   },
   'click .btn-download': function() {
     console.log('download examroom template')
 
 
     PromiseMeteorCall('downloadExamRoom')
-    .then(res => {
-      if (res) {
-        let blob = new Blob([res], {
-          type: "text/plain;charset=utf-8"
-        });
-        saveAs(blob, '教室编号.csv')
-      }
-    })
+      .then(res => {
+        if (res) {
+          let blob = new Blob([res], {
+            type: "text/plain;charset=utf-8"
+          });
+          saveAs(blob, '教室编号.csv')
+        }
+      })
 
   },
   'click .btn-seat-download': function() {
@@ -62,19 +62,19 @@ Template.examroomPage.events({
 
 
     PromiseMeteorCall('downloadSeats')
-    .then(res => {
-      if (res) {
-        let blob = new Blob([res], {
-          type: "text/plain;charset=utf-8"
-        });
-        saveAs(blob, '座位列表.csv')
-      }
-    })
+      .then(res => {
+        if (res) {
+          let blob = new Blob([res], {
+            type: "text/plain;charset=utf-8"
+          });
+          saveAs(blob, '座位列表.csv')
+        }
+      })
   },
   'click .btn-clean': function() {
     PromiseMeteorCall('cleanExamroom')
-    .then(res => console.log(res))
-    .catch(err => console.log(err))
+      .then(res => console.log(res))
+      .catch(err => console.log(err))
   },
   // import function
   'change #examroomUpload': function(event, template) {
@@ -108,5 +108,27 @@ Template.examroomPage.events({
       }
     }
 
+  },
+  'click .btn-download-all': function() {
+    examroom = Examroom.find({}, {
+      examroomId: 1
+    }).fetch()
+
+    _.forEach(examroom, function(item) {
+      PromiseMeteorCall('generateExamroomList', item.examroomId)
+        .then(res => {
+          pdfMake.fonts = {
+            Roboto: {
+              normal: 'Microsoft YaHei.ttf',
+              bold: 'Microsoft YaHei.ttf',
+              italics: 'Microsoft YaHei.ttf',
+              bolditalics: 'Microsoft YaHei.ttf'
+            }
+          }
+          pdfMake.createPdf(res).download(`考点编号_10698_考场号${item.examroomId}`);
+
+        })
+        .catch(err => console.log(err))
+    })
   }
 });
