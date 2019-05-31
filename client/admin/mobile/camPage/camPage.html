@@ -1,0 +1,27 @@
+<template name="camPage">
+
+  <div class="card mobile-cam-card">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-sm">
+          <div class="camera" style='text-align:center'>
+            <video id="video" width="50%" class="rounded" autoplay playsinline controls="true">Video stream not available.</video>
+          </div>
+          <div class="input-group d-flex justify-content-center float-home-button">
+            <div class="input-group-append camera-control">
+              {{#if searching}}
+                <button class="btn btn-primary btn-lg rounded-left disabled" type="button">签到中</button>
+              {{else}}
+                <button class="btn btn-primary btn-lg rounded-left" type="button">签到</button>
+              {{/if}}
+              <button class="btn btn-outline-secondary btn-switch btn-lg" type="button"><i class="fa fa-random"></i></button>
+              <button class="btn btn-outline-secondary btn-reset btn-lg rounded-right" type="button">重置</button>
+            </div>
+          </div>
+        </div>
+        {{> cameraSelectModal}}
+      </div>
+    </div>
+  </div>
+
+</template>

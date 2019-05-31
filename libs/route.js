@@ -39,3 +39,10 @@ FlowRouter.route('/scandidate', {
         BlazeLayout.render('AdminLayout', {main: 'scandidate'});
     }
 });
+
+FlowRouter.route('/mobile', {
+   name: 'mobileHome',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'mobileHome'});
+    }
+});

@@ -72,3 +72,15 @@ Meteor.publish('onSitePic', function(id) {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('studentNoQuery', function(studentid) {
+  if (this.userId) {
+    student = BaiduStudents.findOne({studentid:studentid})
+    image = Image.find({certificateno:student.certno})
+    returnStudent = BaiduStudents.find({studentid:studentid})
+
+    return [returnStudent, image]
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

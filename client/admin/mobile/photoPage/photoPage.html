@@ -1,0 +1,55 @@
+<template name="photoPage">
+  <div class="card mobile-studentinfo-card">
+
+    <div class="card-body">
+
+      <div class="row">
+
+        <div class="col-12 centerCol">
+
+          <canvas id="canvas">
+          </canvas>
+
+        </div>
+
+      </div>
+
+      {{#if studentInfo}}
+
+        <div class="row">
+          <div class="col-6 text-block">
+            <h5 class="text-center">匹配结果</h5>
+            <p class="text-center">相似度: {{baiduResult}}%</p>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-4 centerCol">
+            {{#if targetPic}}
+              <img src="{{targetPic}}" class="img-fluid rounded" alt="Responsive image" width="300px" style="margin:auto">
+            {{/if}}
+          </div>
+
+          <div class="col-8 centerCol">
+
+              {{#with studentInfo}}
+                {{> nameCardMobile}}
+              {{/with}}
+
+          </div>
+        </div>
+
+      {{else}}
+
+      <div class="row">
+        <div class="col-6 text-block">
+          <p class="text-center">学生信息</p>
+        </div>
+      </div>
+
+      {{/if}}
+
+
+    </div>
+  </div>
+</template>
