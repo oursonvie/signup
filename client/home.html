@@ -1,11 +1,11 @@
 <template name="home">
   <main>
 
-    <div class="panel panel-default search-panel">
-      <div class="panel-heading">
+    <div class="card card-default search-card">
+      <div class="card-heading">
         <h3>西安交通大学网络教育学院学位外语报名系统</h3>
       </div>
-      <div class="panel-body">
+      <div class="card-body">
 
         {{#if ifEarly}}
           <h2 style="text-align:center">报名尚未开始</h2>
@@ -29,10 +29,10 @@
     {{#if Template.subscriptionsReady}}
       {{#if ifSearch}}
         {{#if Students}}
-          <div class="panel panel-default panel-basicinfo">
+          <div class="card card-default card-basicinfo">
 
-              <div class="panel-heading">本人基本信息</div>
-              <div class="panel-body">
+              <div class="card-heading">本人基本信息</div>
+              <div class="card-body">
                 {{#with Students}}
 
                   {{#if allowSignup}}

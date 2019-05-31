@@ -8,6 +8,7 @@ Template.studentPage.onCreated(function() {
     self.subscribe('studentCount');
     self.subscribe('photoCount');
     self.subscribe('StudentOne', Session.get('searchStudent'));
+    self.subscribe('baiduCount');
     //count for 5 languages
 
     self.subscribe('studentCountLanguage');
@@ -41,6 +42,9 @@ Template.studentPage.helpers({
   },
   examRoomCount: function(lang) {
     return Math.ceil(Counts.get(lang, lang)/30);
+  },
+  baiduCount: function() {
+    return Counts.get('syncedCount');
   }
 });
 
@@ -137,5 +141,24 @@ Template.studentPage.events({
       }
     })
     .catch(err => console.log(err))
+  },
+  'click .btn-syncBaidu': function() {
+    // sync studentPic
+    PromiseMeteorCall('syncAllStudents')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },
+  'click .btn-baidu-createList': function() {
+    PromiseMeteorCall('updateBaiduList')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 });

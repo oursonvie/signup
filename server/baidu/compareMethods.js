@@ -1,20 +1,17 @@
 let AipFaceClient = require("baidu-aip-sdk").face;
 
 // 设置APPID/AK/SK
-let APP_ID = "11334192";
-let API_KEY = "VWVgTgrDg8LIx1ORnYTfZxS6";
-let SECRET_KEY = "tipZVwOW7bfUIcZRFqoPeUmFZEgZK4B4";
+let APP_ID = Meteor.settings.private.baidu.APP_ID
+let API_KEY = Meteor.settings.private.baidu.API_KEY
+let SECRET_KEY = Meteor.settings.private.baidu.SECRET_KEY
 
 // 新建一个对象，建议只保存一个对象调用服务接口
 let client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY);
 
 
-
 Meteor.methods({
   compareBaidu:function(userId, picId){
-
     console.log(userId, picId)
-
      try {
 
        // get site pic of student

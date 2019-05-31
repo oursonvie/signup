@@ -18,3 +18,7 @@ Meteor.publish('photoCount', function() {
 Meteor.publish('suspectStudentCount', function() {
   Counts.publish(this,'suspectStudentCount', SuspectStudents.find())
 })
+
+Meteor.publish('baiduCount', function() {
+  Counts.publish( this,'syncedCount', BaiduStudents.find({baidu:{$exists:true}}) )
+})
