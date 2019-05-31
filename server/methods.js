@@ -96,5 +96,8 @@ Meteor.methods({
       return result
     }
 
+  },
+  insertFaceLog: function(log) {
+    return FaceLogs.insert(log)
   }
 });

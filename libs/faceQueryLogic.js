@@ -51,9 +51,13 @@ queryCamProcess = () => {
         logs.createdBy = Meteor.userId()
         logs.methods = '人脸检索'
 
-        logResult = FaceLogs.insert(logs)
-
-        console.log(`[Log inserted] ${logResult}`)
+        PromiseMeteorCall('insertFaceLog', logs)
+        .then(res => {
+          console.log(`[Log inserted] ${res}`)
+        })
+        .catch(err => {
+          cosnole.log(err)
+        })
 
         // if pass baidu result
         if (res.result.user_list[0].score >= Meteor.settings.public.baiduRatio) {
