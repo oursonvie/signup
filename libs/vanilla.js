@@ -9,3 +9,8 @@ resetSessions = () => {
   Session.set('noValidExam', false)
   Session.set('ocring', false)
 }
+
+resetLocalStorage = () => {
+  localStorage.removeItem('selectCameraId');
+  localStorage.removeItem('selectCameraName');
+}

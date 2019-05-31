@@ -78,8 +78,9 @@ Meteor.publish('studentNoQuery', function(studentid) {
     student = BaiduStudents.findOne({studentid:studentid})
     image = Image.find({certificateno:student.certno})
     returnStudent = BaiduStudents.find({studentid:studentid})
+    seats = Seats.find({certno:student.certno},{fields:{roomnumber:1, seatnumber:1}})
 
-    return [returnStudent, image]
+    return [returnStudent, image, seats]
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }

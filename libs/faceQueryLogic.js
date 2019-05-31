@@ -41,73 +41,26 @@ queryCamProcess = () => {
 
 
         console.log(`facial passing rate: ${res.result.user_list[0].score}`)
-        let baiduRatio = Settings.findOne({
-          valuename: 'baiduRatio'
-        }).value
+
+        // prepare log file
+        let logs = {}
+        logs.studentPic = studentPic
+        logs.createdAt = new Date()
+        logs.baiduScore = res.result.user_list[0].score
+        logs.baiduResult = res
+        logs.createdBy = Meteor.userId()
+        logs.methods = '人脸检索'
+
+        logResult = FaceLogs.insert(logs)
+
+        console.log(`[Log inserted] ${logResult}`)
 
         // if pass baidu result
-        if (res.result.user_list[0].score >= baiduRatio) {
+        if (res.result.user_list[0].score >= Meteor.settings.public.baiduRatio) {
 
           console.log(`FaceCompare Logic time: ${moment().valueOf() - init_time}`)
 
           console.log('Passed BaiduRatio')
-
-          // prepare log file
-          let logs = {}
-          logs.studentPic = studentPic
-          logs.createdAt = new Date()
-          logs.baiduScore = res.result.user_list[0].score
-          logs.baiduResult = res
-          logs.createdBy = Meteor.userId()
-          logs.methods = '人脸检索'
-
-          // test time settings
-          testTime = Session.get('testTime') ? Session.get('testTime') : Meteor.settings.public.testDate
-
-          // check if there any exam to checkin return arrary to avaliable exam to checkin
-          PromiseMeteorCall('checkInExam', res.result.user_list[0].user_id, testTime)
-            .then(signInId => {
-              // if return true
-              if (signInId) {
-
-                // insert Logs
-                PromiseMeteorCall('insertLog', logs)
-                  .then(updateId => {
-
-                    // update current enrolled status
-                    PromiseMeteorCall('updateSigninStatus', signInId, updateId, Meteor.userId())
-                      .then(res => {
-                        console.log(res)
-                      })
-                      .catch(err => {
-                        console.log(err)
-                      })
-
-                  })
-                  .catch(err => {
-                    console.log(err)
-                  })
-
-                // double checkin validation
-                PromiseMeteorCall('checkSigninStatus', signInId)
-                  .then(signinStatus => {
-
-                    if (signinStatus) {
-                      alert('学生已经签到')
-                    }
-
-                  })
-                  .catch(err => {
-                    console.log(err)
-                  })
-
-              } else {
-                console.log(`No exam schedule avaliable for checkin`)
-              }
-            })
-            .catch(err => {
-              console.log(err)
-            })
 
 
         } else {

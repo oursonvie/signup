@@ -1,6 +1,8 @@
 Template.photoPage.helpers({
   targetPic: function() {
-    return Session.get('targetPic')
+    if ( Image.findOne() ) {
+      return base64ImageFixer(Image.findOne().doccontent)
+    }
   },
   baiduResult: function() {
     if (Session.get('baiduResult') && Session.get('baiduResult').error_code == 0) {
@@ -14,5 +16,8 @@ Template.photoPage.helpers({
   },
   studentInfo: function() {
     return BaiduStudents.findOne({studentid: Session.get('studentNoQuery')})
+  },
+  SeatInfo: function() {
+    return Seats.findOne()
   }
 });

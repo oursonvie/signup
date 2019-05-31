@@ -1,23 +1,15 @@
 <template name="nameCardMobile">
 
-    <div class="card main-photo-card">
+    <div class="mobile-studentinfo-card">
+
       <div class="card-body">
+        <h4>{{name}}</h4>
 
-        <h2>
-          {{name}}
-        </h2>
-
-
-      </div>
-    </div>
-
-    <div class="card main-photo-card">
-      <div class="card-body">
-
-        <p>学号: {{studentid}}</p>
+        <p><b>身份证号: </b> {{certno}}</p>
+        <p><b>学号: </b> {{studentid}}</p>
         <p><b>层次: </b>{{level}}</p>
-        <p><b>专业: </b>{{major}}</p>
-        <p><b>考点: </b>{{examlocation}}</p>
+        <p><b>专业: </b>{{degree}}</p>
+        <p><b>所属学习中心: </b>{{lcenter}}</p>
 
       </div>
     </div>
