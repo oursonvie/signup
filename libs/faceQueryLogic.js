@@ -52,12 +52,12 @@ queryCamProcess = () => {
         logs.methods = '人脸检索'
 
         PromiseMeteorCall('insertFaceLog', logs)
-        .then(res => {
-          console.log(`[Log inserted] ${res}`)
-        })
-        .catch(err => {
-          cosnole.log(err)
-        })
+          .then(res => {
+            console.log(`[Log inserted] ${res}`)
+          })
+          .catch(err => {
+            cosnole.log(err)
+          })
 
         // if pass baidu result
         if (res.result.user_list[0].score >= Meteor.settings.public.baiduRatio) {
@@ -109,88 +109,67 @@ faceCompareProcess = () => {
     // subscribe to student
     Session.set('certNoQuery', certNo)
 
-    console.log(certNo)
+    // subscribe to student
+    PromiseMeteorCall('certnoStudentIdLoopUp', certNo)
+    .then( res => {
+      Session.set('studentNoQuery', res)
+    })
+    .catch( err => {
+      console.log(err)
+    })
 
     // get student pic from signup no
-    PromiseMeteorCall('localPhotoLookUp', certNo)
+    PromiseMeteorCall('certnoPhotoLookUp', certNo)
       .then(targetPic => {
         Session.set('targetPic', targetPic)
         let studentPic = Session.get('studentPic')
 
-        // check if there any exam to checkin return arrary to avaliable exam to checkin
-        PromiseMeteorCall('validateCheckin', certNo, Session.get('testTime'))
-          .then(signInId => {
-
-            if (signInId) {
-
-              // if return valid exam info save to session
-              Session.set('examroomSubNo', signInId)
-
-              // image compare if pass provoke signin
-              PromiseMeteorCall('baidu_compare', studentPic.split(',')[1], targetPic.split(',')[1])
-                .then(res => {
-                  console.log(`baidu_compare time: ${moment().valueOf() - init_time}`)
-                  Session.set('baiduResult', res)
-
-                  Session.set('searching', false)
-
-                  if (res.error_code == 0) {
-                    console.log(`facial passing rate: ${res.result.score}`)
-                    let baiduRatio = Settings.findOne({
-                      valuename: 'baiduRatio'
-                    }).value
-
-                    // prepare log file
-                    let logs = {}
-                    logs.studentPic = studentPic
-                    logs.certno = certNo
-                    logs.createdAt = new Date()
-                    logs.baiduScore = res.result.score
-                    logs.baiduResult = res
-                    logs.createdBy = Meteor.userId()
-                    logs.methods = '巡考核查'
-
-                    logs.signinid = signInId
-
-                    PromiseMeteorCall('insertValidationLog', logs)
-                      .then(upsertId => {
-                        console.log(upsertId)
-
-                        // if pass baidu result
-                        if (res.result.score >= baiduRatio) {
-                          alert(`学生核查通过`)
-                        } else {
-                          alert(`学生核查未通过`)
-                        }
-
-                      })
-                      .catch(err => {
-                        console.log(err)
-                      })
+        // image compare if pass provoke signin
+        PromiseMeteorCall('baidu_compare', studentPic.split(',')[1], targetPic.split(',')[1])
+          .then(res => {
 
 
-                  } else {
-                    // error handling for baidu error
-                    error_code = res.error_code
-                    alert(errorCodeHanding(error_code))
-                  }
 
-                })
+            console.log(`baidu_compare time: ${moment().valueOf() - init_time}`)
+            Session.set('baiduResult', res)
+
+            Session.set('searching', false)
+
+            if (res.error_code == 0) {
+              console.log(`facial passing rate: ${res.result.score}`)
+
+              // prepare log file
+              let logs = {}
+              logs.studentPic = studentPic
+              logs.certno = certNo
+              logs.createdAt = new Date()
+              logs.baiduScore = res.result.score
+              logs.baiduResult = res
+              logs.createdBy = Meteor.userId()
+              logs.methods = '人脸比对'
+
+              // if pass baidu result
+              if (res.result.score >= Meteor.settings.public.baiduRatio) {
+
+                console.log(`FaceCompare Logic time: ${moment().valueOf() - init_time}`)
+
+                console.log('Passed BaiduRatio')
+
+
+              } else {
+                alert('人脸比对不通过')
+                console.log(`Didn't pass test`)
+              }
+
 
 
             } else {
-              Session.set('searching', false)
-              alert(`学生没有可核查考试`)
+              // error handling for baidu error
+              error_code = res.error_code
+              alert(errorCodeHanding(error_code))
             }
 
-
           })
-          .catch(err => {
-            console.log(err)
-          })
-
-
-
 
 
       })

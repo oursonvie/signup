@@ -99,5 +99,20 @@ Meteor.methods({
   },
   insertFaceLog: function(log) {
     return FaceLogs.insert(log)
+  },
+  certnoPhotoLookUp: function(certno) {
+    if ( Image.findOne({certificateno:certno}) && Image.findOne({certificateno:certno}).doccontent ) {
+      image = Image.findOne({certificateno:certno}).doccontent
+      return base64ImageFixer(image)
+    } else {
+      throw new Meteor.Error(`cant find pic`, 'cannot find student picture')
+    }
+  },
+  certnoStudentIdLoopUp: function(certno) {
+    if ( Student.findOne({certno: certno}) ) {
+      return Student.findOne({certno: certno}).studentid
+    } else {
+      throw new Meteor.Error(`cant find student`, 'cannot find student')
+    }
   }
 });
