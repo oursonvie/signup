@@ -64,6 +64,69 @@ Picker.route('/api/pdf', function(params, req, res) {
 
 });
 
+Picker.route('/api/examroom', function(params, req, res) {
+
+  try {
+
+    console.log(params.query)
+
+    let id = params.query.roomnumber
+
+    let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
+    let message = {roomnumber: id, remoteIP: remoteHost, datetime: new Date}
+
+    console.log(`[Examroom PDF Request] roomnumber = ${id} from ${remoteHost} at ${message.datetime}`)
+
+    PromiseMeteorCall('pushChat', 'PDF Request', message)
+    .then(res => {}) // do nothing if success
+    .catch(err => console.log(err))
+
+    if (id) {
+
+      message.err = false
+      message.type = 'PDF_request'
+
+      Logs.insert(message)
+
+      PromiseMeteorCall('generateExamroomList', id)
+      .then(response => {
+
+        createPdfBinary(response, function(binary) {
+          // res.contentType('application/pdf');
+          res.setHeader('content-type', 'application/pdf');
+          // res.send(binary);
+
+
+          res.end(binary);
+        }, function(err) {
+          message.err = err
+          message.type = 'PDF_request'
+
+          Logs.insert(message)
+
+          res.send(error);
+        });
+
+
+      })
+      .catch(err => {
+        message.err = err
+        message.type = 'PDF_request'
+
+        Logs.insert(message)
+        res.end('ERROR:' + err);
+      })
+    } else {
+      res.end('invalid key');
+    }
+
+  } catch(err) {
+    console.log(err)
+    res.end('ERROR:' + err);
+  }
+
+});
 
 function createPdfBinary(pdfDoc, callback) {
 

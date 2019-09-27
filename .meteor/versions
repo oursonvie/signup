@@ -1,4 +1,4 @@
-accounts-base@1.4.3
+accounts-base@1.4.4
 accounts-password@1.5.1
 alanning:roles@1.2.16
 aldeed:autoform@6.3.0
@@ -9,7 +9,7 @@ anti:i18n@0.4.3
 autoupdate@1.6.0
 babel-compiler@7.3.4
 babel-runtime@1.3.0
-base64@1.0.11
+base64@1.0.12
 binary-heap@1.0.11
 blaze@2.3.3
 blaze-html-templates@1.1.2
@@ -56,7 +56,7 @@ es5-shim@4.8.0
 evaisse:csv@0.1.4
 fetch@0.1.1
 fortawesome:fontawesome@4.7.0
-fourseven:scss@4.10.0
+fourseven:scss@4.12.0
 geojson-utils@1.0.10
 harrison:babyparse@1.0.1
 harrison:papa-parse@1.1.7
@@ -72,7 +72,7 @@ jparker:crypto-md5@0.1.1
 jquery@1.11.11
 kadira:blaze-layout@2.3.0
 kadira:flow-router@2.12.1
-lamhieu:meteorx@2.0.1
+lamhieu:meteorx@2.1.1
 launch-screen@1.1.1
 livedata@1.0.18
 localstorage@1.2.0
@@ -111,12 +111,12 @@ modern-browsers@0.1.4
 modules@0.13.0
 modules-runtime@0.10.3
 momentjs:moment@2.24.0
-mongo@1.6.2
+mongo@1.6.3
 mongo-decimal@0.1.1
 mongo-dev-server@1.1.0
 mongo-id@1.0.7
 mongo-livedata@1.0.12
-montiapm:agent@2.35.0
+montiapm:agent@2.37.2
 msavin:jetsetter@4.0.0
 msavin:mongol@4.0.1
 npm-bcrypt@0.9.3

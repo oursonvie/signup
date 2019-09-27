@@ -73,3 +73,5 @@ cfs:gridfs
 underscore@1.0.10
 
 montiapm:agent
+
+## bundle-visualizer

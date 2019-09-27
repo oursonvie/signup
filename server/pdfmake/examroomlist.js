@@ -3,6 +3,8 @@ Meteor.methods({
 
     // console.log(examroomId)
 
+    examroomId = parseInt(examroomId)
+
     let examroom = Examroom.findOne({examroomId:examroomId})
 
     let arrayStudent = Seats.find({roomnumber:examroomId}).fetch()

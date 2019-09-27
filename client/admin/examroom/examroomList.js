@@ -1,5 +1,3 @@
-require('pdfmake/build/pdfmake.js');
-require('pdfmake/build/vfs_fonts.js');
 
 Template.examroomList.onCreated(function() {
     var self = this;
@@ -24,23 +22,8 @@ Template.examroomList.helpers({
 
 Template.examroomList.events({
   'click .btn-download': function() {
-    let examroom = Examroom.findOne()
-
-    PromiseMeteorCall('generateExamroomList', examroom.examroomId)
-    .then(res => {
-      pdfMake.fonts = {
-             Roboto: {
-                  normal: 'Microsoft YaHei.ttf',
-                  bold: 'Microsoft YaHei.ttf',
-                  italics: 'Microsoft YaHei.ttf',
-                  bolditalics: 'Microsoft YaHei.ttf'
-            }
-      }
-
-      pdfMake.createPdf(res).download(`考点编号_10698_考场号${examroom.examroomId}`);
-
-    })
-    .catch(err => console.log(err))
+    let link = `${Meteor.absoluteUrl()}api/examroom?roomnumber=${FlowRouter.getParam('id')}`
+    window.open(link);
 
   },
   'click .fa-eye': function() {
