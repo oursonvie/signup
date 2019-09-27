@@ -34,13 +34,9 @@ getXjtuPhoto = (sid) => {
       let zpurl = baseurl + 'zp' + '/' + batchid + '/' + lcenter + '/' + 'zp' + sid + '.jpg'
       let sfpzurl = baseurl + 'sfzp' + '/' + batchid + '/' + lcenter + '/' + 'sfzp' + sid + '.jpg'
 
-      // console.log(zpurl)
-      // console.log(sfpzurl)
 
       let photoZp = (getXjtuUrl(zpurl)) ? getXjtuUrl(zpurl) : getXjtuUrl(sfpzurl)
-      // let photoSfpzurl = getXjtuUrl(sfpzurl)
 
-      // let filecount = ((photoZp) ? 1 : 0) + ((photoSfpzurl) ? 1 : 0)
 
       result = {
         filetype: 'zp',
@@ -50,20 +46,27 @@ getXjtuPhoto = (sid) => {
         fileexist: (( photoZp.length > 0 ) ? true : false )
       }
 
-      /*
-
-      result = {
-        data: {
-          count: filecount,
-          dataList: [
-            {filetype:'zp', doccontent:photoZp, certificateno: student.certno},
-            {filetype:'sfpzurl', doccontent:photoSfpzurl, certificateno: student.certno}
-          ]
-        }
-      }
-
-      */
-
       return result
     }
+}
+
+getImgUrl = (url) => {
+  try {
+    const response = Promise.await(PromiseHTTPCall(
+      'GET',
+      url,
+      {
+        npmRequestOptions: { encoding: null },
+        timeout: 3000
+      }
+    ))
+
+    // get base64 image
+    let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer(response.content).toString('base64');
+
+    return baseImage
+  } catch(err) {
+    console.log(`[getImgUrl] Error: ${JSON.stringfy(err)}`)
+    return ''
+  }
 }

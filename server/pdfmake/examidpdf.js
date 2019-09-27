@@ -6,7 +6,7 @@ makeExamId = (renderObject) => {
     content: [
 
       {
-        image: logoPng,
+        image: getImgUrl(`${Meteor.absoluteUrl()}img/logoPng.png`),
         width: 400,
         alignment: 'center',
         margin: [0, -10, 0, 0],
@@ -76,7 +76,7 @@ makeExamId = (renderObject) => {
   		},
 
       {
-        image: examRules,
+        image: getImgUrl(`${Meteor.absoluteUrl()}img/examrule.jpg`) ,
         alignment: 'center',
         width: 500,
         margin: [20, -30, 0, 0]

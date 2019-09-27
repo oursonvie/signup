@@ -48,7 +48,7 @@ singleStudent = function(student) {
   if ( Image.findOne({certificateno: student.certno}) != null && Image.findOne({certificateno: student.certno}).doccontent) {
     studentImage = base64ImageFixer(Image.findOne({certificateno: student.certno}).doccontent)
   } else {
-    studentImage = blank()
+    studentImage = getImgUrl(`${Meteor.absoluteUrl()}img/blank.png`)
   }
 
   return [
