@@ -88,7 +88,7 @@ Student.attachSchema(new SimpleSchema({
   },
   family_name: {
     type: String,
-    label: "拼音（姓）",
+    label: "姓（拼音）",
     autoValue: function() {
       if (this.isUpsert) {
         return ' '
@@ -99,7 +99,7 @@ Student.attachSchema(new SimpleSchema({
   },
   first_name: {
     type: String,
-    label: "拼音（名）",
+    label: "名（拼音）",
     autoValue: function() {
       if (this.isUpsert) {
         return ' '
