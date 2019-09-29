@@ -72,8 +72,6 @@ AutoForm.addHooks(['updateStudent'], {
 
               if (/^[a-z]+$/i.test(checkName)) {
 
-                console.log(doc)
-
                 return doc
 
               } else {
