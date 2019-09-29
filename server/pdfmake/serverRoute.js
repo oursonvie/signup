@@ -10,6 +10,8 @@ Picker.route('/api/pdf', function(params, req, res) {
 
     let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
+    console.log(req.headers)
+
     let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
 
     console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)

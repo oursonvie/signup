@@ -1,7 +1,7 @@
 <template name="home">
   <main>
 
-    <div class="card card-default search-card">
+    <div class="card general-card">
       <div class="card-heading">
         <h3>西安交通大学网络教育学院学位外语报名系统</h3>
       </div>
@@ -17,7 +17,9 @@
               <div class="form-group">
                 <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" id="UserID" placeholder="身份证号">
               </div>
-              <button type="submit" class="btn btn-primary pull-right" style="width:150px">查询</button>
+              <p class="text-center">
+                <button type="submit" class="btn btn-primary" style="width:150px">查询</button>
+              </p>
             </form>
           {{/if}}
         {{/if}}
@@ -31,7 +33,6 @@
         {{#if Students}}
           <div class="card card-default card-basicinfo">
 
-              <div class="card-heading">本人基本信息</div>
               <div class="card-body">
                 {{#with Students}}
 
