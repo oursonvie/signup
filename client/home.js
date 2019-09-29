@@ -97,7 +97,6 @@ AutoForm.addHooks(['updateStudent'], {
 
       }
 
-
     }
   },
   onSuccess: function(formType, result) {
