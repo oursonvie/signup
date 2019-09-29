@@ -72,6 +72,8 @@ AutoForm.addHooks(['updateStudent'], {
 
               if (/^[a-z]+$/i.test(checkName)) {
 
+                console.log(doc)
+
                 return doc
 
               } else {
@@ -115,7 +117,7 @@ AutoForm.addHooks(['updateStudent'], {
       Session.set('studentPhoto', false)
       document.getElementById('UserID').value = ''
 
-      alert('报名成功，点击确认')
+      alert(`报名成功，请截图保存您的报名编号: ${this.docId}`)
     }
   },
   onError: function(name, error, template) {
