@@ -4,4 +4,7 @@ Template.signedStudentInfo.helpers({
        return moment(this.updateAt).format('YYYY-MM-DD HH:mm:ss')
      }
   },
+  certnoLastFour: function() {
+    return this.certno.slice(-4)
+  }
 });
