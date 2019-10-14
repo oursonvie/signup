@@ -4,12 +4,26 @@ import SimpleSchema from 'simpl-schema';
 Template.home.onCreated(function() {
   Session.set('searchStudent', false)
   Session.set('studentPhoto', false)
+
+  // get certno
+  certno = FlowRouter.getQueryParam("query")
+
+  if (certno) {
+    Session.set('searchStudent', certno)
+  }
+
   var self = this
   self.autorun(function() {
     self.subscribe('StudentOne', Session.get('searchStudent'));
     self.subscribe('studentCount');
   });
 });
+
+Template.home.onRendered(function() {
+  if (Session.get('searchStudent')) {
+    document.getElementById('UserID').value = certno.toUpperCase()
+  }
+})
 
 Template.home.helpers({
   ifSearch: () => {
@@ -52,7 +66,8 @@ Template.home.events({
 
     let userId = inputValue.toUpperCase()
 
-    Session.set('searchStudent', userId)
+    // Session.set('searchStudent', userId)
+    window.location.replace(`?query=${userId}`);
 
   }
 });

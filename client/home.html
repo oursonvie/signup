@@ -31,7 +31,7 @@
     {{#if Template.subscriptionsReady}}
       {{#if ifSearch}}
         {{#if Students}}
-          <div class="card card-default card-basicinfo">
+          <div class="card general-card card-basicinfo">
 
               <div class="card-body">
                 {{#with Students}}
@@ -39,7 +39,7 @@
                   {{#if allowSignup}}
 
                     {{#if Students.edited}}
-                      <p>该生已报名</p>
+                      {{> signedStudentInfo}}
                     {{else}}
                       {{> updateStudentForm}}
                     {{/if}}
