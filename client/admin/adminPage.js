@@ -160,5 +160,14 @@ Template.studentPage.events({
     .catch(err => {
       console.log(err)
     })
+  },
+  "click .btn-checkPhoto": function() {
+    PromiseMeteorCall('checkPhoto')
+    .then(res => {
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
   }
 });

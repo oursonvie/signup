@@ -6,7 +6,7 @@
     "logoUrl": "/img/xjtu.png",
     "registerLimit": 5000,
     "examtime": {
-      "starttime":"2019-06-01 09:30:00",
+      "starttime":"2019-11-16 09:30:00",
       "duration":2
     },
     "baiduRatio": 20

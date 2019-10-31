@@ -46,7 +46,7 @@ Meteor.methods({
     return CSV.unparse(Examroom.find({},{fields:{_id:0, examroomId:1, examroomLocation:1}}).fetch())
   },
   downloadSeats:function(){
-    return CSV.unparse(Seats.find({},{fields:{_id:0, studentid:1, roomnumber:1, seatnumber: 1, name: 1, certno: 1, examid: 1, source: 1, language: 1}}).fetch())
+    return CSV.unparse(Seats.find({},{fields:{_id:0, studentid:1, roomnumber:1, lcenter:1, seatnumber: 1, name: 1, certno: 1, examid: 1, source: 1, language: 1}}).fetch())
   },
   importExamroom:function(papaData){
     //console.log(papaData)
