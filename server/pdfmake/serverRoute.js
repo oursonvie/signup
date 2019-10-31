@@ -2,65 +2,78 @@ var PdfPrinter = require('pdfmake')
 
 Picker.route('/api/pdf', function(params, req, res) {
 
-  try {
+
 
     // console.log(params.query)
 
-    let id = decryptAES(params.query.doc);
+    // set start date
 
-    let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    todaysDate = moment().format('YYYY-MM-DD HH:mm:ss')
 
-    let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
+    if ( moment(todaysDate).isAfter(Meteor.settings.public.printStartDate) && moment(todaysDate).isBefore(Meteor.settings.public.printEndDate) ) {
 
-    console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
+      try {
+        let id = decryptAES(params.query.doc);
 
-    PromiseMeteorCall('pushChat', 'PDF Request', message)
-    .then(res => {}) // do nothing if success
-    .catch(err => console.log(err))
+        let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-    if (id) {
+        let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
 
-      message.err = false
-      message.type = 'PDF_request'
+        console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
 
-      Logs.insert(message)
+        PromiseMeteorCall('pushChat', 'PDF Request', message)
+        .then(res => {}) // do nothing if success
+        .catch(err => console.log(err))
 
-      PromiseMeteorCall('printExamID', id)
-      .then(response => {
+        if (id) {
 
-        createPdfBinary(response, function(binary) {
-          // res.contentType('application/pdf');
-          res.setHeader('content-type', 'application/pdf');
-          // res.send(binary);
-
-
-          res.end(binary);
-        }, function(err) {
-          message.err = err
+          message.err = false
           message.type = 'PDF_request'
 
           Logs.insert(message)
 
-          res.send(error);
-        });
+          PromiseMeteorCall('printExamID', id)
+          .then(response => {
+
+            createPdfBinary(response, function(binary) {
+              // res.contentType('application/pdf');
+              res.setHeader('content-type', 'application/pdf');
+              // res.send(binary);
 
 
-      })
-      .catch(err => {
-        message.err = err
-        message.type = 'PDF_request'
+              res.end(binary);
+            }, function(err) {
+              message.err = err
+              message.type = 'PDF_request'
 
-        Logs.insert(message)
+              Logs.insert(message)
+
+              res.send(error);
+            });
+
+
+          })
+          .catch(err => {
+            message.err = err
+            message.type = 'PDF_request'
+
+            Logs.insert(message)
+            res.end('ERROR:' + err);
+          })
+        } else {
+          res.end('invalid key');
+        }
+
+        } catch(err) {
+        console.log(err)
         res.end('ERROR:' + err);
-      })
+        }
+
     } else {
-      res.end('invalid key');
+      res.end(`Request will not be proceeed before ${Meteor.settings.public.printStartDate} and after ${Meteor.settings.public.printEndDate}`);
     }
 
-  } catch(err) {
-    console.log(err)
-    res.end('ERROR:' + err);
-  }
+
 
 });
 
