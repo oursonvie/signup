@@ -37,7 +37,6 @@ getXjtuPhoto = (sid) => {
 
       let photoZp = (getXjtuUrl(zpurl)) ? getXjtuUrl(zpurl) : getXjtuUrl(sfpzurl)
 
-
       result = {
         filetype: 'zp',
         doccontent:photoZp,
@@ -60,6 +59,8 @@ getImgUrl = (url) => {
         timeout: 3000
       }
     ))
+
+    console.log(url)
 
     // get base64 image
     let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer(response.content).toString('base64');
