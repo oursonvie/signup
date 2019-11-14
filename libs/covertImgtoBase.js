@@ -66,7 +66,7 @@ getImgUrl = (url) => {
 
     return baseImage
   } catch(err) {
-    console.log(`[getImgUrl] Error: ${JSON.stringfy(err)}`)
+    console.log(`[getImgUrl] Error: ${JSON.stringify(err)}`)
     return ''
   }
 }
