@@ -60,14 +60,12 @@ getImgUrl = (url) => {
       }
     ))
 
-    console.log(url)
-
     // get base64 image
     let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer(response.content).toString('base64');
 
     return baseImage
   } catch(err) {
-    console.log(`[getImgUrl] Error: ${JSON.stringify(err)}`)
+    console.log(`[getImgUrl] TargetUrl: ${url}, Error: ${JSON.stringify(err)}`)
     return ''
   }
 }
