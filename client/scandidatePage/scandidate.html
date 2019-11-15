@@ -3,64 +3,64 @@
 
     {{#if studenPhoto}}
 
-    <div class="card card-default search-card">
-      <div class="card-heading">
+      <div class="card card-default search-card">
+        <div class="card-heading">
 
-        <div class="card-body">
+          <div class="card-body">
 
-          <div class="row">
+            <div class="row">
 
-            <div class="col-sm-4">
-              <ul class="list-group">
+              <div class="col-4">
+                <ul class="list-group">
 
-                {{#if showResult}}
-                  <li class="list-group-item list-group-item-success">面部识别度: {{SuspectStudents.baiduAPIScore}}</li>
+                  {{#if showResult}}
+                    <li class="list-group-item list-group-item-success">面部识别度: {{SuspectStudents.baiduAPIScore}}</li>
+                  {{/if}}
+                  <li class="list-group-item">考场号: {{seatsInfo.roomnumber}}</li>
+                  <li class="list-group-item">座位号: {{seatsInfo.seatnumber}}</li>
+                  <li class="list-group-item">姓名: {{seatsInfo.name}}</li>
+                  <li class="list-group-item">身份证号: {{seatsInfo.certno}}</li>
+                  <li class="list-group-item">准考证号: {{seatsInfo.examid}}</li>
+                  <li class="list-group-item">专业: {{seatsInfo.degree}}</li>
+                  <li class="list-group-item">层次: {{seatsInfo.level}}</li>
+                  <li class="list-group-item">学习中心: {{seatsInfo.lcenter}}</li>
+                  <li class="list-group-item">考试科目: {{seatsInfo.language}}</li>
+                  <li class="list-group-item">数据来源: {{seatsInfo.source}}</li>
+                </ul>
+              </div>
+
+              <div class="col-4">
+                <img src="{{studenPhoto.doccontent}}" class="img-fluid" alt="Responsive image">
+                <p>学生报名照片</p>
+              </div>
+
+              <div class="col-4">
+
+                {{#if onSitePic}}
+                  <img src="{{onSitePic.url}}" class="img-fluid" alt="Responsive image">
+                  <p>学生现场照片</p>
+                {{else}}
+                  <div class="form-group">
+                    <label for="onSitePic">上传学生照片</label>
+                    <input type="file" id="onSitePic" accept="image/*">
+                  </div>
                 {{/if}}
-                <li class="list-group-item">考场号: {{seatsInfo.roomnumber}}</li>
-                <li class="list-group-item">座位号: {{seatsInfo.seatnumber}}</li>
-                <li class="list-group-item">姓名: {{seatsInfo.name}}</li>
-                <li class="list-group-item">身份证号: {{seatsInfo.certno}}</li>
-                <li class="list-group-item">准考证号: {{seatsInfo.examid}}</li>
-                <li class="list-group-item">专业: {{seatsInfo.degree}}</li>
-                <li class="list-group-item">层次: {{seatsInfo.level}}</li>
-                <li class="list-group-item">学习中心: {{seatsInfo.lcenter}}</li>
-                <li class="list-group-item">考试科目: {{seatsInfo.language}}</li>
-                <li class="list-group-item">数据来源: {{seatsInfo.source}}</li>
-              </ul>
-            </div>
 
-            <div class="col-sm-4">
-              <img src="{{studenPhoto.doccontent}}" class="img-responsive" alt="Responsive image">
-              <p>学生报名照片</p>
-            </div>
-
-            <div class="col-sm-4">
-
-              {{#if onSitePic}}
-                <img src="{{onSitePic.url}}" class="img-responsive" alt="Responsive image">
-                <p>学生现场照片</p>
-              {{else}}
-                <div class="form-group">
-                  <label for="onSitePic">上传学生照片</label>
-                  <input type="file" id="onSitePic" accept="image/*">
-                </div>
-              {{/if}}
+              </div>
 
             </div>
+
+
+
+
+            <button type="button" class="btn btn-danger btn-suspect-delete">删除</button>
+
+            <button type="button" class="btn btn-primary btn-reset">重置</button>
 
           </div>
 
-
-
-
-          <button type="button" class="btn btn-danger btn-suspect-delete">删除</button>
-
-          <button type="button" class="btn btn-primary btn-reset">重置</button>
-
         </div>
-
       </div>
-    </div>
 
 
     {{else}}
