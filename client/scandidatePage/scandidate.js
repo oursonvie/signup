@@ -46,6 +46,16 @@ Template.scandidate.helpers({
   },
   suspectStudentCount: () => {
     return Counts.get('suspectStudentCount');
+  },
+  displayPhoto: function(image) {
+    var imgPart = image.split(',')
+
+    if (imgPart.length == 2) {
+      return image
+    } else {
+      return `data:image/jpeg;base64,${image}`
+    }
+
   }
 })
 
@@ -83,7 +93,7 @@ Template.scandidate.events({
             PromiseMeteorCall('compareBaidu', Session.get('searchStudent'), fileObj._id)
             .then(res => {
 
-              if (res.error_code == 0 && res.result.score) {
+              if (res.error_code == 0 && res.result.score || res.result.score == 0) {
 
                 let result = res.result.score
 
