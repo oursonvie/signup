@@ -56,6 +56,9 @@ Template.scandidate.helpers({
       return `data:image/jpeg;base64,${image}`
     }
 
+  },
+  scoreFormatter: function(score) {
+    return score.toFixed(2)
   }
 })
 

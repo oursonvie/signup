@@ -14,7 +14,7 @@
                 <ul class="list-group">
 
                   {{#if showResult}}
-                    <li class="list-group-item list-group-item-success">面部识别度: {{SuspectStudents.baiduAPIScore}}</li>
+                    <li class="list-group-item list-group-item-success">面部识别度: {{scoreFormatter SuspectStudents.baiduAPIScore}}%</li>
                   {{/if}}
                   <li class="list-group-item">考场号: {{seatsInfo.roomnumber}}</li>
                   <li class="list-group-item">座位号: {{seatsInfo.seatnumber}}</li>
