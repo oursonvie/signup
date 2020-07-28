@@ -34,7 +34,17 @@ Examroom.attachSchema(new SimpleSchema({
       }
     }
   },
-  location: {
+  place: {
+    type: String,
+    label: "地址",
+    optional: true,
+    autoform: {
+      afFormGroup: {
+        label: false
+      }
+    }
+  },
+  address: {
     type: String,
     label: "校区",
     optional: true,

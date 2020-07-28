@@ -10,7 +10,7 @@ getXjtuUrl = (url) => {
     ))
 
     // get base64 image
-    let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer(response.content).toString('base64');
+    let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer.from(response.content).toString('base64');
 
     return baseImage
   } catch(err) {
@@ -61,7 +61,7 @@ getImgUrl = (url) => {
     ))
 
     // get base64 image
-    let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer(response.content).toString('base64');
+    let baseImage = "data:" + response.headers["content-type"] + ";base64," + new Buffer.from(response.content).toString('base64');
 
     return baseImage
   } catch(err) {

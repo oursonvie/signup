@@ -65,7 +65,8 @@ Meteor.methods({
         Examroom.update({examroomId: examroomID}, {$set:
           {
             examroomLocation: examroom.examroomLocation,
-            location: examroom.location
+            place: examroom.place,
+            address: examroom.address
           }
       })
       } catch(err) {

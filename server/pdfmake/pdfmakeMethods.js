@@ -28,8 +28,8 @@ Meteor.methods({
            seatno: SeatInfo.seatnumber.toString().padStart(2, '0'),
            location: ExamroomInfo.examroomLocation,
            examtype: '闭卷',
-           place: '西安交通大学（东校区）',
-           address: '西安市咸宁西路28号西安交通大学兴庆校区',
+           place: ExamroomInfo.place,
+           address: ExamroomInfo.address,
            image: base64ImageFixer(StudentImage.doccontent)
          }
 
