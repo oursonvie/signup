@@ -34,6 +34,16 @@ Examroom.attachSchema(new SimpleSchema({
       }
     }
   },
+  location: {
+    type: String,
+    label: "校区",
+    optional: true,
+    autoform: {
+      afFormGroup: {
+        label: false
+      }
+    }
+  },
   capacity: {
     type: Number,
     label: "容纳人数",

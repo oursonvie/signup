@@ -68,7 +68,7 @@ Student.attachSchema(new SimpleSchema({
     label: "批次",
     autoValue: function() {
       if (this.isUpsert) {
-        return parseInt(this.field('studentid').value.slice(1,5))
+        return ( this.field('studentid').value ) ? parseInt(this.field('studentid').value.slice(1,5)) : this.value
       }
     },
   },
@@ -84,7 +84,8 @@ Student.attachSchema(new SimpleSchema({
   },
   status: {
     type: String,
-    label: "学籍状态"
+    label: "学籍状态",
+    allowedValues: ['在籍', '毕业']
   },
   family_name: {
     type: String,

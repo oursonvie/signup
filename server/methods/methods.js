@@ -5,17 +5,25 @@ Meteor.methods({
   importStudent:function(papaData){
     console.log(`[studentImport]: ${papaData.length}`)
     _.forEach(papaData, function(student) {
-      result = Student.upsert(
-        {
-          signupid: student.signupid ,
-          certno: student.certno ,
-          studentid: student.studentid
-        },
-        {$set:student}
-      )
-      console.log(result)
+      try {
+        result = Student.upsert(
+          {
+            signupid: student.signupid ,
+            certno: student.certno ,
+            studentid: student.studentid
+          },
+          {$set:student}
+        )
+        console.log(result)
+      } catch(err) {
+        console.log(student)
+        console.log(err)
+      }
+
     })
-    console.log(`[studentImport] done`)
+    a = `[studentImport] done`
+    console.log(a)
+    return a
   },
   updateStudentStatus: function(papaData) {
     console.log(papaData.length)
@@ -54,7 +62,12 @@ Meteor.methods({
       try {
         let examroomID = parseInt(examroom.examroomId)
         console.log(examroom)
-        Examroom.update({examroomId: examroomID}, {$set:{examroomLocation: examroom.examroomLocation}})
+        Examroom.update({examroomId: examroomID}, {$set:
+          {
+            examroomLocation: examroom.examroomLocation,
+            location: examroom.location
+          }
+      })
       } catch(err) {
         throw new Meteor.Error('500', err)
       }
