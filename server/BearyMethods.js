@@ -6,7 +6,7 @@ Meteor.methods({
         "text": `[${input}] ${JSON.stringify(message)}`
       }
 
-      return bearySend(postData)
+      return slackSend(postData)
 
   },
   bearyFaceMatch: function(id, api) {
@@ -14,14 +14,54 @@ Meteor.methods({
   }
 });
 
-bearySend = (content) => {
-  var url = 'https://hook.bearychat.com/=bw6fh/incoming/0359b75248dfa1404c2df9c4472323e3'
 
+slackSend = (content) => {
   try {
-    result = Promise.await(PromiseHTTPCall('POST', url, {data:content}))
+    result = Promise.await(PromiseHTTPCall('POST', Meteor.settings.private.slackUrl, {
+      data: content
+    }))
 
-    return result.content
+    console.log(result.content)
   } catch (e) {
     console.log(e)
   }
 }
+
+callBearyChat = (lcenter, url) => {
+  alt = {
+    "blocks": [{
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": `发现活体检测不通过学生，来自: ${lcenter}`
+      },
+      "accessory": {
+        "type": "image",
+        "image_url": url,
+        "alt_text": "image"
+      }
+    }]
+  }
+
+  slackSend(alt)
+
+}
+
+Meteor.methods({
+  slackSendText: function(string) {
+    // content = JSON.stringify({text:string})
+    content = {
+      text: string
+    }
+
+    try {
+      result = Promise.await(PromiseHTTPCall('POST', Meteor.settings.private.slackUrl, {
+        data: content
+      }))
+
+      return result
+    } catch (e) {
+      throw new Meteor.Error(e.message);
+    }
+  }
+});

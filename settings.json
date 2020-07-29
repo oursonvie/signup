@@ -22,6 +22,7 @@
       "APP_ID": "17776896",
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
-    }
+    },
+    "slackUrl": "https://hooks.slack.com/services/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"
   }
 }
