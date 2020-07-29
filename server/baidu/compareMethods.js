@@ -20,7 +20,7 @@ Meteor.methods({
         let response = Promise.await(PromiseHTTPCall('GET', picUrl,{npmRequestOptions: { encoding: null }}))
 
         // get base64 image
-        let sitePic = new Buffer(response.content).toString('base64');
+        let sitePic = new Buffer.from(response.content).toString('base64');
 
         // get db pic of student
         let rawPic = Image.findOne({certificateno:userId}).doccontent.split(',')[1] || Image.findOne({certificateno:userId}).doccontent

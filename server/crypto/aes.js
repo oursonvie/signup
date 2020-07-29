@@ -10,14 +10,14 @@ encryptAES = function(data) {
   var cipher = crypto.createCipheriv('aes-128-cbc', key, iv);
   var crypted = cipher.update(data, 'utf8', 'binary');
   crypted += cipher.final('binary');
-  crypted = new Buffer(crypted, 'binary').toString('base64');
+  crypted = new Buffer.from(crypted, 'binary').toString('base64');
   // console.log(crypted);
   return crypted;
 }
 
 decryptAES = function(crypted) {
   // console.log(crypted)
-  crypted = new Buffer(crypted, 'base64').toString('binary');
+  crypted = new Buffer.from(crypted, 'base64').toString('binary');
   var decipher = crypto.createDecipheriv('aes-128-cbc', key, iv);
   var decoded = decipher.update(crypted, 'binary', 'utf8');
   decoded += decipher.final('utf8');
