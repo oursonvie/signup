@@ -127,6 +127,17 @@ Student.attachSchema(new SimpleSchema({
       }
     }
   },
+  error: {
+    type: String,
+    autoValue:function(){
+      if (this.isUpsert) {
+        return '0'
+      }
+     },
+     autoform: {
+       type: 'hidden'
+     }
+  },
   createdBy: {
     type: String,
     autoValue:function(){

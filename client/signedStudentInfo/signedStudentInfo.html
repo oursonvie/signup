@@ -1,13 +1,27 @@
 <template name="signedStudentInfo">
-  <div class="card text-white bg-success">
-    <div class="card-header">
-      <h5 class="text-center">学生已报名成功</h5>
+
+  {{#if validSignup}}
+    <div class="card text-white bg-success">
+      <div class="card-header">
+        <h5 class="text-center">学生已报名成功</h5>
       </div>
       <div class="card-body">
         <p class="text-center">报名编号: {{this._id}}</p>
         <p class="text-center">报名时间: {{updateAt}}</p>
         <p class="text-center">身份证后四位: {{certnoLastFour}}</p>
-        </div>
+      </div>
     </div>
+  {{else}}
+    <div class="card text-white bg-danger">
+      <div class="card-header">
+        <h5 class="text-center">报名失败</h5>
+      </div>
+      <div class="card-body">
+        <p class="text-center">失败原因: {{this.error}}</p>
+      </div>
+    </div>
+  {{/if}}
+
+
 
 </template>

@@ -1,10 +1,10 @@
 {
   "public":{
-    "startDate": "2019-09-17 09:00:00",
-    "currentStudentDate": "2019-10-05 09:00:00",
+    "startDate": "2020-08-01 09:00:00",
+    "currentStudentDate": "2020-08-04 09:00:00",
     "expireDate": "2020-10-17 23:59:59",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 8000,
+    "registerLimit": 100,
     "printStartDate": "2020-07-28 08:00:00",
     "printEndDate": "2020-08-16 12:00:00",
     "examtime": {
@@ -23,6 +23,6 @@
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
     },
-    "slackUrl": "https://hooks.slack.com/services/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"
+    "slackUrl": "https://hooks.slack.com/services/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"
   }
 }

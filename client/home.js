@@ -4,6 +4,15 @@ import SimpleSchema from 'simpl-schema';
 Template.home.onCreated(function() {
   Session.set('searchStudent', false)
   Session.set('studentPhoto', false)
+  Session.set('studentCount', false)
+
+  PromiseMeteorCall('studentCount')
+    .then(res => {
+      Session.set('studentCount', res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
 
   // get certno
   certno = FlowRouter.getQueryParam("query")
@@ -15,7 +24,6 @@ Template.home.onCreated(function() {
   var self = this
   self.autorun(function() {
     self.subscribe('StudentOne', Session.get('searchStudent'));
-    self.subscribe('studentCount');
   });
 });
 
@@ -32,14 +40,11 @@ Template.home.helpers({
   Students: function() {
     return Student.findOne({})
   },
-  photoExist: function() {
-    return Session.get('studentPhoto').fileexist
-  },
   RegisterExipre: function() {
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
 
     if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return !validSignupDate || Counts.get('signedStudentCount') >= Meteor.settings.public.registerLimit
+      return !validSignupDate || Session.get('studentCount') >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
@@ -50,7 +55,7 @@ Template.home.helpers({
   allowSignup: function() {
     startDate = (this.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
 
-    return validSignupDate = moment().isAfter(startDate) && moment().isBefore(Meteor.settings.public.expireDate)
+    return moment().isAfter(startDate) && moment().isBefore(Meteor.settings.public.expireDate)
   },
   currentSetudentDate: function() {
     return Meteor.settings.public.currentStudentDate
@@ -87,6 +92,11 @@ AutoForm.addHooks(['updateStudent'], {
 
               if (/^[a-z]+$/i.test(checkName)) {
 
+                // when checked front end, check serverside
+
+                PromiseMeteorCall('checkValidSignup', Session.get('searchStudent') )
+                .catch( err => console.log(err) )
+
                 return doc
 
               } else {
@@ -119,17 +129,12 @@ AutoForm.addHooks(['updateStudent'], {
 
       // check if photo been fetched
       if (this && this.updateDoc && this.updateDoc.$set) {
+        /*
         PromiseMeteorCall('pushChat', 'Update', this.updateDoc.$set)
-          .then(res => console.log(res))
           .catch(err => console.log(err))
+        */
       }
 
-
-      Session.set('searchStudent', false)
-      Session.set('studentPhoto', false)
-      document.getElementById('UserID').value = ''
-
-      alert(`报名成功，请截图保存您的报名编号: ${this.docId}`)
     }
   },
   onError: function(name, error, template) {
