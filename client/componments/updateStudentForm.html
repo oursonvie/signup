@@ -1,86 +1,88 @@
 <template name="updateStudentForm">
   <div class="card">
     <div class="card-body">
-      {{#autoForm collection="Student" doc=this id="updateStudent" type="update"}}
-        <fieldset>
 
-          <div class="row">
-            <div class="col-md-6">
-              {{> afQuickField name='name' disabled="true"}}
-            </div>
-            <div class="col-md-6">
-              {{> afQuickField name='sex' disabled="true"}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>姓名: {{name}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>性别: {{sex}}</p>
+        </div>
+      </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              {{> afQuickField name='status' disabled="true"}}
-            </div>
-            <div class="col-md-6">
-              {{> afQuickField name='birthday' disabled="true"}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>学籍状态: {{status}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>出生日期: {{birthday}}</p>
+        </div>
+      </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              {{> afQuickField name='degree' disabled="true"}}
-            </div>
-            <div class="col-md-6">
-              {{> afQuickField name='level' disabled="true"}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>就读专业: {{degree}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>培养层次: {{level}}</p>
+        </div>
+      </div>
 
-          <div class="row">
-            <div class="col-md-6">
-              {{> afQuickField name='studentid' disabled="true"}}
-            </div>
-            <div class="col-md-6">
-              {{> afQuickField name='lcenter' disabled="true"}}
-            </div>
-          </div>
+      <div class="row">
+        <div class="col-md-6">
+          <p>学号: {{studentid}}</p>
+        </div>
+        <div class="col-md-6">
+          <p>学习中心: {{lcenter}}</p>
+        </div>
+      </div>
 
-          <div class="card border-danger">
-            <div class="card-heading text-danger">
-              <h3>学位报名信息</h3>
-            </div>
-
-
-            <div class="card-body text-danger">
-
-              <div class="row">
-                <div class="col-md-6">
-                  {{> afQuickField name='family_name'}}
-                </div>
-                <div class="col-md-6">
-                  {{> afQuickField name='first_name'}}
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-6">
-                  {{> afQuickField name='language'}}
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-
-
-        </fieldset>
-        
-        <div class="invisible">
-          <button type="submit" class="btn btn-primary btn-submit" id="callAutoform">提交</button>
+      <div class="card border-danger">
+        <div class="card-heading text-danger">
+          <h3>学位报名信息</h3>
         </div>
 
+        <div class="card-body text-danger">
 
-        <button type="button" class="btn btn-primary btn-test pull-right" style="width:150px">提交</button>
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="familyName">姓</label>
+                <input type="text" class="form-control" id="familyName" value="{{family_name}}">
+              </div>
+              <div class="form-group col-md-6">
+                <label for="firstName">名</label>
+                <input type="text" class="form-control" id="firstName" value="{{first_name}}">
+              </div>
+            </div>
 
 
+            <div class="form-row">
 
-      {{/autoForm}}
+              <div class="form-group col-md-4">
+                <label for="lanuage">考试语种</label>
+                <select id="lanuage" class="form-control">
+                  <option selected>英语</option>
+                  <option>俄语</option>
+                  <option>法语</option>
+                  <option>德语</option>
+                  <option>日语</option>
+                </select>
+              </div>
+
+            </div>
+
+          </form>
+
+        </div>
       </div>
+
+
+      <button type="button" class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
+
+
+    </div>
 
   </div>
 </template>
