@@ -22,6 +22,9 @@ Template.studentPage.helpers({
   totalStudentCount: function() {
     return Counts.get('studentCount');
   },
+  errorCount: function() {
+    return Counts.get('errorStudent');
+  },
   photodNo: function() {
     return Counts.get('photoCount');
   },
