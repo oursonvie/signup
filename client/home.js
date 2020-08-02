@@ -4,6 +4,16 @@ import SimpleSchema from 'simpl-schema';
 Template.home.onCreated(function() {
   Session.set('searchStudent', false)
   Session.set('studentPhoto', false)
+  Session.set('studentCount', false)
+
+  PromiseMeteorCall('studentCount')
+    .then(res => {
+      Session.set('studentCount', res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
 
   // get certno
   certno = FlowRouter.getQueryParam("query")
@@ -15,7 +25,6 @@ Template.home.onCreated(function() {
   var self = this
   self.autorun(function() {
     self.subscribe('StudentOne', Session.get('searchStudent'));
-    self.subscribe('studentCount');
   });
 });
 
@@ -39,7 +48,7 @@ Template.home.helpers({
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
 
     if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return !validSignupDate || Counts.get('signedStudentCount') >= Meteor.settings.public.registerLimit
+      return !validSignupDate || Session.get('studentCount') >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
@@ -58,7 +67,7 @@ Template.home.helpers({
 })
 
 Template.home.events({
-  "submit .checkID"(event, template) {
+  "submit .checkID": function(event, template) {
 
     event.preventDefault();
 
@@ -78,36 +87,23 @@ AutoForm.addHooks(['updateStudent'], {
       if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
         return doc
       } else {
-        if (Counts.get('signedStudentCount') < Meteor.settings.public.registerLimit) {
 
-          if (moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)) {
+        if (doc.$set.language) {
+          let checkName = doc.$set.family_name + doc.$set.first_name
 
-            if (doc.$set.language) {
-              let checkName = doc.$set.family_name + doc.$set.first_name
+          if (/^[a-z]+$/i.test(checkName)) {
 
-              if (/^[a-z]+$/i.test(checkName)) {
-
-                return doc
-
-              } else {
-                alert('姓名只允许拼音')
-                return false
-                throw new Meteor.Error('Input Error', 'Only letter accepted')
-              }
-            } else {
-              alert('请选择考试语言')
-              return false
-              throw new Meteor.Error('Input Error', 'Language missing')
-            }
+            return doc
 
           } else {
-            alert('不在报名时间内')
+            alert('姓名只允许拼音')
+            return false
+            throw new Meteor.Error('Input Error', 'Only letter accepted')
           }
-
         } else {
-          alert('报名人数已满')
+          alert('请选择考试语言')
           return false
-          throw new Meteor.Error('Insert Error', 'Reach register upper limit')
+          throw new Meteor.Error('Input Error', 'Language missing')
         }
 
       }
@@ -120,7 +116,6 @@ AutoForm.addHooks(['updateStudent'], {
       // check if photo been fetched
       if (this && this.updateDoc && this.updateDoc.$set) {
         PromiseMeteorCall('pushChat', 'Update', this.updateDoc.$set)
-          .then(res => console.log(res))
           .catch(err => console.log(err))
       }
 
