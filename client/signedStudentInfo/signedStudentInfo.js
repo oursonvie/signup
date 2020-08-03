@@ -6,8 +6,5 @@ Template.signedStudentInfo.helpers({
   },
   certnoLastFour: function() {
     return this.certno.slice(-4)
-  },
-  validSignup: function() {
-    return (this.error == 0) ? true : false
   }
 });
