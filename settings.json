@@ -1,28 +1,32 @@
 {
-  "public":{
+  "public": {
     "startDate": "2020-08-01 09:00:00",
-    "currentStudentDate": "2020-08-04 09:00:00",
+    "currentStudentDate": "2020-08-03 09:00:00",
     "expireDate": "2020-10-17 23:59:59",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 6900,
+    "registerLimit": 2018,
     "printStartDate": "2020-07-28 08:00:00",
     "printEndDate": "2020-08-16 12:00:00",
     "examtime": {
-      "starttime":"2019-11-16 09:30:00",
-      "duration":2
+      "starttime": "2019-11-16 09:30:00",
+      "duration": 2
     },
     "baiduRatio": 20
   },
-  "private":{
+  "private": {
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
-    "passkey":"b90126c9a326d6a9",
-    "passvi":"b90126c9a326d6a9",
-    "appKey":"543DE0821C0F607EE0533412640A033E",
+    "passkey": "b90126c9a326d6a9",
+    "passvi": "b90126c9a326d6a9",
+    "appKey": "543DE0821C0F607EE0533412640A033E",
     "baidu": {
       "APP_ID": "17776896",
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
     },
     "slackUrl": "https://hooks.slack.com/services/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"
+  },
+  "monti": {
+    "appId": "pppYoEhoafqgCh2pn",
+    "appSecret": "554c28ac-3585-46ff-84cd-a1743f6a6a8b"
   }
 }

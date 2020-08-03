@@ -1,8 +1,10 @@
 Meteor.methods({
   studentCount: function() {
-    return Student.find({
-      edited: true
-    }).count()
+
+    studentCount = Student.find({edited: true}).count()
+    serverTime = moment().unix()
+
+    return {studentCount:studentCount, serverTime: serverTime}
   },
   checkValidSignup: function(certno) {
 
@@ -11,7 +13,7 @@ Meteor.methods({
     }).status
 
     signupCount = Student.find({
-      edited: true
+      edited: true,
     }).count()
 
     reason = 0
@@ -32,6 +34,16 @@ Meteor.methods({
 
     if (reason == 0) {
       // if reason is 0, do nothing
+
+      result = Student.update({
+        certno: certno
+      }, {
+        $set: {
+          error: 0
+        }
+      })
+
+      return `[成功] 报名成功`
     } else {
       // else reset update
 
@@ -39,17 +51,12 @@ Meteor.methods({
         certno: certno
       }, {
         $set: {
-          error: reason,
-          family_name: '姓',
-          first_name: '名',
-          edited: false
-        },
-        $unset: {
-          language: '',
+          error: reason
         }
       })
 
       console.log(`[checkValidSignup] ${certno} error: ${reason} result: ${result}`)
+      return `[错误] ${reason}`
 
     }
   }

@@ -1,7 +1,6 @@
 Meteor.publish('studentCount', function() {
   Counts.publish(this,'studentCount', Student.find({}))
-  Counts.publish(this,'signedStudentCount', Student.find({edited:true, error:0}))
-  Counts.publish(this,'errorStudent', Student.find({ edited:true, error:{$ne:0} }))
+  Counts.publish(this,'signedStudentCount', Student.find({edited:true}))
 })
 
 Meteor.publish('studentCountLanguage', function() {

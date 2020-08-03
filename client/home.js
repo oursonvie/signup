@@ -4,11 +4,11 @@ import SimpleSchema from 'simpl-schema';
 Template.home.onCreated(function() {
   Session.set('searchStudent', false)
   Session.set('studentPhoto', false)
-  Session.set('studentCount', false)
+  Session.set('serverInfo', false)
 
   PromiseMeteorCall('studentCount')
     .then(res => {
-      Session.set('studentCount', res)
+      Session.set('serverInfo', res)
     })
     .catch(err => {
       console.log(err)
@@ -44,7 +44,7 @@ Template.home.helpers({
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
 
     if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return !validSignupDate || Session.get('studentCount') >= Meteor.settings.public.registerLimit
+      return !validSignupDate || Session.get('serverInfo').studentCount >= Meteor.settings.public.registerLimit
     } else {
       return true
     }
@@ -53,12 +53,18 @@ Template.home.helpers({
     return moment().isBefore(Meteor.settings.public.startDate)
   },
   allowSignup: function() {
-    startDate = (this.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
+    let startDate = (this.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
 
-    return moment().isAfter(startDate) && moment().isBefore(Meteor.settings.public.expireDate)
+    let serverTime = Session.get('serverInfo').serverTime
+
+    return moment.unix(serverTime).isAfter(startDate) && moment.unix(serverTime).isBefore(Meteor.settings.public.expireDate)
+
   },
   currentSetudentDate: function() {
     return Meteor.settings.public.currentStudentDate
+  },
+  serverInfo: function() {
+    return Session.get('serverInfo')
   }
 })
 
@@ -83,19 +89,19 @@ AutoForm.addHooks(['updateStudent'], {
       if (Roles.userIsInRole(Meteor.userId(), ['admin'])) {
         return doc
       } else {
-        if (Counts.get('signedStudentCount') < Meteor.settings.public.registerLimit) {
 
-          if (moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)) {
+        let startDate = (Student.findOne().status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
+        let serverTime = Session.get('serverInfo').serverTime
+
+
+        if ( Session.get('serverInfo').studentCount < Meteor.settings.public.registerLimit) {
+
+          if ( moment.unix(serverTime).isAfter(startDate) && moment.unix(serverTime).isBefore(Meteor.settings.public.expireDate) ) {
 
             if (doc.$set.language) {
               let checkName = doc.$set.family_name + doc.$set.first_name
 
               if (/^[a-z]+$/i.test(checkName)) {
-
-                // when checked front end, check serverside
-
-                PromiseMeteorCall('checkValidSignup', Session.get('searchStudent') )
-                .catch( err => console.log(err) )
 
                 return doc
 

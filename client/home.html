@@ -33,8 +33,10 @@
           {{#if Students}}
             <div class="card general-card card-basicinfo">
 
-                <div class="card-body">
-                  {{#with Students}}
+              <div class="card-body">
+                {{#with Students}}
+
+                  {{#if serverInfo}}
 
                     {{#if allowSignup}}
 
@@ -44,12 +46,17 @@
                         {{> updateStudentForm}}
                       {{/if}}
 
-                      {{else}}
+                    {{else}}
 
                       <h4 class="text-center">在读生报名开始时间为: {{currentSetudentDate}}</h4>
                     {{/if}}
-                  {{/with}}
-                </div>
+
+                  {{else}}
+                    {{> loader}}
+                  {{/if}}
+
+                {{/with}}
+              </div>
             </div>
           {{else}}
             <p>报名信息有误，请检查后重试</p>
