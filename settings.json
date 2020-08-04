@@ -23,7 +23,8 @@
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
     },
-    "slackUrl": "https://hooks.slack.com/services/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"
+    "slackUrl": "https://hooks.slack.com/services/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",
+    "switch":0
   },
   "monti": {
     "appId": "pppYoEhoafqgCh2pn",
