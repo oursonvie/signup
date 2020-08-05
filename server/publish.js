@@ -1,8 +1,12 @@
 Meteor.publish('StudentOne', function(id) {
-  if (Meteor.settings.public.switch) {
+  if ( Roles.userIsInRole(Meteor.userId(), ['admin']) ) {
     return Student.find({certno:id})
   } else {
-    return []
+    if (Meteor.settings.public.switch) {
+      return Student.find({certno:id})
+    } else {
+      return []
+    }
   }
 })
 
