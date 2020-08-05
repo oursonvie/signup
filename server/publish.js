@@ -1,6 +1,8 @@
 Meteor.publish('StudentOne', function(id) {
-  if (Meteor.settings.private.switch) {
+  if (Meteor.settings.public.switch) {
     return Student.find({certno:id})
+  } else {
+    return []
   }
 })
 

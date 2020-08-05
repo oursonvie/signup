@@ -2,6 +2,13 @@ import SimpleSchema from 'simpl-schema';
 // SimpleSchema.debug = true
 
 Template.home.onCreated(function() {
+  // check full status
+
+  if (!Meteor.settings.public.switch) {
+    // redirect('/fullPage');
+    window.location.replace("/finished")
+  }
+
   Session.set('searchStudent', false)
   Session.set('studentPhoto', false)
   Session.set('serverInfo', false)

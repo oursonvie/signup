@@ -5,6 +5,13 @@ FlowRouter.route('/', {
     }
 });
 
+FlowRouter.route('/finished', {
+   name: 'fullPage',
+    action() {
+        BlazeLayout.render('UserLayout', {main: 'fullPage'});
+    }
+});
+
 FlowRouter.route('/admin', {
    name: 'studentPage',
     action() {
