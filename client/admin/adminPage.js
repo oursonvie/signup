@@ -172,5 +172,32 @@ Template.studentPage.events({
     .catch(err => {
       console.log(err)
     })
+  },
+  "click .btn-photo-download": function() {
+
+    PromiseMeteorCall('getAllPicId')
+    .then(items => {
+      if (items.length > 0) {
+
+        _.forEach(items, function(item) {
+
+        	PromiseMeteorCall('downloadPic',item._id)
+        	.then( res => {
+        		var blob = b64toBlob(res.realData, res.contentType);
+        		var filename = item.certificateno
+        		saveAs(blob, filename);
+        	})
+        	.catch(e => {
+        		console.log(e)
+        	})
+
+        })
+
+      }
+    })
+    .catch(err => {
+      console.log(err)
+    })
+
   }
 });
