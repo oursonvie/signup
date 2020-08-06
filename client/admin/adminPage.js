@@ -177,19 +177,16 @@ Template.studentPage.events({
 
     PromiseMeteorCall('getAllPicId')
     .then(items => {
+
+      console.log(items.length)
+
       if (items.length > 0) {
 
-        _.forEach(items, function(item) {
-
-        	PromiseMeteorCall('downloadPic',item._id)
-        	.then( res => {
-        		var blob = b64toBlob(res.realData, res.contentType);
-        		var filename = item.certificateno
-        		saveAs(blob, filename);
-        	})
-        	.catch(e => {
-        		console.log(e)
-        	})
+        _.forEach(items, function(item, index) {
+          setTimeout(function(){
+            downloadPic(item)
+        },
+        1000*index);
 
         })
 
@@ -201,3 +198,19 @@ Template.studentPage.events({
 
   }
 });
+
+
+downloadPic = (item) => {
+
+  PromiseMeteorCall('downloadPic',item._id)
+  .then( res => {
+    var blob = b64toBlob(res.realData, res.contentType);
+    var filename = item.certificateno
+    console.log(`[Saving] ${filename}`)
+    saveAs(blob, filename);
+  })
+  .catch(e => {
+    console.log(e)
+  })
+
+}
