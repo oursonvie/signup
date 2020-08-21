@@ -6,9 +6,9 @@
     "logoUrl": "/img/xjtu.png",
     "registerLimit": 6000,
     "printStartDate": "2020-07-28 08:00:00",
-    "printEndDate": "2020-08-16 12:00:00",
+    "printEndDate": "2020-09-16 12:00:00",
     "examtime": {
-      "starttime": "2019-11-16 09:30:00",
+      "starttime": "2020-09-05 09:30:00",
       "duration": 2
     },
     "baiduRatio": 20,
@@ -24,7 +24,7 @@
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
     },
-    "slackUrl": "https://hooks.slack.com/services/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"
+    "slackUrl": "https://hooks.slack.com/services/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"
   },
   "monti": {
     "appId": "pppYoEhoafqgCh2pn",

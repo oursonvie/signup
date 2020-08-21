@@ -1,5 +1,5 @@
 // md5 for open auth
-const EncryptAuthorInformation = () => {
+EncryptAuthorInformation = () => {
   let dateNow = moment()
   let hour = dateNow.hour()
   let day = dateNow.date()
@@ -33,6 +33,8 @@ getOpenPhoto = (batchcode, certificateno) => {
     if (result.data.data.count > 0) {
       dataList = result.data.data.dataList
 
+      console.log(dataList)
+
       zp = dataList[lodash.findIndex(dataList, {'filetype':'zp'})]
 
       res = {
@@ -42,7 +44,7 @@ getOpenPhoto = (batchcode, certificateno) => {
         source: 'open',
         fileexist: (( zp.doccontent.length > 0 ) ? true : false )
       }
-
+      
       return res
     }
 

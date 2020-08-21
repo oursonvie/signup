@@ -25,25 +25,6 @@ Meteor.methods({
     console.log(a)
     return a
   },
-  updateStudentStatus: function(papaData) {
-    console.log(papaData.length)
-    _.forEach(papaData, function(student) {
-      result = Student.update(
-        {
-          signupid:student.signupid,
-          certno: student.certno,
-          studentid: student.studentid,
-        },
-        {
-          $set: {
-            status: student.status
-          }
-        }
-      )
-
-      console.log(result)
-    })
-  },
   download:function(){
     return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0, edited:0}}).fetch())
   },
@@ -52,9 +33,6 @@ Meteor.methods({
   },
   downloadExamRoom:function(){
     return CSV.unparse(Examroom.find({},{fields:{_id:0, examroomId:1, examroomLocation:1}}).fetch())
-  },
-  downloadSeats:function(){
-    return CSV.unparse(Seats.find({},{fields:{_id:0, studentid:1, roomnumber:1, lcenter:1, seatnumber: 1, name: 1, certno: 1, examid: 1, source: 1, language: 1}}).fetch())
   },
   importExamroom:function(papaData){
     //console.log(papaData)

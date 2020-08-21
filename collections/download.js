@@ -1,6 +1,6 @@
-Logs = new Mongo.Collection("logs");
+SeatDownload = new Mongo.Collection("seatdownload");
 
-Logs.deny({
+SeatDownload.deny({
   insert: function(){
     return !Roles.userIsInRole(Meteor.userId(), ['admin']);
   },
