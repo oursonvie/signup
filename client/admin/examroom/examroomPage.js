@@ -119,22 +119,29 @@ Template.examroomPage.events({
 
     AllRoomId = arrayConvter(allRooms, 'examroomId')
 
-    _.forEach(AllRoomId, function(id) {
-      fetch(`${Meteor.absoluteUrl()}api/examroom?roomnumber=${id}`)
-        .then(resp => resp.blob())
-        .then(blob => {
-          const url = window.URL.createObjectURL(blob);
-          const a = document.createElement('a');
-          a.style.display = 'none';
-          a.href = url;
-          // the filename you want
-          a.download = `考场${id}.pdf`;
-          document.body.appendChild(a);
-          a.click();
-          window.URL.revokeObjectURL(url);
-          console.log(`${id} has been downloaded`); // or you know, something with better UX...
-        })
-        .catch(() => alert('oh no!'));
+    _.forEach(AllRoomId, function(id, index) {
+
+      setTimeout(function() {
+
+          fetch(`${Meteor.absoluteUrl()}api/examroom?roomnumber=${id}`)
+            .then(resp => resp.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.style.display = 'none';
+              a.href = url;
+              // the filename you want
+              a.download = `考场${id}.pdf`;
+              document.body.appendChild(a);
+              a.click();
+              window.URL.revokeObjectURL(url);
+              console.log(`${id} has been downloaded`); // or you know, something with better UX...
+            })
+            .catch(() => alert('oh no!'));
+        },
+        2000 * index);
+
+
     })
 
 

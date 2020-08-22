@@ -1,10 +1,8 @@
 var PdfPrinter = require('pdfmake')
 
 Picker.route('/api/pdf', function(params, req, res) {
-
-
-
-    console.log(params.query)
+  
+    // console.log(params.query)
 
     // set start date
 

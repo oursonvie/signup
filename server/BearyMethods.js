@@ -23,7 +23,8 @@ slackSend = (content) => {
 
     console.log(result.content)
   } catch (e) {
-    console.log(e)
+    // console.log(e)
+    console.log(`[slackSend] fail`)
   }
 }
 
