@@ -43,7 +43,18 @@ Meteor.methods({
             }
           )
 
-          console.log(`[LevelUpdate] ${student.certno} result: ${result}`)
+          seatUpdate = Seats.update(
+            {
+              certno:student.certno
+            },
+            {
+              $set: {
+                level: student.level
+              }
+            }
+          )
+
+          console.log(`[LevelUpdate] ${student.certno} result: ${result}, seat: ${seatUpdate}`)
         }
 
 
