@@ -19,7 +19,7 @@ Meteor.methods({
            studentid: SeatInfo.studentid,
            name: SeatInfo.name,
            degree: SeatInfo.degree,
-           level: SeatInfo.level,
+           level: (SeatInfo.level) ? SeatInfo.level : '毕业生',
            certno: SeatInfo.certno,
            examid: SeatInfo.examid,
            examtime: examDateTimeConverter(ExamDateInfo.starttime, ExamDateInfo.duration),

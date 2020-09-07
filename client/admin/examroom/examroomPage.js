@@ -110,25 +110,40 @@ Template.examroomPage.events({
 
   },
   'click .btn-download-all': function() {
-    examroom = Examroom.find({}, {
-      examroomId: 1
+
+    allRooms = Examroom.find({}, {
+      fields: {
+        examroomId: 1
+      }
     }).fetch()
 
-    _.forEach(examroom, function(item) {
-      PromiseMeteorCall('generateExamroomList', item.examroomId)
-        .then(res => {
-          pdfMake.fonts = {
-            Roboto: {
-              normal: 'Microsoft YaHei.ttf',
-              bold: 'Microsoft YaHei.ttf',
-              italics: 'Microsoft YaHei.ttf',
-              bolditalics: 'Microsoft YaHei.ttf'
-            }
-          }
-          pdfMake.createPdf(res).download(`考点编号_10698_考场号${item.examroomId}`);
+    AllRoomId = arrayConvter(allRooms, 'examroomId')
 
-        })
-        .catch(err => console.log(err))
+    _.forEach(AllRoomId, function(id, index) {
+
+      setTimeout(function() {
+
+          fetch(`${Meteor.absoluteUrl()}api/examroom?roomnumber=${id}`)
+            .then(resp => resp.blob())
+            .then(blob => {
+              const url = window.URL.createObjectURL(blob);
+              const a = document.createElement('a');
+              a.style.display = 'none';
+              a.href = url;
+              // the filename you want
+              a.download = `考场${id}.pdf`;
+              document.body.appendChild(a);
+              a.click();
+              window.URL.revokeObjectURL(url);
+              console.log(`${id} has been downloaded`); // or you know, something with better UX...
+            })
+            .catch(() => alert('oh no!'));
+        },
+        2000 * index);
+
+
     })
+
+
   }
 });

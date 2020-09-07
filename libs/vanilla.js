@@ -51,3 +51,12 @@ b64toBlob = (b64Data, contentType, sliceSize) => {
       var blob = new Blob(byteArrays, {type: contentType});
       return blob;
 }
+
+// conver object array in to array
+arrayConvter = (array, key) => {
+  result = []
+  _.forEach(array, function(item) {
+    result.push(item[key])
+  })
+  return result
+}

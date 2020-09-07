@@ -115,7 +115,7 @@ Template.studentPage.events({
           console.log('papaObject', papaObject);
 
           if (papaObject && papaObject.errors.length == 0) {
-            Meteor.call('updateStudentStatus', papaObject.data)
+            Meteor.call('updateStudentLevel', papaObject.data)
           } else {
             throw papaObject.errors
           }

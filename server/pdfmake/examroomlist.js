@@ -13,7 +13,7 @@ Meteor.methods({
       pageSize: 'A4',
 
       content: [
-        { text: `西安交通大学网络学院2019上半年全国学位外语考试考场签到表`, alignment: 'center' },
+        { text: `${Meteor.settings.public.signupSheetName}`, alignment: 'center' },
         { text: `考场 ${examroom.examroomId}`, alignment: 'left', fontSize: 8 },
         {
           table: {
