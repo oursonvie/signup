@@ -47,6 +47,13 @@ FlowRouter.route('/scandidate', {
     }
 });
 
+FlowRouter.route('/facelog', {
+   name: 'facelog',
+    action() {
+        BlazeLayout.render('AdminLayout', {main: 'facelog'});
+    }
+});
+
 FlowRouter.route('/mobile', {
    name: 'mobileHome',
     action() {

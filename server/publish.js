@@ -93,3 +93,11 @@ Meteor.publish('studentNoQuery', function(studentid) {
     throw new Meteor.Error( '500', 'No Premission' );
   }
 })
+
+Meteor.publish('facelogs', function() {
+  if (this.userId) {
+    return FaceLogs.find()
+  } else {
+    throw new Meteor.Error( '500', 'No Premission' );
+  }
+})

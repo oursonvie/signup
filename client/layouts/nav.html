@@ -1,34 +1,35 @@
 <template name="nav">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/admin">学位外语报名</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
+    <a class="navbar-brand" href="/admin">学位外语报名</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
 
-      {{#if currentUser}}
-        <li class="nav-item">
-          <a class="nav-link" href="/admin">学生管理</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/examroom">考点管理</a>
-        </li>
-        <li class="nav-item"
-        ><a class="nav-link" href="/scandidate">疑似学生管理</a>
-      </li>
-      {{/if}}
+        {{#if currentUser}}
+          <li class="nav-item">
+            <a class="nav-link" href="/admin">学生管理</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/examroom">考点管理</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/scandidate">疑似学生管理</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="/facelog">识别记录</a>
+          </li>
+        {{/if}}
 
 
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" id="UserID" placeholder="身份证号">
-      <button class="btn btn-outline-success my-2 my-sm-0 btn-query" type="submit">查询</button>
-      <button class="btn btn-outline-danger my-2 my-sm-0 btn-reset" type="submit">重置</button>
-    </form>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" id="UserID" placeholder="身份证号">
+        <button class="btn btn-outline-success my-2 my-sm-0 btn-query" type="submit">查询</button>
+        <button class="btn btn-outline-danger my-2 my-sm-0 btn-reset" type="submit">重置</button>
+      </form>
 
-    {{> customLogin}}
-  </div>
-</nav>
+      {{> customLogin}}
+    </div>
+  </nav>
 </template>

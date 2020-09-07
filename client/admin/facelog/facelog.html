@@ -1,0 +1,32 @@
+<template name="facelog">
+  <div class='row'>
+
+    {{#if Template.subscriptionsReady}}
+
+      {{#each Facelogs}}
+
+        <div class='col-xs-3'>
+          <div class="card card-default">
+
+
+            <div class="card-body">
+              <img src="{{studentPic}}" class="img-fluid" alt="Responsive image">
+            </div>
+
+            <div class="card-footer text-muted">
+              <p class="text-center">{{methods}}</p>
+              <p class="text-center">比对分数: {{baiduScore}}</p>
+              <p class="text-center">{{dateTime}}</p>
+            </div>
+
+          </div>
+        </div>
+
+      {{/each}}
+
+    {{else}}
+      {{> loader}}
+    {{/if}}
+
+  </div>
+</template>
