@@ -11,11 +11,12 @@ let client = new AipFaceClient(APP_ID, API_KEY, SECRET_KEY);
 
 Meteor.methods({
   compareBaidu:function(userId, picId){
-    console.log(userId, picId)
      try {
 
+       imageObj = Images.findOne( {_id:picId} )
+
        // get site pic of student
-       let picUrl = `${Meteor.absoluteUrl()}cfs/files/images/${picId}`
+       let picUrl = imageObj.link()
 
         let response = Promise.await(PromiseHTTPCall('GET', picUrl,{npmRequestOptions: { encoding: null }}))
 

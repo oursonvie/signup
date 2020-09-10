@@ -6,8 +6,6 @@ Meteor.methods({
      saveObj.createdBy = this.userId
 
      SuspectStudents.insert(saveObj)
-
-     console.log(saveObj)
   },
   downloadSuspect:function(){
     return CSV.unparse(SuspectStudents.find({}, {fields:{_id:0, photoId:0, createdBy:0 }}).fetch())
