@@ -37,13 +37,10 @@
               <div class="col-4">
 
                 {{#if onSitePic}}
-                  <img src="{{onSitePic.url}}" class="img-fluid" alt="Responsive image">
+                  <img src="{{onSitePic.link}}" class="img-fluid" alt="Responsive image">
                   <p>学生现场照片</p>
                 {{else}}
-                  <div class="form-group">
-                    <label for="onSitePic">上传学生照片</label>
-                    <input type="file" id="onSitePic" accept="image/*">
-                  </div>
+                  {{> uploadForm}}
                 {{/if}}
 
               </div>

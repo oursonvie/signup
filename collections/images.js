@@ -1,35 +1,14 @@
-let imageStore = new FS.Store.GridFS("images");
+import { Meteor } from 'meteor/meteor';
+import { FilesCollection } from 'meteor/ostrio:files';
 
-Images = new FS.Collection("images", {
- stores: [imageStore]
-});
-
-Images.deny({
- insert: function(){
- return false;
- },
- update: function(){
- return false;
- },
- remove: function(){
- return false;
- },
- download: function(){
- return false;
- }
- });
-
-Images.allow({
- insert: function(){
- return true;
- },
- update: function(){
- return true;
- },
- remove: function(){
- return true;
- },
- download: function(){
- return true;
- }
+Images = new FilesCollection({
+  collectionName: 'Images',
+  allowClientCode: false, // Disallow remove files from Client
+  onBeforeUpload(file) {
+    // Allow upload files under 10MB, and only in png/jpg/jpeg formats
+    if (file.size <= 2097152 && /png|jpg|jpeg/i.test(file.extension)) {
+      return true;
+    }
+    return '图片太大, 请缩小到2MB以内再上传';
+  }
 });

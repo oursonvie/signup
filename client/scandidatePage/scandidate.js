@@ -77,6 +77,7 @@ Template.scandidate.events({
   "click .btn-reset" (event, template) {
     Session.set('searchStudent',false)
   },
+  /*
   'change #onSitePic': function(event, template) {
     FS.Utility.eachFile(event, function(file) {
       Images.insert(file, function (err, fileObj) {
@@ -123,13 +124,11 @@ Template.scandidate.events({
           })
           .catch(err => console.log(err))
 
-
-
-
         }
       })
     })
   },
+  */
   'click .btn-suspect-download': function(event, template) {
     var nameFile = '疑似考生名单.csv'
 

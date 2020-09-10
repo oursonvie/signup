@@ -75,7 +75,7 @@ Meteor.publish('suspectStudent', function(id) {
 
 Meteor.publish('onSitePic', function(id) {
   if (this.userId) {
-    return Images.find({_id:id})
+    return Images.find({_id:id}).cursor
   } else {
     throw new Meteor.Error( '500', 'No Premission' );
   }
