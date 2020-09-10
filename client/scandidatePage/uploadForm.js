@@ -37,7 +37,6 @@ Template.uploadForm.events({
           // when image uploaded insert student into suspect
           PromiseMeteorCall('insertSuspectStudent', Session.get('searchStudent'), fileObj._id)
             .then(res => {
-              console.log(res)
 
               // compare faces
               PromiseMeteorCall('compareBaidu', Session.get('searchStudent'), fileObj._id)
@@ -65,7 +64,7 @@ Template.uploadForm.events({
                     // write result back into suspect student
                     PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), result)
                       .then(res => {
-                        console.log(res)
+                        
                       })
                       .catch(err => console.log(err))
                   }

@@ -77,58 +77,6 @@ Template.scandidate.events({
   "click .btn-reset" (event, template) {
     Session.set('searchStudent',false)
   },
-  /*
-  'change #onSitePic': function(event, template) {
-    FS.Utility.eachFile(event, function(file) {
-      Images.insert(file, function (err, fileObj) {
-        if (err) {
-          console.log(err)
-        } else {
-          console.log(fileObj)
-
-          // when image uploaded insert student into suspect
-          PromiseMeteorCall('insertSuspectStudent', Session.get('searchStudent'), fileObj._id)
-          .then(res => {
-            console.log(res)
-
-            sleep(1000)
-
-            // compare faces
-            PromiseMeteorCall('compareBaidu', Session.get('searchStudent'), fileObj._id)
-            .then(res => {
-
-              if (res.error_code == 0 && res.result.score || res.result.score == 0) {
-
-                let result = res.result.score
-
-                // get student exam detail before calling beary
-                let student = Seats.findOne({certno:Session.get('searchStudent')},{fields:{_id:0, meteorId:0}})
-
-                student.baiduAPIScore = result
-
-                // beary chat push
-                PromiseMeteorCall('bearyFaceMatch', Session.get('searchStudent'), student)
-
-                // write result back into suspect student
-                PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), result)
-                .then(res => {
-                  console.log(res)
-                })
-                .catch(err => console.log(err))
-              }
-
-            })
-
-            .catch(err => console.log(err))
-
-          })
-          .catch(err => console.log(err))
-
-        }
-      })
-    })
-  },
-  */
   'click .btn-suspect-download': function(event, template) {
     var nameFile = '疑似考生名单.csv'
 
