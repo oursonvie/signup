@@ -28,7 +28,7 @@
     </div>
 
     {{#unless RegisterExipre}}
-      {{#if Template.subscriptionsReady}}
+
         {{#if ifSearch}}
           {{#if Students}}
             <div class="card general-card card-basicinfo">
@@ -40,10 +40,12 @@
 
                     {{#if allowSignup}}
 
-                      {{#if Students.edited}}
+                      {{#if StudentOne.edited}}
                         {{> signedStudentInfo}}
                       {{else}}
-                        {{> updateStudentForm}}
+                        {{#with StudentOne}}
+                          {{> updateStudentForm}}
+                        {{/with}}
                       {{/if}}
 
                     {{else}}
@@ -62,9 +64,7 @@
             <p>报名信息有误，请检查后重试</p>
           {{/if}}
         {{/if}}
-      {{else}}
-        {{> loader}}
-      {{/if}}
+
     {{/unless}}
 
 

@@ -1,0 +1,116 @@
+<template name="updateStudentForm">
+  <div class="card">
+    <div class="card-body">
+
+      <div class="row">
+
+
+          <div class="input-group col-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">姓名</span>
+            </div>
+            <input type="text" class="form-control" placeholder="{{name}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+          </div>
+
+
+          <div class="input-group col-sm-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon1">性别</span>
+            </div>
+            <input type="text" class="form-control" placeholder="{{sex}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+          </div>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">学籍状态</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{status}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">出生日期</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{birthday}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">就读专业</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{degree}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">培养层次</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{level}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+
+      </div>
+
+      <div class="row">
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">学号</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{studentid}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">学习中心</span>
+          </div>
+          <input type="text" class="form-control" placeholder="{{lcenter}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
+
+      </div>
+
+      <div class="card border-danger">
+        <div class="card-heading text-danger">
+          <h3>学位报名信息</h3>
+        </div>
+
+
+        <div class="card-body text-danger">
+
+          <div class="row">
+            <div class="col-md-6">
+              {{family_name}}
+            </div>
+            <div class="col-md-6">
+              {{first_name}}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              {{language}}
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
+
+    </div>
+
+  </div>
+</template>
