@@ -2,6 +2,11 @@
   {{#with currentUpload}}
     Uploading <b>{{file.name}}</b>:
     <span id="progress">{{progress.get}}%</span>
+
+    <div class="progress">
+      <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="{{progress.get}}" aria-valuemin="0" aria-valuemax="100" style="width: {{progress.get}}%"></div>
+    </div>
+
   {{else}}
     <input id="fileInput" type="file" />
   {{/with}}
