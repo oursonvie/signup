@@ -5,20 +5,20 @@
       <div class="row">
 
 
-          <div class="input-group col-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">姓名</span>
-            </div>
-            <input type="text" class="form-control" placeholder="{{name}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">姓名</span>
           </div>
+          <input type="text" class="form-control" placeholder="{{name}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
 
 
-          <div class="input-group col-sm-6">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon1">性别</span>
-            </div>
-            <input type="text" class="form-control" placeholder="{{sex}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        <div class="input-group col-sm-6">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon1">性别</span>
           </div>
+          <input type="text" class="form-control" placeholder="{{sex}}" aria-label="Username" aria-describedby="basic-addon1" disabled>
+        </div>
 
 
       </div>
@@ -91,24 +91,45 @@
         <div class="card-body text-danger">
 
           <div class="row">
-            <div class="col-md-6">
-              {{family_name}}
+            <div class="input-group col-sm-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">姓</span>
+              </div>
+              <input type="text" class="form-control" placeholder="{{family_name}}" aria-label="family_name" aria-describedby="basic-addon1" id="family_name">
             </div>
-            <div class="col-md-6">
-              {{first_name}}
+
+
+            <div class="input-group col-sm-6">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">名</span>
+              </div>
+              <input type="text" class="form-control" placeholder="{{first_name}}" aria-label="first_name" aria-describedby="basic-addon1" id="first_name">
             </div>
+
           </div>
 
           <div class="row">
-            <div class="col-md-6">
-              {{language}}
+
+            <div class="input-group sm-6">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01">报考语言</label>
+              </div>
+              <select class="custom-select" id="language">
+                <option selected disabled>选择</option>
+                <option>英语</option>
+                <option>俄语</option>
+                <option>法语</option>
+                <option>德语</option>
+                <option>日语</option>
+
+              </select>
             </div>
           </div>
 
         </div>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
+      <button class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
 
     </div>
 

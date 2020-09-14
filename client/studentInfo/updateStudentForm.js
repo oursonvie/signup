@@ -1,6 +1,6 @@
-Template.updateStudentForm.onCreated(function() {
-  // check full status
+Template.updateStudentForm.events({
+  "click .btn-submit"(event, template) {
+    console.log(123)
 
-  console.log(this)
-
+  }
 });
