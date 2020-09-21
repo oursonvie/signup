@@ -40,7 +40,9 @@
                     {{#if allowSignup}}
 
                       {{#if StudentOne.edited}}
-                        {{> signedStudentInfo}}
+                        {{#with StudentOne}}
+                          {{> signedStudentInfo}}
+                        {{/with}}
                       {{else}}
                         {{#with StudentOne}}
                           {{> updateStudentForm}}

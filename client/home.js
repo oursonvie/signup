@@ -17,10 +17,6 @@ Template.home.onCreated(function() {
       console.log(err)
     })
 
-    // set test certno id
-
-    Session.set('searchStudent', '130421198509023336')
-
     var self = this
     self.autorun(function() {
       // subscribe regiestered student
