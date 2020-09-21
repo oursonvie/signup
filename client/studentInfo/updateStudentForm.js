@@ -1,3 +1,12 @@
+Template.updateStudentForm.helpers({
+  isSelected: function(language) {
+     return this.language == language
+  },
+
+});
+
+
+
 Template.updateStudentForm.events({
   "click .btn-submit"(event, template) {
 

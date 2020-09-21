@@ -23,7 +23,13 @@ Template.home.onCreated(function() {
 
       if ( Session.get('searchStudent') ) {
         PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
-        .then( res => Session.set('student', res) )
+        .then(
+          res => {
+            Session.set('student', res)
+          }
+
+
+        )
         .catch( e => alert(e) )
       }
 

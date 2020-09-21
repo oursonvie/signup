@@ -1,3 +1,11 @@
+// roles v3 settings
+  Roles.createRole('admin', {
+    unlessExists: true
+  });
+  Roles.createRole('superadmin', {
+    unlessExists: true
+  });
+
 Meteor.startup(function () {
 
   if ( Meteor.users.find().count() === 0 ) {
@@ -19,3 +27,12 @@ Meteor.startup(function () {
   }
 
 });
+
+
+Meteor.publish(null, function () {
+  if (this.userId) {
+    return Meteor.roleAssignment.find({ 'user._id': this.userId });
+  } else {
+    this.ready()
+  }
+})

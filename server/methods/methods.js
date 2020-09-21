@@ -2,28 +2,37 @@ Meteor.methods({
   insertStudent:function(Obj){
      Student.insert(Obj)
   },
-  importStudent:function(papaData){
+  importStudent:function(papaData) {
     console.log(`[studentImport]: ${papaData.length}`)
-    _.forEach(papaData, function(student) {
-      try {
-        result = Student.upsert(
-          {
-            signupid: student.signupid ,
-            certno: student.certno ,
-            studentid: student.studentid
-          },
-          {$set:student}
-        )
-        // console.log(result)
-      } catch(err) {
-        console.log(student)
-        console.log(err)
-      }
 
-    })
-    a = `[studentImport] done`
-    console.log(a)
-    return a
+    if ( this.userId && Roles.userIsInRole(this.userId, ['admin']) ) {
+      _.forEach(papaData, function(student) {
+        try {
+          result = Student.upsert(
+            {
+              signupid: student.signupid ,
+              certno: student.certno ,
+              studentid: student.studentid
+            },
+            {$set:student}
+          )
+          // console.log(result)
+        } catch(err) {
+          console.log(student)
+          console.log(err)
+        }
+
+      })
+
+      a = `[studentImport] done`
+
+      console.log(a)
+      return a
+    } else {
+      throw new Meteor.Error('500', 'No Premission');
+    }
+
+
   },
   download:function(){
     return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0, edited:0}}).fetch())

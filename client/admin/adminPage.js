@@ -1,17 +1,25 @@
 Template.studentPage.onCreated(function() {
   // init search
   Session.set('searchStudent',false)
+  Session.set('student', false)
 
   var self = this
   self.autorun(function() {
     // subscribe regiestered student
     self.subscribe('studentCount');
     self.subscribe('photoCount');
-    self.subscribe('StudentOne', Session.get('searchStudent'));
     self.subscribe('baiduCount');
-    //count for 5 languages
-
+    //  count for 5 languages
     self.subscribe('studentCountLanguage');
+
+    if ( Session.get('searchStudent') ) {
+      PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
+      .then( res => {
+        Session.set('student', res)
+      } )
+      .catch( e => alert(e) )
+    }
+
   });
 });
 
@@ -32,7 +40,7 @@ Template.studentPage.helpers({
     return Session.get('submitCount');
   },
   Student: function() {
-    return Student.findOne({certno:Session.get('searchStudent')});
+    return Session.get('student').content
   },
   ifSearch: function() {
     return Session.get('searchStudent');

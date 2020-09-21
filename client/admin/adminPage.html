@@ -98,15 +98,14 @@
 
 
 
-    <div class='col-6'>
-      {{#if Template.subscriptionsReady}}
+    <div class='col-12'>
+
         {{#if ifSearch}}
           {{#if Student}}
             <div class="card card-default card-basicinfo">
-              <div class="card-heading">本人基本信息</div>
               <div class="card-body">
                 {{#with Student}}
-                  {{> adminUpdate}}
+                  {{> updateStudentForm}}
                 {{/with}}
               </div>
             </div>
@@ -114,9 +113,7 @@
             <p>报名信息有误，请检查后重试</p>
           {{/if}}
         {{/if}}
-      {{else}}
-        {{> loader}}
-      {{/if}}
+
     </div>
   </div>
 
