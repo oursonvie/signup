@@ -1,15 +1,3 @@
-Meteor.publish('StudentOne', function(id) {
-  if ( Roles.userIsInRole(Meteor.userId(), ['admin']) ) {
-    return Student.find({certno:id})
-  } else {
-    if (Meteor.settings.public.switch) {
-      return Student.find({certno:id})
-    } else {
-      return []
-    }
-  }
-})
-
 Meteor.publish('regiesteredStudents', function() {
   if (this.userId) {
     return Student.find({edited:true})
