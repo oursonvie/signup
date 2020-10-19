@@ -6,7 +6,7 @@ Meteor.methods({
         "text": `[${input}] ${JSON.stringify(message)}`
       }
 
-      return slackSend(postData)
+      slackSend(postData)
 
   },
   bearyFaceMatch: function(id, api) {
@@ -21,7 +21,7 @@ slackSend = (content) => {
       data: content
     }))
 
-    console.log(result.content)
+    // console.log(result.content)
   } catch (e) {
     // console.log(e)
     console.log(`[slackSend] fail`)
