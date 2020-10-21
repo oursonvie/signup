@@ -16,7 +16,7 @@ Meteor.methods({
             },
             {$set:student}
           )
-          // console.log(result)
+          console.log(result)
         } catch(err) {
           console.log(student)
           console.log(err)
