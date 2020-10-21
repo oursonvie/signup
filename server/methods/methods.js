@@ -37,6 +37,9 @@ Meteor.methods({
   download:function(){
     return CSV.unparse(Student.find({edited:true}, {fields:{createdBy:0, edited:0}}).fetch())
   },
+  downloadId: function() {
+    return CSV.unparse(Student.find({}, {fields:{_id:1}}).fetch())
+  },
   downloadStudentViaLanguage:function(lang){
     return CSV.unparse(Student.find({edited:true, language: lang}, {fields:{createdBy:0, edited:0}}).fetch())
   },
