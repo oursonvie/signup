@@ -1,6 +1,6 @@
 Meteor.methods({
   searchStudent:function(certno){
-     targetStudent = Student.findOne({certno: certno})
+     targetStudent = Student.findOne({_id: certno})
      try {
        if (targetStudent) {
          return {error:0, content: targetStudent}

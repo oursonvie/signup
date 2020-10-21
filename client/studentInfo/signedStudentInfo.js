@@ -5,6 +5,6 @@ Template.signedStudentInfo.helpers({
      }
   },
   certnoLastFour: function() {
-    return this.certno.slice(-4)
+    return (this.certno) ? this.certno.slice(-4) : his._id.slice(-4)
   }
 });
