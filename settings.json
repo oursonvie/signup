@@ -2,11 +2,11 @@
   "public": {
     "startDate": "2020-08-01 09:00:00",
     "currentStudentDate": "2020-08-01 09:00:00",
-    "expireDate": "2020-10-20 23:59:59",
+    "expireDate": "2020-10-30 23:59:59",
     "logoUrl": "/img/xjtu.png",
-    "registerLimit": 6000,
+    "registerLimit": 200,
     "printStartDate": "2020-07-28 08:00:00",
-    "printEndDate": "2020-09-16 12:00:00",
+    "printEndDate": "2020-10-16 12:00:00",
     "examtime": {
       "starttime": "2020-09-05 09:30:00",
       "duration": 2

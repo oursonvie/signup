@@ -17,24 +17,6 @@ Template.home.onCreated(function() {
       console.log(err)
     })
 
-    var self = this
-    self.autorun(function() {
-      // subscribe regiestered student
-
-      if ( Session.get('searchStudent') ) {
-        PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
-        .then(
-          res => {
-            Session.set('student', res)
-          }
-
-
-        )
-        .catch( e => alert(e) )
-      }
-
-    });
-
 });
 
 Template.home.helpers({
@@ -82,9 +64,21 @@ Template.home.events({
 
     let inputValue = document.getElementById('UserID').value.trim()
 
-    let userId = inputValue.toUpperCase()
+    // ignore cap
+    // let userId = inputValue.toUpperCase()
+    let userId = inputValue
 
     Session.set('searchStudent', userId)
+
+    PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
+    .then(
+      res => {
+        Session.set('student', res)
+      }
+
+
+    )
+    .catch( e => alert(e) )
 
   }
 });
