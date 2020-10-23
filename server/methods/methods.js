@@ -16,7 +16,11 @@ Meteor.methods({
             },
             {$set:student}
           )
-          console.log(result)
+
+          if ( result.insertedId == undefined ) {
+            console.log(student)
+          }
+          // console.log(result)
         } catch(err) {
           console.log(student)
           console.log(err)
@@ -26,7 +30,6 @@ Meteor.methods({
 
       a = `[studentImport] done`
 
-      console.log(a)
       return a
     } else {
       throw new Meteor.Error('500', 'No Premission');
