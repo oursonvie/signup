@@ -64,10 +64,8 @@ Template.home.events({
 
     let inputValue = document.getElementById('UserID').value.trim()
 
-    // ignore cap
-    // let userId = inputValue.toUpperCase()
-    let userId = inputValue
-
+    let userId = inputValue.toUpperCase()
+  
     Session.set('searchStudent', userId)
 
     PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
