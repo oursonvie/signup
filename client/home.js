@@ -42,7 +42,8 @@ Template.home.helpers({
     return moment().isBefore(Meteor.settings.public.startDate)
   },
   allowSignup: function() {
-    let startDate = (this.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
+    let studentInfo = Session.get('student')
+    let startDate = (studentInfo.error == 0 && studentInfo.content.status == '毕业') ? Meteor.settings.public.startDate : Meteor.settings.public.currentStudentDate
 
     let serverTime = Session.get('serverInfo').serverTime
 
@@ -65,7 +66,7 @@ Template.home.events({
     let inputValue = document.getElementById('UserID').value.trim()
 
     let userId = inputValue.toUpperCase()
-  
+
     Session.set('searchStudent', userId)
 
     PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
