@@ -24,3 +24,16 @@ checkPinyin = () => {
 capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
+
+Meteor.methods({
+  checkPinyin: function() {
+    if ( Roles.userIsInRole(this.userId, ['superadmin']) ) {
+
+      checkPinyin()
+
+    } else {
+      throw new Meteor.Error( '500', 'No Premission' );
+    }
+
+  }
+});
