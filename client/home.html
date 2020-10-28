@@ -17,7 +17,14 @@
                 <input type="text" pattern="^[a-zA-Z0-9]+$" class="form-control" id="UserID" placeholder="身份证号">
               </div>
               <p class="text-center">
-                <button type="submit" class="btn btn-primary" style="width:150px">查询</button>
+
+                {{#if ifSearch}}
+                  <button type="submit" class="btn btn-primary" style="width:150px" disabled>查询</button>
+                {{else}}
+                  <button type="submit" class="btn btn-primary" style="width:150px">查询</button>
+                {{/if}}
+
+
               </p>
             </form>
           {{/if}}
@@ -62,7 +69,7 @@
               </div>
             </div>
           {{else}}
-            <p>报名信息有误，请检查后重试</p>
+            <p>{{> loader}}</p>
           {{/if}}
         {{/if}}
 
