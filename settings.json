@@ -6,16 +6,16 @@
     "logoUrl": "/img/xjtu.png",
     "registerLimit": 5000,
     "printStartDate": "2020-07-28 08:00:00",
-    "printEndDate": "2020-10-16 12:00:00",
+    "printEndDate": "2021-10-16 12:00:00",
     "examtime": {
-      "starttime": "2020-09-05 09:30:00",
+      "starttime": "2020-12-05 09:30:00",
       "duration": 2
     },
     "baiduRatio": 20,
     "signupSheetName": "西安交通大学网络学院2020下半年全国学位外语考试考场签到表"
   },
   "private": {
-    "font_YaHei": "/Users/yixiongzhang/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
+    "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
     "passkey": "b90126c9a326d6a9",
     "passvi": "b90126c9a326d6a9",
     "appKey": "543DE0821C0F607EE0533412640A033E",
