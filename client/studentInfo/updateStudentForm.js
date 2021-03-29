@@ -1,8 +1,15 @@
+Template.updateStudentForm.onCreated(function() {
+  // check full status
+  Session.set('submitted', false)
+});
+
 Template.updateStudentForm.helpers({
   isSelected: function(language) {
      return this.language == language
   },
-
+  ifSubmitted: function() {
+    return Session.get('submitted')
+  }
 });
 
 
@@ -27,9 +34,9 @@ Template.updateStudentForm.events({
     } else if ( !regex.test(family_name) || !regex.test(first_name) ) {
       alert(`请输入姓名拼音`)
     } else {
+      Session.set('submitted', true)
       PromiseMeteorCall('signupStudent', this._id, family_name, first_name, language)
       .then( res => {
-        console.log(res)
 
         if ( res == 'success' ) {
           alert('报名成功')

@@ -1,9 +1,6 @@
-import {
-  Template
-} from 'meteor/templating';
-import {
-  ReactiveVar
-} from 'meteor/reactive-var';
+import {Template} from 'meteor/templating';
+import {ReactiveVar} from 'meteor/reactive-var';
+
 Template.uploadForm.onCreated(function() {
   this.currentUpload = new ReactiveVar(false);
 });
@@ -64,7 +61,7 @@ Template.uploadForm.events({
                     // write result back into suspect student
                     PromiseMeteorCall('updateSuspectStudent', Session.get('searchStudent'), result)
                       .then(res => {
-                        
+
                       })
                       .catch(err => console.log(err))
                   }

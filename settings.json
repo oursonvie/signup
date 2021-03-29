@@ -2,7 +2,7 @@
   "public": {
     "startDate": "2020-10-26 08:00:00",
     "currentStudentDate": "2020-10-28 08:00:00",
-    "expireDate": "2020-10-30 23:59:59",
+    "expireDate": "2021-10-30 23:59:59",
     "logoUrl": "/img/xjtu.png",
     "registerLimit": 5000,
     "printStartDate": "2020-07-28 08:00:00",

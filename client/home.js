@@ -73,9 +73,10 @@ Template.home.events({
     .then(
       res => {
         Session.set('student', res)
+        if (res.error != 0) {
+          alert( JSON.stringify(res) )
+        }
       }
-
-
     )
     .catch( e => alert(e) )
 

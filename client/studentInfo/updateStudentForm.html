@@ -129,7 +129,11 @@
         </div>
       </div>
 
-      <button class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
+      {{#if ifSubmitted}}
+        <button class="btn btn-primary btn-submit pull-right" style="width:150px" disabled>提交</button>
+      {{else}}
+        <button class="btn btn-primary btn-submit pull-right" style="width:150px">提交</button>
+      {{/if}}
 
     </div>
 
