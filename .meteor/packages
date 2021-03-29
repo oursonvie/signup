@@ -53,7 +53,6 @@ aldeed:autoform
 
 ## tools
 session@1.2.0
-stevezhu:lodash
 clinical:csv
 pfafman:filesaver
 tmeasday:publish-counts
@@ -68,7 +67,8 @@ promise@0.11.2
 
 meteorhacks:aggregate
 
-underscore@1.0.10
+underscore
+erasaur:meteor-lodash
 
 montiapm:agent
 jquery

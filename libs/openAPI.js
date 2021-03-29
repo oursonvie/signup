@@ -33,7 +33,7 @@ getOpenPhoto = (batchcode, certificateno) => {
     if (result.data.data.count > 0) {
       dataList = result.data.data.dataList
 
-      console.log(dataList)
+      // console.log(dataList)
 
       zp = dataList[lodash.findIndex(dataList, {'filetype':'zp'})]
 
@@ -44,7 +44,7 @@ getOpenPhoto = (batchcode, certificateno) => {
         source: 'open',
         fileexist: (( zp.doccontent.length > 0 ) ? true : false )
       }
-      
+
       return res
     }
 

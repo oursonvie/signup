@@ -52,42 +52,48 @@ insertFace = (student) => {
     targetPic = Image.findOne({certificateno:student.certno}).doccontent
     picContent = ( student.source == 'open' ) ? targetPic : targetPic.split(',')[1]
 
-    result = Promise.await(PromiseMeteorCall('baidu_face_add', picContent, groupId, student.studentid))
+    if (targetPic) {
+      result = Promise.await(PromiseMeteorCall('baidu_face_add', picContent, groupId, student.studentid))
 
-    // save baidu result and image into unique students
-    if (result.error_code == 0) {
+      // save baidu result and image into unique students
+      if (result.error_code == 0) {
 
-      updateResult = BaiduStudents.update({
-        certno: student.certno
-      }, {
-        $set: {
-          baidu: result
-        }
-      })
+        updateResult = BaiduStudents.update({
+          certno: student.certno
+        }, {
+          $set: {
+            baidu: result
+          }
+        })
 
-      return `[Updated baidu & image] ${student.studentid} ${updateResult}`
-    } else if (result.error_code == 223105) {
-      // remove this student
-      deleteResult = Promise.await(PromiseMeteorCall('baidu_delete_user', groupId, student.studentid))
+        return `[Updated baidu & image] ${student.studentid} ${updateResult}`
+      } else if (result.error_code == 223105) {
+        // remove this student
+        deleteResult = Promise.await(PromiseMeteorCall('baidu_delete_user', groupId, student.studentid))
 
-      updateResult = BaiduStudents.update({
-        certno: student.certno
-      }, {
-        $unset: {
-          baidu: ''
-        }
-      })
+        updateResult = BaiduStudents.update({
+          certno: student.certno
+        }, {
+          $unset: {
+            baidu: ''
+          }
+        })
 
-      // unset failed students
-      console.log(`delete student ${student.studentid}, result: ${$updateResult}`)
+        // unset failed students
+        console.log(`delete student ${student.studentid}, result: ${$updateResult}`)
 
-      throw new Meteor.Error('dulicate pic', result);
+        throw new Meteor.Error('dulicate pic', result);
+
+      } else {
+        throw new Meteor.Error('error', result);
+      }
 
     } else {
-      throw new Meteor.Error('error', result);
+      return (`${student.studentid} has no pic`)
     }
 
   } catch (e) {
+    console.log(`${student.certno}`)
     throw new Meteor.Error('error', e);
   }
 }
