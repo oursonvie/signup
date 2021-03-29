@@ -13,6 +13,7 @@
     "crypto": "^1.0.1",
     "diff": "^4.0.2",
     "es6-denodeify": "^0.1.5",
+    "lodash": "^4.17.21",
     "meteor-node-stubs": "^1.0.0",
     "pdfmake": "^0.1.36",
     "simpl-schema": "^0.3.2"

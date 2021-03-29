@@ -20,7 +20,7 @@ getXjtuUrl = (url) => {
 }
 
 getXjtuPhoto = (sid) => {
-  let baseurl = 'http://mxueli.xjtudlc.com/Upload/StudentPicture/10698/'
+  let baseurl = `http://${Meteor.settings.private.xueliPicServer}/10698/`
 
     let student = Student.findOne({signupid:sid})
 
