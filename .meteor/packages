@@ -67,7 +67,7 @@ promise@0.11.2
 
 meteorhacks:aggregate
 
-underscore
+underscore@1.0.10
 
 montiapm:agent
 jquery
