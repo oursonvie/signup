@@ -14,6 +14,20 @@ Template.updateStudentForm.helpers({
     let examChoice = Meteor.settings.public.examChoice
 
     return examChoice != undefined ? examChoice : false
+  },
+  checkNumber: function(id) {
+    // check if front page gets server data
+    let serverData = Session.get('serverInfo')
+    let dateChoiceData = Meteor.settings.public.examChoice
+    if (serverData.dateCount) {
+      let dateCountIndex = lodash.findIndex(serverData.dateCount, {'_id': id.toString() } );
+      let limitIndex = lodash.findIndex(dateChoiceData, {'id': id} );
+
+      return serverData.dateCount[dateCountIndex].count <= dateChoiceData[limitIndex].limit ? false : true
+
+    } else {
+      return true
+    }
   }
 });
 

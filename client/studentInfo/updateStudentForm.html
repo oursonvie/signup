@@ -137,7 +137,11 @@
                 <select class="custom-select" id="examTime">
                   <option selected disabled>选择</option>
                   {{#each timeOptions}}
-                    <option value="{{id}}" selected = {{isSelected '英语' }}>{{time}}</option>
+                    {{#if checkNumber id}}
+                      <option value="{{id}}" disabled >{{time}} (报名人数已满)</option>
+                    {{else}}
+                      <option value="{{id}}">{{time}}</option>
+                    {{/if}}
                   {{/each}}
                 </select>
               </div>
