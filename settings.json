@@ -12,7 +12,11 @@
       "duration": 2
     },
     "baiduRatio": 20,
-    "signupSheetName": "西安交通大学网络学院2020下半年全国学位外语考试考场签到表"
+    "signupSheetName": "西安交通大学网络学院2020下半年全国学位外语考试考场签到表",
+    "examChoice": [
+      {"id":1, "time":"2021-05-31 09:30:00"},
+      {"id":2, "time":"2021-04-31 09:30:00"}
+    ]
   },
   "private": {
     "font_YaHei": "/Users/Tonny/Desktop/Assignment/Signup/meteor/public/fonts/Microsoft YaHei.ttf",
