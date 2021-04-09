@@ -1,3 +1,5 @@
+lodash = require('lodash');
+
 // reset sessions in cam page
 resetSessions = () => {
   Session.set('studentPic', false)

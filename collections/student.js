@@ -109,23 +109,17 @@ Student.attachSchema(new SimpleSchema({
       }
     }
   },
-  language: {
+  examTime: {
     type: String,
     label: "考试语种",
     optional: true,
-    autoform: {
-      type: "select",
-      firstOption: '(选择考试语言)',
-      options: () => {
-        return[
-          {label: "英语", value:"英语"},
-          {label: "俄语", value:"俄语"},
-          {label: "法语", value:"法语"},
-          {label: "德语", value:"德语"},
-          {label: "日语", value:"日语"}
-        ]
-      }
-    }
+    allowedValues: ["1","2","3","4","5"]
+  },
+  language: {
+    type: String,
+    label: "考试时间",
+    optional: true,
+    allowedValues: ["英语","俄语","法语","德语","日语"]
   },
   createdBy: {
     type: String,

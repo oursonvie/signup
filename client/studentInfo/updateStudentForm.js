@@ -9,6 +9,11 @@ Template.updateStudentForm.helpers({
   },
   ifSubmitted: function() {
     return Session.get('submitted')
+  },
+  timeOptions: function() {
+    let examChoice = Meteor.settings.public.examChoice
+
+    return examChoice != undefined ? examChoice : false
   }
 });
 
@@ -20,6 +25,9 @@ Template.updateStudentForm.events({
     let family_name = document.getElementById('family_name').value
     let first_name = document.getElementById('first_name').value
     let language = document.getElementById('language').value
+    let examTime = document.getElementById('examTime').value
+
+    let serverInfo = Session.get('serverInfo')
 
     // check input string
 
@@ -33,9 +41,11 @@ Template.updateStudentForm.events({
       alert(`请选择报考语言`)
     } else if ( !regex.test(family_name) || !regex.test(first_name) ) {
       alert(`请输入姓名拼音`)
+    } else if ( serverInfo.multipleTimeMode && examTime == '选择' ) {
+      alert(`请选择考试时间`)
     } else {
       Session.set('submitted', true)
-      PromiseMeteorCall('signupStudent', this._id, family_name, first_name, language)
+      PromiseMeteorCall('signupStudent', this._id, family_name, first_name, language, examTime)
       .then( res => {
 
         if ( res == 'success' ) {

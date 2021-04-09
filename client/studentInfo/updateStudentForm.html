@@ -126,6 +126,26 @@
             </div>
           </div>
 
+
+          {{#if timeOptions}}
+            <div class="row">
+
+              <div class="input-group sm-6">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">选择考试时间</label>
+                </div>
+                <select class="custom-select" id="examTime">
+                  <option selected disabled>选择</option>
+                  {{#each timeOptions}}
+                    <option value="{{id}}" selected = {{isSelected '英语' }}>{{time}}</option>
+                  {{/each}}
+                </select>
+              </div>
+            </div>
+          {{/if}}
+
+
+
         </div>
       </div>
 

@@ -6,6 +6,9 @@
     </div>
     <div class="card-body">
       <p class="text-center">报名编号: {{this._id}}</p>
+      {{#if this.examTime}}
+        <p class="text-center">考试时间: {{examTime this.examTime}}</p>
+      {{/if}}
       <p class="text-center">报名时间: {{updateAt}}</p>
       <p class="text-center">身份证后四位: {{certnoLastFour}}</p>
     </div>

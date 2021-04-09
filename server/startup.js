@@ -1,5 +1,3 @@
-lodash = require('lodash');
-
 // roles v3 settings
   Roles.createRole('admin', {
     unlessExists: true

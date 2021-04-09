@@ -1,6 +1,5 @@
 Meteor.methods({
-  signupStudent: function(id, familyName, firstName, language) {
-    // console.log(id, familyName, firstName, language)
+  signupStudent: function(id, familyName, firstName, language, examTime) {
 
     // admin can just update student
 
@@ -12,7 +11,8 @@ Meteor.methods({
         $set: {
           family_name: familyName,
           first_name: firstName,
-          language: language
+          language: language,
+          examTime: examTime
         }
       })
 
@@ -29,6 +29,9 @@ Meteor.methods({
 
       validStartDate = (studentStatus == '毕业') ? moment().isAfter(Meteor.settings.public.startDate) : moment().isAfter(Meteor.settings.public.currentStudentDate)
 
+      // get multipleTimeMode
+      let multipleTimeMode = Meteor.settings.public.examChoice != undefined ? true : false
+
       // signup number
 
       if (!signupNumberValid()) {
@@ -37,6 +40,8 @@ Meteor.methods({
         throw new Meteor.Error('504', `不在报名时间内，具体报名时间以服务器时间为准`);
       } else if (!validStartDate) {
         throw new Meteor.Error('503', `请检查学籍以及允许报名的时间`);
+      } else if (multipleTimeMode && !examTime) {
+        throw new Meteor.Error('502', `没有选择报名考试时间`);
       } else {
         // when everything checked out, signup student
 
@@ -46,7 +51,8 @@ Meteor.methods({
           $set: {
             family_name: familyName,
             first_name: firstName,
-            language: language
+            language: language,
+            examTime: examTime
           }
         })
 
