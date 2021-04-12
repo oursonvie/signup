@@ -18,37 +18,36 @@ getOpenPhoto = (batchcode, certificateno) => {
   let url = `http://openapi.open.com.cn/api/GetStudentFile/GetStudentFileInfo?appKey=${appKey}&batchCode=${batchcode}&certificateNo=${certificateno}`
 
   try {
-    const result = Promise.await(PromiseHTTPCall(
+    result = Promise.await(PromiseHTTPCall(
       'GET',
-      url,
-      {
-        headers: { key: EncryptAuthorInformation()},
-        timeout: 3000
+      url, {
+        headers: {
+          key: EncryptAuthorInformation()
+        }
       }
     ))
 
     // debug open api
-    // console.log(result.content)
-
     if (result.data.data.count > 0) {
       dataList = result.data.data.dataList
 
-      // console.log(dataList)
-
-      zp = dataList[lodash.findIndex(dataList, {'filetype':'zp'})]
+      zp = dataList[lodash.findIndex(dataList, {
+        'filetype': 'zp'
+      })]
 
       res = {
         filetype: 'zp',
         doccontent: zp.doccontent,
         certificateno: zp.certificateno,
         source: 'open',
-        fileexist: (( zp.doccontent.length > 0 ) ? true : false )
+        fileexist: ((zp.doccontent.length > 0) ? true : false)
       }
 
       return res
     }
 
   } catch (err) {
+    console.log(err)
 
     throw new Meteor.Error('403', err.code)
 

@@ -1,15 +1,37 @@
 examRoomGenerator = () => {
-  let languageList = []
+  // time and language combination
+  let examTime = Meteor.settings.public.examChoice
 
-  // language array
-  _.forEach(LanguageList(), function(language){
-    languageList.push(language.value)
+  let comboList = []
+  // combo array
+  _.forEach(examTime, function(time) {
+    // get distinct language value for this
+    let distinctLanguage = Promise.await( Student.rawCollection().distinct('language', {examTime: time.id.toString() } ) )
+    let obj = { id:time.id.toString(), time: time.time, language: distinctLanguage }
+    comboList.push(obj)
   })
+
+  // count examroom needed
+  let totalExamCount = []
+  _.forEach(comboList, function(item) {
+    let examTimeCount = 0
+    // count each Language
+    _.forEach(item.language, function(language) {
+      let count = Student.find({examTime:item.id, language:language, edited:true}).count()
+      let examroomNeeded = Math.ceil(count/30)
+      let obj = {examTime:item.id, language:language, count: count, examroomNeeded: examroomNeeded}
+      totalExamCount.push(obj)
+    })
+  })
+
+  return totalExamCount
+
+  /*
 
   let languageCount = []
   // count examroom needed for each languages
   _.forEach(languageList, function(language){
-    let count = Student.find({language:language}).count()
+    let count = Student.find({language:language, edited:true}).count()
     let examroomNeeded = Math.ceil(count/30)
     languageCount.push(examroomNeeded)
   })
@@ -17,6 +39,8 @@ examRoomGenerator = () => {
   let sum = languageCount.reduce((a, b) => a + b, 0);
 
   return sum
+
+  */
 
 }
 
@@ -29,32 +53,29 @@ Meteor.methods({
       if (Examroom.find().count() == 0) {
 
         // generate examroom
-        const examroomNeeded = examRoomGenerator()
+        const totalExamPeople = lodash.orderBy(examRoomGenerator(), ['examTime', 'count'], ['asc', 'desc'] );
 
-        for (i = 1; i < examroomNeeded + 1; i++) {
-          // define examroom init data, includes exam time
-          let room = {
-            examroomId: i,
-            capacity: 30,
-            starttime: Meteor.settings.private.exam_starttime,
-            duration: Meteor.settings.private.exam_duration
+        let roomNo = 1
+        // start generate examtoom with info
+        _.forEach(totalExamPeople, function(item) {
+
+          for( i = 0; i < item.examroomNeeded; i++ ) {
+            let examTime = examTimeIDLookUp(item.examTime)
+
+            let room = {
+              examroomId: roomNo,
+              capacity: 30,
+              starttime: examTime,
+              duration: Meteor.settings.private.exam_duration,
+              language: item.language,
+              examTime: item.examTime,
+            }
+
+            Examroom.insert(room)
+            roomNo += 1
           }
-          Examroom.insert(room)
-        }
 
-
-        // start assigning people into examroom
-        let totalExamPeople = []
-
-        _.forEach(LanguageList(), function(lang) {
-          let count = Student.find({edited:true, language: lang.value}).count()
-          if (count > 0) {
-            totalExamPeople.push({name: lang.value, count: count})
-          }
         })
-
-        // list exam by signup people count
-        totalExamPeople = lodash.orderBy(totalExamPeople, ['count'], ['desc']);
 
         // define total examroom number
         const totalExamRoom = Examroom.find({},{sort:{examroomId:1}}).fetch()
@@ -62,9 +83,11 @@ Meteor.methods({
 
         // loop though each exam language
         _.forEach(totalExamPeople, function(exam) {
+          // define examTime
+          let examTime = examTimeIDLookUp(exam.examTime)
 
           // get all student ids under same examnation
-          let rawList = Student.find({edited:true, language: exam.name },{fields:{_id:1}}).fetch()
+          let rawList = Student.find({edited:true, language: exam.language, examTime: exam.examTime },{fields:{_id:1}}).fetch()
 
           let sortedList = []
 
@@ -112,7 +135,8 @@ Meteor.methods({
                     examid: examID,
                     lcenter: student.lcenter,
                     source: student.source,
-                    language: student.language
+                    language: student.language,
+                    examTime: examTime
                   }
 
                   briefSeats = {

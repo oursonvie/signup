@@ -1,10 +1,10 @@
 Meteor.methods({
   randomAssignStudent: function(number) {
     if ( Roles.userIsInRole(this.userId, ['superadmin']) ) {
-      let arrayList = []
-      _.forEach(LanguageList(), function(list) {
-        arrayList.push(list.value)
-      })
+      let arrayList = arrayConvter( LanguageList(), 'value')
+
+      let rawList = Meteor.settings.public.examChoice
+      let idList = arrayConvter( rawList, 'id')
 
       let fullStudentList = Student.find({edited:false}).fetch()
 
@@ -26,7 +26,8 @@ Meteor.methods({
           let result = Student.update({_id: student._id}, {$set:{
             first_name: 'asd',
             family_name: 'bbb',
-            language: arrayList[0]
+            language: arrayList[ Math.ceil(Math.random()*arrayList.length) - 1 ],
+            examTime: parseInt(idList[ Math.ceil(Math.random()*idList.length) - 1])
           }})
         }
     } else {
