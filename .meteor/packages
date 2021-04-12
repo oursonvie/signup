@@ -40,7 +40,6 @@ email@2.0.0
 
 themeteorchef:bert
 momentjs:moment
-http@1.4.2
 jparker:crypto-md5
 
 
@@ -74,3 +73,5 @@ jquery
 msavin:mongol
 msavin:jetsetter
 ostrio:files
+http
+fetch
