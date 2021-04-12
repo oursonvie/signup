@@ -23,7 +23,7 @@ Template.updateStudentForm.helpers({
       let dateCountIndex = lodash.findIndex(serverData.dateCount, {'_id': id.toString() } );
       let limitIndex = lodash.findIndex(dateChoiceData, {'id': id} );
 
-      return serverData.dateCount[dateCountIndex].count <= dateChoiceData[limitIndex].limit ? false : true
+      return serverData.dateCount[dateCountIndex].count < dateChoiceData[limitIndex].limit ? false : true
 
     } else {
       return true

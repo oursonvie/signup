@@ -31,9 +31,30 @@ Template.home.helpers({
   },
   RegisterExipre: function() {
     let validSignupDate = moment().isAfter(Meteor.settings.public.startDate) && moment().isBefore(Meteor.settings.public.expireDate)
+    let serverseInfo = Session.get('serverInfo')
 
-    if (Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit) {
-      return !validSignupDate || Session.get('serverInfo').studentCount >= Meteor.settings.public.registerLimit
+    if ( Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.examChoice && serverseInfo) {
+
+      // check sub exam time are all full
+      let examTimes = Meteor.settings.public.examChoice
+      let currentSignedin = serverseInfo.dateCount
+
+      let allFull = true
+
+
+      _.forEach(examTimes, function(time) {
+        // get current signed number
+        let currentIDindex = lodash.findIndex(currentSignedin, { '_id':time.id.toString() })
+        let currentSignedNo = currentSignedin[currentIDindex].count
+        if (currentSignedNo < time.limit) {
+          allFull = allFull && false
+        } else {
+          allFull = allFull && true
+        }
+      })
+      return !validSignupDate || allFull
+    } else if ( Meteor.settings.public.startDate && Meteor.settings.public.expireDate && Meteor.settings.public.registerLimit ) {
+      return !validSignupDate || serverseInfo.studentCount >= Meteor.settings.public.registerLimit
     } else {
       return true
     }

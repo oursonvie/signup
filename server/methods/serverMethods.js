@@ -9,7 +9,17 @@ Meteor.methods({
 
       // return signed count for each date
       try {
-        let dateCount = Promise.await(Student.rawCollection().aggregate([ { $match: { edited: true } }, {"$group" : {_id:"$examTime", count:{$sum:1}}} ]).toArray())
+        // date aggredate can't handle those signin with 0 at start
+        // let dateCount = Promise.await(Student.rawCollection().aggregate([ { $match: { edited: true } }, {"$group" : {_id:"$examTime", count:{$sum:1}}} ]).toArray())
+
+        // conventional methods to get signed count
+        examTimes = Meteor.settings.public.examChoice
+        dateCount = []
+        _.forEach(examTimes, function(time) {
+          let count = Student.find({ examTime:time.id.toString(), edited: true }).count()
+
+          dateCount.push({ _id:time.id.toString(), count:count} )
+        })
 
         return {studentCount:studentCount, serverTime: serverTime, multipleTimeMode:multipleTimeMode, dateCount:dateCount}
 
