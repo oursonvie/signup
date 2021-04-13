@@ -57,7 +57,7 @@ Meteor.methods({
           .then(res => {
             PromiseMeteorCall('addPhoto', certno, res)
             .then(res => console.log(res))
-            .catch(err => console.log(err))
+            .catch(err => console.log( JSON.stringify(err) ))
           })
           .catch(err => console.log(err))
         }
