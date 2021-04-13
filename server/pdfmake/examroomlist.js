@@ -9,12 +9,14 @@ Meteor.methods({
 
     let arrayStudent = Seats.find({roomnumber:examroomId}).fetch()
 
+    let seatInfo = Seats.findOne({roomnumber:examroomId})
+
     var docPDF = {
       pageSize: 'A4',
 
       content: [
         { text: `${Meteor.settings.public.signupSheetName}`, alignment: 'center' },
-        { text: `考场 ${examroom.examroomId}`, alignment: 'left', fontSize: 8 },
+        { text: `考场: ${examroom.examroomId} 考试时间: ${seatInfo.examTime} 考试语言: ${seatInfo.language}`, alignment: 'left', fontSize: 8 },
         {
           table: {
             // headers are automatically repeated if the table spans over multiple pages
