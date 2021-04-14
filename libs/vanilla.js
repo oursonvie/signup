@@ -64,7 +64,12 @@ arrayConvter = (array, key) => {
 }
 
 examTimeIDLookUp = (id) => {
+  /*
   let examInfo = Meteor.settings.public.examChoice
   let examtimeIndex = lodash.findIndex(examInfo, {id:parseInt(id)} )
   return examInfo[examtimeIndex].time
+  */
+  let examInfo = Meteor.settings.public.examChoice
+  return examInfo.find( (item) => item.id == parseInt(id) ).time
+
 }
