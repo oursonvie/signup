@@ -11,12 +11,12 @@
             更改层次<input type="file" id="changeStatus" style="display: none;">
           </label>
 
-          <label class="btn btn-danger float-right btn-file">
+          <label class="btn btn-danger float-right btn-file ml-3">
             导入学生<input type="file" id="hiddenUpload" style="display: none;">
           </label>
 
 
-          <button class="btn btn-primary float-right btn-download">下载学生列表</button>
+          <button class="btn btn-primary float-right btn-download ml-3">下载学生列表</button>
 
         </div>
         <div class="card-body text-center">
@@ -76,8 +76,8 @@
               <h4 class="card-title" style="padding-top: 7.5px;">照片数量</h4>
             </div>
             <div class="col-9">
-              <button class="btn btn-primary float-right btn-checkPhoto">同步照片</button>
-              <button class="btn btn-danger float-right btn-photo-download">下载照片</button>
+              <button class="btn btn-primary float-right btn-checkPhoto ml-3">同步照片</button>
+              <button class="btn btn-danger float-right btn-photo-download ml-3">下载照片</button>
             </div>
             </div>
         </div>
@@ -90,8 +90,18 @@
     <div class='col-6'>
       <div class="card card-default card-download">
         <div class="card-header">
-          <button class="btn btn-primary float-right btn-syncBaidu ml-3">同步人脸库</button>
-          <button class="btn btn-danger float-right btn-baidu-createList ml-3">更新人脸列表</button>
+
+          <div class="row">
+            <div class="col-3">
+              <h4 class="card-title" style="padding-top: 7.5px;">人脸底库</h4>
+            </div>
+            <div class="col-9">
+              <button class="btn btn-primary float-right btn-syncBaidu ml-3">同步人脸库</button>
+              <button class="btn btn-danger float-right btn-baidu-createList ml-3">更新人脸列表</button>
+            </div>
+            </div>
+
+
         </div>
         <div class="card-body text-center">
           <h2>{{baiduCount}}/{{signedNo}}</h2>

@@ -115,7 +115,7 @@ Meteor.methods({
                   // first seat occupied in a room indicate the room is occupied
                   if (seatNumber == 1) {
                     // update this room to occupied status
-                    Examroom.update({examroomId:roomNumber},{$set:{occupied:true, language: exam.name}});
+                    Examroom.update({examroomId:roomNumber},{$set:{occupied:true, language: exam.language}});
                   }
 
                   let studentId = sortedList.splice(0,1)[0]
@@ -154,7 +154,7 @@ Meteor.methods({
               }
 
             } else {
-              console.log(`stopped assigning ${exam.name} at roomNumber: ${roomNumber}, seatNumber: ${seatNumber}`);
+              console.log(`stopped assigning ${examTimeIDLookUp(exam.examTime)} - ${exam.language} at roomNumber: ${roomNumber}, seatNumber: ${seatNumber}`);
               break;
             }
 
