@@ -22,3 +22,12 @@ Meteor.publish('suspectStudentCount', function() {
 Meteor.publish('baiduCount', function() {
   Counts.publish( this,'syncedCount', BaiduStudents.find({baidu:{$exists:true}}) )
 })
+
+Meteor.publish('studentCountByTime', function() {
+  Counts.publish(this,'1', Student.find({edited:true, examTime: '1'}))
+  Counts.publish(this,'2', Student.find({edited:true, examTime: '2'}))
+  Counts.publish(this,'3', Student.find({edited:true, examTime: '3'}))
+  Counts.publish(this,'4', Student.find({edited:true, examTime: '4'}))
+  Counts.publish(this,'5', Student.find({edited:true, examTime: '5'}))
+  Counts.publish(this,'6', Student.find({edited:true, examTime: '6'}))
+})

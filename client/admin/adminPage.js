@@ -11,6 +11,7 @@ Template.studentPage.onCreated(function() {
     self.subscribe('baiduCount');
     //  count for 5 languages
     self.subscribe('studentCountLanguage');
+    self.subscribe('studentCountByTime');
 
     if ( Session.get('searchStudent') ) {
       PromiseMeteorCall( 'searchStudent', Session.get('searchStudent') )
@@ -56,6 +57,12 @@ Template.studentPage.helpers({
   },
   baiduCount: function() {
     return Counts.get('syncedCount');
+  },
+  timeList: function() {
+    return Meteor.settings.public.examChoice
+  },
+  signedByTime: function(examId) {
+    return Counts.get(examId.toString())
   }
 });
 

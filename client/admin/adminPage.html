@@ -3,7 +3,7 @@
   <div class='row'>
 
     <div class='col-6'>
-      <div class="card card-default card-download">
+      <div class="card card-default">
         <div class="card-header">
 
 
@@ -19,8 +19,15 @@
           <button class="btn btn-primary float-right btn-download">下载学生列表</button>
 
         </div>
-        <div class="card-body">
-          <p>{{signedNo}}/{{totalStudentCount}}</p>
+        <div class="card-body text-center">
+
+          {{#each timeList}}
+            <h4> {{time}}: {{signedByTime id}} / {{limit}} </h4>
+          {{/each}}
+
+          <br>
+
+          <h1>报名总数: {{signedNo}}/{{totalStudentCount}}</h1>
         </div>
       </div>
     </div>
@@ -74,8 +81,8 @@
             </div>
             </div>
         </div>
-        <div class="card-body">
-          <p>{{photodNo}}</p>
+        <div class="card-body text-center">
+          <h2>{{photodNo}}</h2>
         </div>
       </div>
     </div>
@@ -86,8 +93,8 @@
           <button class="btn btn-primary float-right btn-syncBaidu ml-3">同步人脸库</button>
           <button class="btn btn-danger float-right btn-baidu-createList ml-3">更新人脸列表</button>
         </div>
-        <div class="card-body">
-          <p>{{baiduCount}}/{{signedNo}}</p>
+        <div class="card-body text-center">
+          <h2>{{baiduCount}}/{{signedNo}}</h2>
         </div>
       </div>
     </div>
