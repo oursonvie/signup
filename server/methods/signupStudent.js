@@ -2,8 +2,6 @@ Meteor.methods({
   signupStudent: function(id, familyName, firstName, language, examTime) {
 
     // admin can just update student
-
-
     if ( this.userId && Roles.userIsInRole(this.userId, ['admin']) ) {
       result = Student.update({
         _id: id
@@ -34,7 +32,7 @@ Meteor.methods({
 
       // signup number
 
-      if (!signupNumberValid()) {
+      if ( !signupNumberValid(examTime) ) {
         throw new Meteor.Error('505', `报名人数已满`);
       } else if (moment().isBefore(Meteor.settings.public.startDate) || moment().isAfter(Meteor.settings.public.expireDate)) {
         throw new Meteor.Error('504', `不在报名时间内，具体报名时间以服务器时间为准`);
@@ -112,8 +110,10 @@ Meteor.methods({
   }
 });
 
-signupNumberValid = () => {
-  return Student.find({
-    edited: true
-  }).count() < Meteor.settings.public.registerLimit
+signupNumberValid = (examTime) => {
+  let examChoice = Meteor.settings.public.examChoice
+  let signedCount = Student.find({ examTime: examTime, edited:true }).count()
+  let currentIDindex = lodash.findIndex(examChoice, { 'id':parseInt(examTime) })
+
+  return signedCount < examChoice[currentIDindex].limit
 }
