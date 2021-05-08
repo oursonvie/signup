@@ -57,13 +57,17 @@ Meteor.methods({
         if (result == 1) {
           let message = `${id} ${familyName} ${firstName} ${language}`
           console.log(`[SignupStudent Success] ${message}`)
+          // sending to slack
           PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
           .catch( err => console.log(err) )
+
           return `success`
         } else {
           console.log(`[SignupStudent Fail] ${message}`)
-          // PromiseMeteorCall('pushChat', `SignupStudent Fail` , `${message}`)
-          // .catch( err => console.log(err) )
+          // sending to slack
+          PromiseMeteorCall('pushChat', `SignupStudent Fail` , `${message}`)
+          .catch( err => console.log(err) )
+
           return `fail`
         }
 
