@@ -14,8 +14,8 @@
     "baiduRatio": 20,
     "signupSheetName": "西安交通大学网络学院2020下半年全国学位外语考试考场签到表",
     "examChoice": [
-      {"id":1, "time":"2021-06-19 09:30:00", "limit":2},
-      {"id":2, "time":"2021-07-17 09:30:00", "limit":1}
+      {"id":1, "time":"2021-06-19 09:30:00", "limit":20},
+      {"id":2, "time":"2021-07-17 09:30:00", "limit":20}
     ]
   },
   "private": {
@@ -28,7 +28,7 @@
       "API_KEY": "nRTK6iHbTKWIHgwZ8i3tzLuZ",
       "SECRET_KEY": "A5DY0xSG69leGRiZ7OWZm07M72yPio7F"
     },
-    "slackUrl": "https://hooks.slack.com/services/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",
+    "slackUrl": "https://hooks.slack.com/services/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",
     "xueliPicServer": "192.168.200.139"
   },
   "monti": {

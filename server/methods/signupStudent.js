@@ -57,8 +57,8 @@ Meteor.methods({
         if (result == 1) {
           let message = `${id} ${familyName} ${firstName} ${language}`
           console.log(`[SignupStudent Success] ${message}`)
-          // PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
-          // .catch( err => console.log(err) )
+          PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
+          .catch( err => console.log(err) )
           return `success`
         } else {
           console.log(`[SignupStudent Fail] ${message}`)
