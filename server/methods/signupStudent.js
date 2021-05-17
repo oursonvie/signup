@@ -54,8 +54,10 @@ Meteor.methods({
           }
         })
 
+        let message = `[${studentStatus}] ${id} ${familyName} ${firstName} ${language}`
+
         if (result == 1) {
-          let message = `${id} ${familyName} ${firstName} ${language}`
+
           console.log(`[SignupStudent Success] ${message}`)
           // sending to slack
           PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
