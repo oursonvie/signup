@@ -21,6 +21,16 @@ Template.studentPage.onCreated(function() {
       .catch( e => alert(e) )
     }
 
+    // get server info
+    Session.set('serverInfo', false)
+    PromiseMeteorCall('studentCount')
+      .then(res => {
+        Session.set('serverInfo', res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+
   });
 });
 

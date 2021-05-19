@@ -138,7 +138,11 @@
                   <option selected disabled>选择</option>
                   {{#each timeOptions}}
                     {{#if checkNumber id}}
-                      <option value="{{id}}" disabled >{{time}} (报名人数已满)</option>
+                       {{#if isInRole 'admin'}}
+                          <option value="{{id}}">{{time}} (报名人数已满)</option>
+                        {{else}}
+                          <option value="{{id}}" disabled >{{time}} (报名人数已满)</option>
+                        {{/if}}
                     {{else}}
                       <option value="{{id}}">{{time}}</option>
                     {{/if}}
