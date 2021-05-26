@@ -14,8 +14,7 @@ getXjtuUrl = (url) => {
 
     return baseImage
   } catch(err) {
-    // throw new Meteor.Error('invalid pic', "Can't find pic on server");
-    return ''
+    console.log(err)
   }
 }
 

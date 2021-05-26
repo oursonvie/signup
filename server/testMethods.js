@@ -43,9 +43,8 @@ Meteor.methods({
 
       // remove empty photo entity
       let fileexist = Image.remove({fileexist:false})
-      let empty = Image.remove({doccontent:''})
 
-      console.log(`${fileexist}, ${empty} empty students removed from image DB`)
+      console.log(`${fileexist} empty students removed from image DB`)
 
       let checkArray = Student.find({edited:true}, {fields:{_id:0, certno:1}}).fetch()
 
