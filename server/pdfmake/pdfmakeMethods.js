@@ -1,37 +1,20 @@
 Meteor.methods({
   printExamID: function(certno) {
 
-    if (Seats.find({
-        certno: certno
-      }).count() > 0) {
-      SeatInfo = Seats.findOne({
-        certno: certno
-      })
+    if ( Seats.find( {certno: certno} ).count() > 0) {
+      let SeatInfo = Seats.findOne({certno: certno})
       // console.log(SeatInfo)
 
+      let targetImage = Image.findOne({certificateno: certno})
+      let ExamroomInfo = Examroom.findOne({examroomId: SeatInfo.roomnumber})
 
+      console.log(targetImage)
 
       // check image, examroom info existance
-      if (Image.findOne({
-          certificateno: certno
-        }) && Image.findOne({
-          certificateno: certno
-        }).doccontent && Examroom.findOne({
-          examroomId: SeatInfo.roomnumber
-        }) && Examroom.findOne({
-          examroomId: SeatInfo.roomnumber
-        }).examroomLocation) {
-
-        StudentImage = Image.findOne({
-          certificateno: certno
-        })
-
-        ExamroomInfo = Examroom.findOne({
-          examroomId: SeatInfo.roomnumber
-        })
+      if (targetImage && targetImage.doccontent && ExamroomInfo && ExamroomInfo.examroomLocation) {
 
         // reading exam datetime infor directly from setting file
-        ExamDateInfo = Meteor.settings.public.examtime
+        let ExamDateInfo = Meteor.settings.public.examtime
 
         renderObject = {
           studentid: SeatInfo.studentid,
@@ -48,7 +31,7 @@ Meteor.methods({
           examtype: '闭卷',
           place: ExamroomInfo.place,
           address: ExamroomInfo.address,
-          image: base64ImageFixer(StudentImage.doccontent)
+          image: base64ImageFixer(targetImage.doccontent)
         }
 
         return makeExamId(renderObject)
