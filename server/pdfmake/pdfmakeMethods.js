@@ -8,8 +8,6 @@ Meteor.methods({
       let targetImage = Image.findOne({certificateno: certno})
       let ExamroomInfo = Examroom.findOne({examroomId: SeatInfo.roomnumber})
 
-      console.log(targetImage)
-
       // check image, examroom info existance
       if (targetImage && targetImage.doccontent && ExamroomInfo && ExamroomInfo.examroomLocation) {
 
