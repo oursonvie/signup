@@ -1,29 +1,43 @@
 var PdfPrinter = require('pdfmake')
 
 Picker.route('/api/pdf', function(params, req, res) {
-  
-    // console.log(params.query)
 
-    // set start date
+  // console.log(params.query)
 
-    todaysDate = moment().format('YYYY-MM-DD HH:mm:ss')
+  // set start date
 
-    if ( moment(todaysDate).isAfter(Meteor.settings.public.printStartDate) && moment(todaysDate).isBefore(Meteor.settings.public.printEndDate) ) {
+  todaysDate = moment().format('YYYY-MM-DD HH:mm:ss')
 
-      try {
-        let id = decryptAES(params.query.doc);
+  if (moment(todaysDate).isAfter(Meteor.settings.public.printStartDate) && moment(todaysDate).isBefore(Meteor.settings.public.printEndDate)) {
 
-        let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+    try {
+      let id = decryptAES(params.query.doc);
 
-        let message = {docId: id, remoteIP: remoteHost, datetime: new Date}
+      let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-        console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
+      let message = {
+        docId: id,
+        remoteIP: remoteHost,
+        datetime: new Date
+      }
 
-        PromiseMeteorCall('pushChat', 'PDF Request', message)
+      console.log(`[PDF Request] docId = ${id} from ${remoteHost} at ${message.datetime}`)
+
+      PromiseMeteorCall('pushChat', 'PDF Request', message)
         .then(res => {}) // do nothing if success
         .catch(err => console.log(err))
 
-        if (id) {
+      if (id) {
+
+        // check if student is valid for print
+        let studentStatus = Student.findOne({certno: id},{fields: {edited: 1, examTime: 1} })
+
+        // not signedIn
+        if ( !studentStatus.edited ) {
+          res.end(`ERROR: Target student havent signed up for exam`);
+        } else if ( studentStatus.examTime != 1 ) {
+          res.end(`ERROR: Admission ticket print is only available for exam at 2021-06-19, other exam batch please wait for further notice`);
+        } else {
 
           message.err = false
           message.type = 'PDF_request'
@@ -31,45 +45,47 @@ Picker.route('/api/pdf', function(params, req, res) {
           Logs.insert(message)
 
           PromiseMeteorCall('printExamID', id)
-          .then(response => {
+            .then(response => {
 
-            createPdfBinary(response, function(binary) {
-              // res.contentType('application/pdf');
-              res.setHeader('content-type', 'application/pdf');
-              // res.send(binary);
+              createPdfBinary(response, function(binary) {
+                // res.contentType('application/pdf');
+                res.setHeader('content-type', 'application/pdf');
+                // res.send(binary);
 
 
-              res.end(binary);
-            }, function(err) {
+                res.end(binary);
+              }, function(err) {
+                message.err = err
+                message.type = 'PDF_request'
+
+                Logs.insert(message)
+
+                res.send(error);
+              });
+
+
+            })
+            .catch(err => {
               message.err = err
               message.type = 'PDF_request'
 
               Logs.insert(message)
-
-              res.send(error);
-            });
-
-
-          })
-          .catch(err => {
-            message.err = err
-            message.type = 'PDF_request'
-
-            Logs.insert(message)
-            res.end('ERROR:' + err);
-          })
-        } else {
-          res.end('invalid key');
+              res.end('ERROR:' + err);
+            })
         }
 
-        } catch(err) {
-        console.log(err)
-        res.end('ERROR:' + err);
-        }
+      } else {
+        res.end('invalid key');
+      }
 
-    } else {
-      res.end(`Request will not be proceeed before ${Meteor.settings.public.printStartDate} and after ${Meteor.settings.public.printEndDate}`);
+    } catch (err) {
+      console.log(err)
+      res.end('ERROR:' + err);
     }
+
+  } else {
+    res.end(`Request will not be proceeed before ${Meteor.settings.public.printStartDate} and after ${Meteor.settings.public.printEndDate}`);
+  }
 
 
 
@@ -85,13 +101,17 @@ Picker.route('/api/examroom', function(params, req, res) {
 
     let remoteHost = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-    let message = {roomnumber: id, remoteIP: remoteHost, datetime: new Date}
+    let message = {
+      roomnumber: id,
+      remoteIP: remoteHost,
+      datetime: new Date
+    }
 
     console.log(`[Examroom PDF Request] roomnumber = ${id} from ${remoteHost} at ${message.datetime}`)
 
     PromiseMeteorCall('pushChat', 'PDF Request', message)
-    .then(res => {}) // do nothing if success
-    .catch(err => console.log(err))
+      .then(res => {}) // do nothing if success
+      .catch(err => console.log(err))
 
     if (id) {
 
@@ -101,38 +121,38 @@ Picker.route('/api/examroom', function(params, req, res) {
       Logs.insert(message)
 
       PromiseMeteorCall('generateExamroomList', id)
-      .then(response => {
+        .then(response => {
 
-        createPdfBinary(response, function(binary) {
-          // res.contentType('application/pdf');
-          res.setHeader('content-type', 'application/pdf');
-          // res.send(binary);
+          createPdfBinary(response, function(binary) {
+            // res.contentType('application/pdf');
+            res.setHeader('content-type', 'application/pdf');
+            // res.send(binary);
 
 
-          res.end(binary);
-        }, function(err) {
+            res.end(binary);
+          }, function(err) {
+            message.err = err
+            message.type = 'PDF_request'
+
+            Logs.insert(message)
+
+            res.send(error);
+          });
+
+
+        })
+        .catch(err => {
           message.err = err
           message.type = 'PDF_request'
 
           Logs.insert(message)
-
-          res.send(error);
-        });
-
-
-      })
-      .catch(err => {
-        message.err = err
-        message.type = 'PDF_request'
-
-        Logs.insert(message)
-        res.end('ERROR:' + err);
-      })
+          res.end('ERROR:' + err);
+        })
     } else {
       res.end('invalid key');
     }
 
-  } catch(err) {
+  } catch (err) {
     console.log(err)
     res.end('ERROR:' + err);
   }
@@ -142,13 +162,13 @@ Picker.route('/api/examroom', function(params, req, res) {
 function createPdfBinary(pdfDoc, callback) {
 
   var fontDescriptors = {
-         Roboto: {
-              normal: Meteor.settings.private.font_YaHei,
-              bold: Meteor.settings.private.font_YaHei,
-              italics: Meteor.settings.private.font_YaHei,
-              bolditalics: Meteor.settings.private.font_YaHei
-            }
-      }
+    Roboto: {
+      normal: Meteor.settings.private.font_YaHei,
+      bold: Meteor.settings.private.font_YaHei,
+      italics: Meteor.settings.private.font_YaHei,
+      bolditalics: Meteor.settings.private.font_YaHei
+    }
+  }
 
   var printer = new PdfPrinter(fontDescriptors);
 
@@ -157,11 +177,11 @@ function createPdfBinary(pdfDoc, callback) {
   var chunks = [];
   var result;
 
-  doc.on('data', function (chunk) {
+  doc.on('data', function(chunk) {
     chunks.push(chunk);
   });
 
-  doc.on('end', function () {
+  doc.on('end', function() {
     result = Buffer.concat(chunks);
     callback(result)
     // callback('data:application/pdf;base64,' + result.toString('base64'));
