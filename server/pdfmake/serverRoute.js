@@ -35,8 +35,6 @@ Picker.route('/api/pdf', function(params, req, res) {
         // not signedIn
         if ( !studentStatus.edited ) {
           res.end(`ERROR: Target student havent signed up for exam`);
-        } else if ( studentStatus.examTime != 1 ) {
-          res.end(`ERROR: Admission ticket print is only available for exam at 2021-06-19, other exam batch please wait for further notice`);
         } else {
 
           message.err = false
