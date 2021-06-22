@@ -38,3 +38,15 @@ Meteor.methods({
     return result
   }
 });
+
+
+// return download link using certno
+certPrintDownloadLink = (certno) => {
+  try {
+    let res = Promise.await(PromiseMeteorCall('convertCert', certno))
+    let link = `${Meteor.absoluteUrl()}api/pdf?${res}`
+    return link
+  } catch(e) {
+    console.log(e)
+  }
+}

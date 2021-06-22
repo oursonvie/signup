@@ -19,6 +19,8 @@ Meteor.methods({
 
       let combined = {...seatInfo, ...examRoomInfo, ...studentInfo}
 
+      combined.downloadLink = certPrintDownloadLink(seat.certno)
+
       SeatDownload.insert(combined)
 
     })
