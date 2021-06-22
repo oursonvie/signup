@@ -60,7 +60,7 @@ Meteor.methods({
 
           console.log(`[SignupStudent Success] ${message}`)
           // sending to slack
-          PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
+          // PromiseMeteorCall('pushChat', `SignupStudent Success`,`${message}`)
           .catch( err => console.log(err) )
 
           return `success`
