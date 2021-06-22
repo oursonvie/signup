@@ -12,9 +12,12 @@ Meteor.methods({
     _.forEach(seats, function(seat) {
 
       seatInfo = seat
+
       examRoomInfo = Examroom.findOne({examroomId:seat.roomnumber},{fields:{address:1, examroomLocation:1, place:1, _id:0}})
 
-      combined = {...seatInfo, ...examRoomInfo}
+      let studentInfo = Student.findOne({certno: seat.certno}, {fields:{family_name:1, first_name:1, _id:0}})
+
+      combined = {...seatInfo, ...examRoomInfo, ...studentInfo}
 
       SeatDownload.insert(combined)
 
