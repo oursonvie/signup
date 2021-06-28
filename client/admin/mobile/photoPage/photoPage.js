@@ -1,3 +1,20 @@
+Template.photoPage.onCreated(function() {
+  Session.set('place', false)
+
+  var self = this;
+  self.autorun(function() {
+    if ( Seats.findOne() ) {
+      PromiseMeteorCall('examLocationLookUp', Seats.findOne().roomnumber )
+      .then( res => {
+        Session.set('place', res)
+      })
+      .catch( err => console.log(err))
+    }
+
+  })
+
+})
+
 Template.photoPage.helpers({
   targetPic: function() {
     if ( Image.findOne() ) {
@@ -19,5 +36,8 @@ Template.photoPage.helpers({
   },
   SeatInfo: function() {
     return Seats.findOne()
+  },
+  place: function() {
+    return Session.get('place')
   }
 });
